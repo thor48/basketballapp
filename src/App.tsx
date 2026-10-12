@@ -69,7 +69,7 @@ export type Account = {
   getToken: () => Promise<string | null>
 }
 
-type SortKey = 'rank' | 'proj' | 'consensus' | 'projGp' | 'expert' | 'tier' | 'last' | 'lastGp' | 'adp' | 'gap'
+type SortKey = 'rank' | 'consensus' | 'projGp' | 'expert' | 'tier' | 'last' | 'lastGp' | 'adp' | 'gap'
 type PositionFilter = 'ALL' | 'PG' | 'SG' | 'SF' | 'PF' | 'C' | 'G' | 'F'
 
 const positionOrder = ['PG', 'SG', 'SF', 'PF', 'C']
@@ -92,7 +92,6 @@ const userId = params.get('user') ?? defaultUserId
 
 const sortLabels: Record<SortKey, string> = {
   rank: 'Rank',
-  proj: 'Sleeper',
   consensus: 'Cons FP/G',
   projGp: 'Proj GP',
   expert: 'Experts',
@@ -481,7 +480,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const bestAvailable = base.board.filter((player) => !draftState.drafted.has(player.id)).slice(0, 8)
 
   const sortBy = (key: SortKey) =>
-    setSort((current) => (current.key === key ? { key, desc: !current.desc } : { key, desc: key === 'proj' || key === 'consensus' || key === 'projGp' || key === 'last' || key === 'lastGp' || key === 'gap' }))
+    setSort((current) => (current.key === key ? { key, desc: !current.desc } : { key, desc: key === 'consensus' || key === 'projGp' || key === 'last' || key === 'lastGp' || key === 'gap' }))
 
   const header = (key: SortKey, className = '') => (
     <th className={`sortable ${className} ${sort.key === key ? 'sorted' : ''}`} onClick={() => sortBy(key)}>
@@ -564,7 +563,6 @@ export default function App({ account, accountControl }: { account: Account | nu
                     <th>Player</th>
                     {header('consensus', 'num')}
                     {header('projGp', 'num wide')}
-                    {header('proj', 'num wide')}
                     {header('expert', 'num wide')}
                     {header('tier', 'wide')}
                     {header('last', 'num wide')}
@@ -582,7 +580,7 @@ export default function App({ account, accountControl }: { account: Account | nu
                     const tierStarts = sort.key === 'tier' && !sort.desc && tier && (index === 0 || tier.tier !== tierFor(visible[index - 1], position)?.tier)
                     return (
                       <Fragment key={player.id}>
-                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 13 : 12}>Tier {tier.tier}</td></tr>}
+                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 12 : 11}>Tier {tier.tier}</td></tr>}
                         <tr className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
                           <td className="star-cell">
                             <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
@@ -607,7 +605,6 @@ export default function App({ account, accountControl }: { account: Account | nu
                           </td>
                           <td className="num strong" title={consensusTitle(player)}>{formatPoints(player.consensus)}</td>
                           <td className={`num wide ${player.projGp !== null && player.projGp < 60 ? 'warn' : ''}`} title={gamesTitle(player)}>{player.projGp ?? '—'}</td>
-                          <td className="num wide">{formatPoints(player.proj)}</td>
                           <td className="num wide" title={expertTitle(player)}>{player.expert === null ? '—' : Math.round(player.expert)}</td>
                           <td className="wide tier-cell">{tier ? `${tier.position} ${tier.tier}` : '—'}</td>
                           <td className="num wide">{formatPoints(player.last)}</td>

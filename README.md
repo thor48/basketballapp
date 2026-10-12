@@ -38,7 +38,7 @@ Outside sources come from a snapshot, `src/data/rankings.json`, that `npm run ra
 
 ## Board
 
-- Rank orders Cons FP/G: projected fantasy points per game in league scoring, averaged across Sleeper, ESPN and FantasyPros. It is fixed at load and does not move as players are drafted. The Sleeper column keeps Sleeper's own number.
+- Rank orders Cons FP/G: projected fantasy points per game in league scoring, averaged across Sleeper, ESPN and FantasyPros. It is fixed at load and does not move as players are drafted. Each source's number is in the Cons FP/G tooltip.
 - ESPN and FantasyPros project no `dd`/`td`, so their lines borrow Sleeper's per-game rates before scoring; otherwise the 2 and 5 point bonuses read as a gap between sources.
 - Proj GP is the mean of ESPN's and FantasyPros' projected games (Sleeper projects none), orange under 60.
 - Experts averages ESPN, RotoWire and RotoBaller points-league ranks. Those publish only an order, so they cannot be rescored. Tier is ESPN's points draft tier for the position; sorting by Tier under a position filter turns the board into that position's cheat sheet with tier dividers.
