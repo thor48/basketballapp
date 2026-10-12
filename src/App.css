@@ -63,6 +63,11 @@ tbody tr:hover td { background: var(--panel-2); }
 .tag.rookie { background: rgba(240, 138, 36, .15); color: var(--orange); }
 .tag.taken { background: var(--line); color: var(--text); }
 .tag.need { background: rgba(176, 240, 29, .14); color: var(--slime); }
+/* The tier has its own column on wider screens; phones hide that column and show the tag. */
+.tag.tier { display: none; background: rgba(176, 240, 29, .14); color: var(--slime); }
+.tier-cell { color: var(--muted); font-size: 13px; white-space: nowrap; }
+tr.tier-row td { padding: 6px 8px; background: var(--panel-2); color: var(--slime); font: 600 13px 'Barlow Condensed', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+tbody tr.tier-row:hover td { background: var(--panel-2); }
 
 .star-cell { width: 28px; padding-right: 0; }
 .star { padding: 0; border: 0; background: none; color: var(--line); font-size: 16px; line-height: 1; }
@@ -92,6 +97,7 @@ tbody tr:hover td { background: var(--panel-2); }
 .team.clock-on { box-shadow: 0 0 0 1px var(--orange); }
 
 .footer { margin-top: 24px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.footer a { color: var(--text); }
 
 @media (max-width: 960px) {
   .layout { grid-template-columns: 1fr; }
@@ -106,6 +112,7 @@ tbody tr:hover td { background: var(--panel-2); }
   .side { order: 0; }
   .table-wrap { max-height: 70svh; }
   th.wide, td.wide { display: none; }
+  .tag.tier { display: inline; }
   .rank-cell { gap: 6px; }
   .headshot { width: 28px; height: 28px; font-size: 11px; }
   .toggles { flex-wrap: wrap; }

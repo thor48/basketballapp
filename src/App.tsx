@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react'
 import './App.css'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
+import { expertAverage, expertRanks, rankingSources, rankingsFetchedAt, type ExpertRanks, type Tier } from './lib/rankings'
 import { scoreLine, scoringLegend } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
@@ -39,6 +40,9 @@ type BoardPlayer = {
   rank: number
   gap: number | null
   rookie: boolean
+  experts: ExpertRanks
+  expert: number | null
+  tiers: Tier[]
 }
 
 type BaseData = {
@@ -60,11 +64,21 @@ export type Account = {
   getToken: () => Promise<string | null>
 }
 
-type SortKey = 'rank' | 'proj' | 'last' | 'lastGp' | 'adp' | 'gap'
+type SortKey = 'rank' | 'proj' | 'expert' | 'tier' | 'last' | 'lastGp' | 'adp' | 'gap'
 type PositionFilter = 'ALL' | 'PG' | 'SG' | 'SF' | 'PF' | 'C' | 'G' | 'F'
 
 const positionOrder = ['PG', 'SG', 'SF', 'PF', 'C']
 const positionFilters: PositionFilter[] = ['ALL', 'PG', 'SG', 'SF', 'PF', 'C', 'G', 'F']
+const tierPositions: Record<PositionFilter, string[]> = {
+  ALL: positionOrder,
+  PG: ['PG'],
+  SG: ['SG'],
+  SF: ['SF'],
+  PF: ['PF'],
+  C: ['C'],
+  G: ['PG', 'SG'],
+  F: ['SF', 'PF'],
+}
 const starredKey = 'hoops.starred'
 const params = new URLSearchParams(window.location.search)
 // `?draft=` and `?user=` replay another draft, e.g. last season's finished one, for testing.
@@ -74,10 +88,25 @@ const userId = params.get('user') ?? defaultUserId
 const sortLabels: Record<SortKey, string> = {
   rank: 'Rank',
   proj: 'Proj FP/G',
+  expert: 'Experts',
+  tier: 'Tier',
   last: 'Last FP/G',
   lastGp: 'Last GP',
   adp: 'ADP',
   gap: 'ADP gap',
+}
+
+// ESPN tiers each position separately, so a PG/SG has two. Under a position filter the tier
+// shown is that position's; otherwise his best one.
+function tierFor(player: BoardPlayer, position: PositionFilter) {
+  return player.tiers
+    .filter((tier) => tierPositions[position].includes(tier.position))
+    .sort((a, b) => a.tier - b.tier || a.rank - b.rank)[0]
+}
+
+function expertTitle(player: BoardPlayer) {
+  const parts = (['espn', 'rotowire', 'rotoballer'] as const).map((source) => `${rankingSources[source].name} ${player.experts[source] ?? '—'}`)
+  return parts.join(' · ')
 }
 
 function readStarred() {
@@ -154,6 +183,9 @@ function buildBoard(
       rank: 0,
       gap: null,
       rookie: player.years_exp === 0,
+      experts: expertRanks(id),
+      expert: expertAverage(expertRanks(id)),
+      tiers: expertRanks(id).tiers ?? [],
     })
   }
   rows.sort((a, b) => b.proj - a.proj)
@@ -183,6 +215,9 @@ function unprojectedPlayer(pick: Pick): BoardPlayer {
     rank: 0,
     gap: null,
     rookie: false,
+    experts: {},
+    expert: null,
+    tiers: [],
   }
 }
 
@@ -365,7 +400,13 @@ export default function App({ account, accountControl }: { account: Account | nu
       if (needsOnly && !draftState.openSlots.some((slot) => fitsSlot(slot, player.positions))) return false
       return true
     })
+    const single = position !== 'ALL' && position !== 'G' && position !== 'F'
     const value = (player: BoardPlayer) => {
+      if (sort.key === 'tier') {
+        const tier = tierFor(player, position)
+        // One position follows ESPN's own order; a mix of positions goes by expert rank inside a tier.
+        return tier ? tier.tier * 1000 + (single ? tier.rank : (player.expert ?? 999)) : Infinity
+      }
       const raw = sort.key === 'rank' ? player.rank : player[sort.key]
       return raw ?? (sort.desc ? -Infinity : Infinity)
     }
@@ -484,6 +525,8 @@ export default function App({ account, accountControl }: { account: Account | nu
                     {header('rank', 'num')}
                     <th>Player</th>
                     {header('proj', 'num')}
+                    {header('expert', 'num wide')}
+                    {header('tier', 'wide')}
                     {header('last', 'num wide')}
                     {header('lastGp', 'num wide')}
                     {header('adp', 'num')}
@@ -492,44 +535,52 @@ export default function App({ account, accountControl }: { account: Account | nu
                   </tr>
                 </thead>
                 <tbody>
-                  {visible.map((player) => {
+                  {visible.map((player, index) => {
                     const pick = draftState.drafted.get(player.id)
                     const mine = pick && pick.roster_id === draftState.myRosterId
+                    const tier = tierFor(player, position)
+                    const tierStarts = sort.key === 'tier' && !sort.desc && tier && (index === 0 || tier.tier !== tierFor(visible[index - 1], position)?.tier)
                     return (
-                      <tr key={player.id} className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
-                        <td className="star-cell">
-                          <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
-                        </td>
-                        <td className="num muted">
-                          <div className="rank-cell">
-                            {player.rank}
-                            <Headshot id={player.id} name={player.name} />
-                          </div>
-                        </td>
-                        <td>
-                          <div className="player">
-                            <span className="name">{player.name}</span>
-                            <span className="meta">
-                              {player.positions.join('/')} · {player.team}
-                              {player.rookie && <em className="tag rookie">R</em>}
-                              {player.injury && <em className="tag injury">{player.injury}</em>}
-                              {pick && <em className="tag taken">#{pick.pick_no} {mine ? 'You' : ownerByRoster.get(pick.roster_id)}</em>}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="num strong">{formatPoints(player.proj)}</td>
-                        <td className="num wide">{formatPoints(player.last)}</td>
-                        <td className={`num wide ${player.lastGp !== null && player.lastGp < 50 ? 'warn' : ''}`}>{player.lastGp ?? '—'}</td>
-                        <td className="num">{player.adp === null ? '—' : player.adp.toFixed(1)}</td>
-                        <td className={`num wide ${player.gap === null ? '' : player.gap >= 5 ? 'good' : player.gap <= -5 ? 'bad' : ''}`}>
-                          {player.gap === null ? '—' : player.gap > 0 ? `+${player.gap}` : player.gap}
-                        </td>
-                        {myFollowing && (
-                          <td className="num wide">
-                            {player.adp === null ? <span className="good">likely</span> : player.adp >= myFollowing ? <span className="good">likely</span> : <span className="muted">gone</span>}
+                      <Fragment key={player.id}>
+                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 11 : 10}>Tier {tier.tier}</td></tr>}
+                        <tr className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
+                          <td className="star-cell">
+                            <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
                           </td>
-                        )}
-                      </tr>
+                          <td className="num muted">
+                            <div className="rank-cell">
+                              {player.rank}
+                              <Headshot id={player.id} name={player.name} />
+                            </div>
+                          </td>
+                          <td>
+                            <div className="player">
+                              <span className="name">{player.name}</span>
+                              <span className="meta">
+                                {player.positions.join('/')} · {player.team}
+                                {player.rookie && <em className="tag rookie">R</em>}
+                                {player.injury && <em className="tag injury">{player.injury}</em>}
+                                {tier && <em className="tag tier">{tier.position} T{tier.tier}</em>}
+                                {pick && <em className="tag taken">#{pick.pick_no} {mine ? 'You' : ownerByRoster.get(pick.roster_id)}</em>}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="num strong">{formatPoints(player.proj)}</td>
+                          <td className="num wide" title={expertTitle(player)}>{player.expert === null ? '—' : Math.round(player.expert)}</td>
+                          <td className="wide tier-cell">{tier ? `${tier.position} ${tier.tier}` : '—'}</td>
+                          <td className="num wide">{formatPoints(player.last)}</td>
+                          <td className={`num wide ${player.lastGp !== null && player.lastGp < 50 ? 'warn' : ''}`}>{player.lastGp ?? '—'}</td>
+                          <td className="num">{player.adp === null ? '—' : player.adp.toFixed(1)}</td>
+                          <td className={`num wide ${player.gap === null ? '' : player.gap >= 5 ? 'good' : player.gap <= -5 ? 'bad' : ''}`}>
+                            {player.gap === null ? '—' : player.gap > 0 ? `+${player.gap}` : player.gap}
+                          </td>
+                          {myFollowing && (
+                            <td className="num wide">
+                              {player.adp === null ? <span className="good">likely</span> : player.adp >= myFollowing ? <span className="good">likely</span> : <span className="muted">gone</span>}
+                            </td>
+                          )}
+                        </tr>
+                      </Fragment>
                     )
                   })}
                 </tbody>
@@ -629,6 +680,14 @@ export default function App({ account, accountControl }: { account: Account | nu
 
       <footer className="footer">
         Projections, ADP and stats from Sleeper. Rank is projected points per game in this league's scoring; projections leave out the 40/50 point, 15 assist and 20 rebound bonuses. Last season is {Number(base.league.season) - 1}, with its bonuses. ADP gap is standard ADP minus rank, shown for the top players a full draft would take: positive means the room usually takes him later than his points say.
+        {' '}Experts is the average of the{' '}
+        {(['espn', 'rotowire', 'rotoballer'] as const).map((source, index) => (
+          <Fragment key={source}>
+            {index ? (index === 2 ? ' and ' : ', ') : ''}
+            <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}</a>
+          </Fragment>
+        ))}{' '}
+        points-league rankings; tiers are <a href={rankingSources.tiers.url} target="_blank" rel="noreferrer">ESPN's points draft tiers</a> by position. Both as of {new Date(rankingsFetchedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}.
       </footer>
     </div>
   )

@@ -1,0 +1,2280 @@
+{
+ "fetchedAt": "2026-10-12T01:53:41.870Z",
+ "sources": {
+  "espn": {
+   "name": "ESPN",
+   "label": "ESPN H2H points draft rank",
+   "url": "https://www.espn.com/fantasy/basketball/story/_/id/49960162/fantasy-basketball-points-league-rankings-2026-27-nba-season"
+  },
+  "rotowire": {
+   "name": "RotoWire",
+   "label": "RotoWire top 150 points league rankings",
+   "url": "https://www.rotowire.com/basketball/article/fantasy-basketball-points-league-rankings-2026-27-134657"
+  },
+  "rotoballer": {
+   "name": "RotoBaller",
+   "label": "RotoBaller top 150 points rankings (Yahoo default scoring)",
+   "url": "https://www.rotoballer.com/fantasy-basketball-rankings-for-points-leagues-2026-2027/1958458"
+  },
+  "tiers": {
+   "name": "ESPN tiers",
+   "label": "ESPN points league draft tiers by position",
+   "url": "https://www.espn.com/fantasy/basketball/story/_/id/50125975/fantasy-basketball-points-league-draft-tiers-nba-2026-27"
+  }
+ },
+ "players": {
+  "1000": {
+   "espn": 207,
+   "rotoballer": 96
+  },
+  "1029": {
+   "espn": 171
+  },
+  "1054": {
+   "espn": 55,
+   "rotowire": 50,
+   "rotoballer": 19,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 6,
+     "rank": 17
+    }
+   ]
+  },
+  "1074": {
+   "espn": 109,
+   "rotowire": 90,
+   "rotoballer": 55,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 26
+    }
+   ]
+  },
+  "1081": {
+   "espn": 234
+  },
+  "1082": {
+   "espn": 148,
+   "rotoballer": 139,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 21
+    }
+   ]
+  },
+  "1085": {
+   "espn": 37,
+   "rotowire": 36,
+   "rotoballer": 35,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 5,
+     "rank": 13
+    }
+   ]
+  },
+  "1092": {
+   "espn": 251
+  },
+  "1128": {
+   "espn": 228
+  },
+  "1131": {
+   "espn": 253
+  },
+  "1141": {
+   "espn": 259
+  },
+  "1178": {
+   "espn": 137,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 31
+    }
+   ]
+  },
+  "1240": {
+   "espn": 25,
+   "rotowire": 38,
+   "rotoballer": 46,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 4,
+     "rank": 10
+    }
+   ]
+  },
+  "1254": {
+   "espn": 178
+  },
+  "1257": {
+   "espn": 221
+  },
+  "1265": {
+   "espn": 135,
+   "rotowire": 137,
+   "rotoballer": 132,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 30
+    }
+   ]
+  },
+  "1272": {
+   "espn": 29,
+   "rotowire": 27,
+   "rotoballer": 15,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 5,
+     "rank": 7
+    }
+   ]
+  },
+  "1308": {
+   "espn": 33,
+   "rotowire": 26,
+   "rotoballer": 13,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 2,
+     "rank": 5
+    }
+   ]
+  },
+  "1321": {
+   "espn": 87,
+   "rotowire": 114,
+   "rotoballer": 117,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 6,
+     "rank": 19
+    }
+   ]
+  },
+  "1350": {
+   "espn": 70,
+   "rotowire": 77,
+   "rotoballer": 60,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 14
+    }
+   ]
+  },
+  "1362": {
+   "espn": 42,
+   "rotowire": 41,
+   "rotoballer": 18,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 3,
+     "rank": 8
+    }
+   ]
+  },
+  "1378": {
+   "espn": 267
+  },
+  "1380": {
+   "espn": 5,
+   "rotowire": 6,
+   "rotoballer": 4,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 1,
+     "rank": 1
+    }
+   ]
+  },
+  "1433": {
+   "espn": 23,
+   "rotowire": 16,
+   "rotoballer": 26,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 3,
+     "rank": 4
+    }
+   ]
+  },
+  "1444": {
+   "espn": 61,
+   "rotowire": 76,
+   "rotoballer": 47,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 7,
+     "rank": 18
+    }
+   ]
+  },
+  "1450": {
+   "espn": 82,
+   "rotowire": 105,
+   "rotoballer": 80,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 5,
+     "rank": 13
+    }
+   ]
+  },
+  "1486": {
+   "espn": 101,
+   "rotoballer": 129,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 8,
+     "rank": 23
+    }
+   ]
+  },
+  "1487": {
+   "espn": 106,
+   "rotoballer": 122,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 8,
+     "rank": 14
+    }
+   ]
+  },
+  "1511": {
+   "espn": 72,
+   "rotowire": 45,
+   "rotoballer": 16,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 16
+    }
+   ]
+  },
+  "1512": {
+   "espn": 145,
+   "rotoballer": 123,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 19
+    }
+   ]
+  },
+  "1525": {
+   "espn": 105,
+   "rotowire": 108,
+   "rotoballer": 118,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 25
+    }
+   ]
+  },
+  "1526": {
+   "espn": 130,
+   "rotowire": 134,
+   "rotoballer": 101,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 9,
+     "rank": 25
+    }
+   ]
+  },
+  "1534": {
+   "espn": 290
+  },
+  "1535": {
+   "espn": 50,
+   "rotowire": 55,
+   "rotoballer": 50,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 5,
+     "rank": 9
+    }
+   ]
+  },
+  "1541": {
+   "espn": 258
+  },
+  "1546": {
+   "espn": 250
+  },
+  "1548": {
+   "espn": 266
+  },
+  "1583": {
+   "espn": 155,
+   "rotowire": 122,
+   "rotoballer": 77
+  },
+  "1585": {
+   "espn": 136,
+   "rotowire": 121,
+   "rotoballer": 111,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 18
+    }
+   ]
+  },
+  "1589": {
+   "espn": 167
+  },
+  "1590": {
+   "espn": 99,
+   "rotowire": 106,
+   "rotoballer": 68,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 8,
+     "rank": 22
+    }
+   ]
+  },
+  "1595": {
+   "espn": 122,
+   "rotowire": 107,
+   "rotoballer": 128,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 27
+    }
+   ]
+  },
+  "1598": {
+   "espn": 287
+  },
+  "1602": {
+   "espn": 163
+  },
+  "1604": {
+   "espn": 200
+  },
+  "1613": {
+   "espn": 24,
+   "rotowire": 13,
+   "rotoballer": 22,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 4,
+     "rank": 5
+    }
+   ]
+  },
+  "1614": {
+   "espn": 293
+  },
+  "1620": {
+   "espn": 277
+  },
+  "1637": {
+   "espn": 65,
+   "rotowire": 94,
+   "rotoballer": 79,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 4,
+     "rank": 10
+    }
+   ]
+  },
+  "1640": {
+   "espn": 286
+  },
+  "1648": {
+   "espn": 20,
+   "rotowire": 21,
+   "rotoballer": 37,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 8
+    }
+   ]
+  },
+  "1658": {
+   "espn": 1,
+   "rotowire": 1,
+   "rotoballer": 1,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 1,
+     "rank": 1
+    }
+   ]
+  },
+  "1690": {
+   "espn": 261
+  },
+  "1691": {
+   "espn": 210
+  },
+  "1697": {
+   "espn": 73,
+   "rotowire": 58,
+   "rotoballer": 53,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 18
+    }
+   ]
+  },
+  "1698": {
+   "espn": 110,
+   "rotowire": 71,
+   "rotoballer": 39,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 4,
+     "rank": 11
+    }
+   ]
+  },
+  "1707": {
+   "espn": 278
+  },
+  "1711": {
+   "espn": 41,
+   "rotowire": 22,
+   "rotoballer": 27,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 3,
+     "rank": 7
+    }
+   ]
+  },
+  "1713": {
+   "espn": 52,
+   "rotowire": 62,
+   "rotoballer": 40,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 3,
+     "rank": 8
+    }
+   ]
+  },
+  "1716": {
+   "espn": 26,
+   "rotowire": 40,
+   "rotoballer": 43,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 3,
+     "rank": 5
+    }
+   ]
+  },
+  "1717": {
+   "espn": 89,
+   "rotowire": 127,
+   "rotoballer": 121,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 23
+    }
+   ]
+  },
+  "1718": {
+   "espn": 113,
+   "rotowire": 149,
+   "rotoballer": 106,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 25
+    }
+   ]
+  },
+  "1736": {
+   "espn": 219
+  },
+  "1739": {
+   "espn": 12,
+   "rotowire": 30,
+   "rotoballer": 23,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 3,
+     "rank": 3
+    }
+   ]
+  },
+  "1747": {
+   "espn": 28,
+   "rotowire": 20,
+   "rotoballer": 20,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 4,
+     "rank": 12
+    }
+   ]
+  },
+  "1752": {
+   "espn": 51,
+   "rotowire": 49,
+   "rotoballer": 45,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 5,
+     "rank": 10
+    }
+   ]
+  },
+  "1759": {
+   "espn": 257
+  },
+  "1777": {
+   "espn": 220
+  },
+  "1779": {
+   "espn": 138,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 9,
+     "rank": 26
+    }
+   ]
+  },
+  "1787": {
+   "espn": 54,
+   "rotowire": 87,
+   "rotoballer": 74,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 6,
+     "rank": 9
+    }
+   ]
+  },
+  "1792": {
+   "espn": 140,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 8,
+     "rank": 32
+    }
+   ]
+  },
+  "1797": {
+   "espn": 296
+  },
+  "1799": {
+   "espn": 191
+  },
+  "1801": {
+   "espn": 175
+  },
+  "1803": {
+   "espn": 94,
+   "rotowire": 97,
+   "rotoballer": 115,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 6,
+     "rank": 21
+    }
+   ]
+  },
+  "1809": {
+   "espn": 102,
+   "rotowire": 128,
+   "rotoballer": 124,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 7,
+     "rank": 13
+    }
+   ]
+  },
+  "1822": {
+   "espn": 9,
+   "rotowire": 8,
+   "rotoballer": 7,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 2,
+     "rank": 3
+    }
+   ]
+  },
+  "1830": {
+   "espn": 36,
+   "rotowire": 48,
+   "rotoballer": 67,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 2,
+     "rank": 3
+    }
+   ]
+  },
+  "1831": {
+   "espn": 93,
+   "rotowire": 75,
+   "rotoballer": 102,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 6,
+     "rank": 20
+    }
+   ]
+  },
+  "1841": {
+   "espn": 186
+  },
+  "1845": {
+   "espn": 10,
+   "rotowire": 15,
+   "rotoballer": 33,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 1,
+     "rank": 2
+    }
+   ]
+  },
+  "1846": {
+   "espn": 32,
+   "rotowire": 33,
+   "rotoballer": 24,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 5,
+     "rank": 8
+    }
+   ]
+  },
+  "1871": {
+   "espn": 273
+  },
+  "1872": {
+   "espn": 43,
+   "rotowire": 83,
+   "rotoballer": 82,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 5,
+     "rank": 15
+    }
+   ]
+  },
+  "1883": {
+   "espn": 176
+  },
+  "1887": {
+   "espn": 142,
+   "rotoballer": 109,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 33
+    }
+   ]
+  },
+  "1892": {
+   "espn": 123,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 8,
+     "rank": 23
+    }
+   ]
+  },
+  "1899": {
+   "espn": 288
+  },
+  "1913": {
+   "espn": 80,
+   "rotowire": 91,
+   "rotoballer": 108,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 5,
+     "rank": 17
+    }
+   ]
+  },
+  "1924": {
+   "espn": 84,
+   "rotowire": 54,
+   "rotoballer": 54,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 19
+    }
+   ]
+  },
+  "1934": {
+   "espn": 129,
+   "rotowire": 109,
+   "rotoballer": 87,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 30
+    }
+   ]
+  },
+  "1941": {
+   "espn": 194
+  },
+  "1945": {
+   "espn": 16,
+   "rotowire": 23,
+   "rotoballer": 30,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 6
+    }
+   ]
+  },
+  "1946": {
+   "espn": 299
+  },
+  "1950": {
+   "espn": 189
+  },
+  "1957": {
+   "espn": 2,
+   "rotowire": 4,
+   "rotoballer": 6,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 1,
+     "rank": 1
+    }
+   ]
+  },
+  "1959": {
+   "espn": 170,
+   "rotowire": 150,
+   "rotoballer": 148
+  },
+  "1961": {
+   "espn": 183
+  },
+  "1967": {
+   "espn": 15,
+   "rotowire": 17,
+   "rotoballer": 31,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 5
+    }
+   ]
+  },
+  "1970": {
+   "espn": 3,
+   "rotowire": 3,
+   "rotoballer": 3,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 1,
+     "rank": 2
+    }
+   ]
+  },
+  "1972": {
+   "espn": 199
+  },
+  "1974": {
+   "espn": 185
+  },
+  "1975": {
+   "espn": 45,
+   "rotowire": 84,
+   "rotoballer": 134,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 3,
+     "rank": 9
+    }
+   ]
+  },
+  "1982": {
+   "espn": 292
+  },
+  "1983": {
+   "espn": 203
+  },
+  "1986": {
+   "espn": 238
+  },
+  "1987": {
+   "espn": 298
+  },
+  "1988": {
+   "espn": 48,
+   "rotowire": 72,
+   "rotoballer": 63,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 3,
+     "rank": 10
+    }
+   ]
+  },
+  "1997": {
+   "espn": 126,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 28
+    }
+   ]
+  },
+  "1998": {
+   "espn": 83,
+   "rotowire": 86,
+   "rotoballer": 65,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 20
+    }
+   ]
+  },
+  "1999": {
+   "espn": 209
+  },
+  "2001": {
+   "espn": 104,
+   "rotowire": 103,
+   "rotoballer": 93,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 24
+    }
+   ]
+  },
+  "2007": {
+   "espn": 38,
+   "rotowire": 56,
+   "rotoballer": 44,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 5,
+     "rank": 14
+    }
+   ]
+  },
+  "2008": {
+   "espn": 294
+  },
+  "2009": {
+   "espn": 100,
+   "rotowire": 124,
+   "rotoballer": 133,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 7,
+     "rank": 18
+    }
+   ]
+  },
+  "2010": {
+   "espn": 265
+  },
+  "2012": {
+   "espn": 216
+  },
+  "2017": {
+   "espn": 263
+  },
+  "2020": {
+   "espn": 166
+  },
+  "2029": {
+   "espn": 160,
+   "rotowire": 136,
+   "rotoballer": 119
+  },
+  "2032": {
+   "espn": 112,
+   "rotowire": 92,
+   "rotoballer": 88,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 24
+    }
+   ]
+  },
+  "2036": {
+   "espn": 44,
+   "rotowire": 67,
+   "rotoballer": 69,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 6,
+     "rank": 10
+    }
+   ]
+  },
+  "2040": {
+   "espn": 74,
+   "rotowire": 88,
+   "rotoballer": 64,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 21
+    }
+   ]
+  },
+  "2050": {
+   "espn": 201,
+   "rotoballer": 144
+  },
+  "2053": {
+   "espn": 276
+  },
+  "2054": {
+   "espn": 57,
+   "rotowire": 69,
+   "rotoballer": 71,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 5,
+     "rank": 11
+    }
+   ]
+  },
+  "2055": {
+   "espn": 47,
+   "rotowire": 65,
+   "rotoballer": 78,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 3,
+     "rank": 6
+    }
+   ]
+  },
+  "2061": {
+   "espn": 285
+  },
+  "2065": {
+   "espn": 143,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 8,
+     "rank": 33
+    }
+   ]
+  },
+  "2074": {
+   "espn": 252
+  },
+  "2086": {
+   "espn": 56,
+   "rotowire": 59,
+   "rotoballer": 75,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 4,
+     "rank": 9
+    }
+   ]
+  },
+  "2090": {
+   "espn": 59,
+   "rotowire": 98,
+   "rotoballer": 104,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 4,
+     "rank": 11
+    }
+   ]
+  },
+  "2091": {
+   "espn": 154,
+   "rotowire": 129,
+   "rotoballer": 141
+  },
+  "2095": {
+   "espn": 206
+  },
+  "2118": {
+   "espn": 282
+  },
+  "2119": {
+   "espn": 231
+  },
+  "2120": {
+   "espn": 280
+  },
+  "2125": {
+   "espn": 217
+  },
+  "2126": {
+   "espn": 13,
+   "rotowire": 9,
+   "rotoballer": 25,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 4
+    }
+   ]
+  },
+  "2128": {
+   "espn": 244,
+   "rotoballer": 125
+  },
+  "2131": {
+   "espn": 144,
+   "rotowire": 143,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 8,
+     "rank": 34
+    }
+   ]
+  },
+  "2133": {
+   "espn": 8,
+   "rotowire": 10,
+   "rotoballer": 10,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 1,
+     "rank": 1
+    }
+   ]
+  },
+  "2135": {
+   "espn": 96,
+   "rotowire": 85,
+   "rotoballer": 92,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 6,
+     "rank": 22
+    }
+   ]
+  },
+  "2136": {
+   "espn": 62,
+   "rotowire": 57,
+   "rotoballer": 84,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 6,
+     "rank": 11
+    }
+   ]
+  },
+  "2139": {
+   "espn": 255
+  },
+  "2142": {
+   "espn": 90,
+   "rotowire": 79,
+   "rotoballer": 112,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 24
+    }
+   ]
+  },
+  "2143": {
+   "espn": 39,
+   "rotowire": 63,
+   "rotoballer": 86,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 2,
+     "rank": 5
+    }
+   ]
+  },
+  "2144": {
+   "espn": 195
+  },
+  "2145": {
+   "espn": 158
+  },
+  "2146": {
+   "espn": 141,
+   "rotowire": 141,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 9,
+     "rank": 27
+    }
+   ]
+  },
+  "2152": {
+   "espn": 161
+  },
+  "2156": {
+   "espn": 214
+  },
+  "2157": {
+   "espn": 92,
+   "rotowire": 102,
+   "rotoballer": 90,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 25
+    }
+   ]
+  },
+  "2159": {
+   "espn": 159
+  },
+  "2161": {
+   "espn": 21,
+   "rotowire": 19,
+   "rotoballer": 29,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 9
+    }
+   ]
+  },
+  "2179": {
+   "espn": 14,
+   "rotowire": 25,
+   "rotoballer": 21,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 4,
+     "rank": 11
+    }
+   ]
+  },
+  "2181": {
+   "espn": 30,
+   "rotowire": 32,
+   "rotoballer": 38,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 2,
+     "rank": 4
+    }
+   ]
+  },
+  "2185": {
+   "espn": 212
+  },
+  "2233": {
+   "espn": 197
+  },
+  "2255": {
+   "espn": 98,
+   "rotowire": 110,
+   "rotoballer": 120,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 7,
+     "rank": 17
+    }
+   ]
+  },
+  "2256": {
+   "espn": 247
+  },
+  "2258": {
+   "espn": 119,
+   "rotowire": 146,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 8,
+     "rank": 21
+    }
+   ]
+  },
+  "2259": {
+   "espn": 35,
+   "rotowire": 35,
+   "rotoballer": 34,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 4,
+     "rank": 7
+    }
+   ]
+  },
+  "2260": {
+   "espn": 229
+  },
+  "2266": {
+   "espn": 269
+  },
+  "2267": {
+   "espn": 7,
+   "rotowire": 5,
+   "rotoballer": 5,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 2,
+     "rank": 3
+    }
+   ]
+  },
+  "2275": {
+   "espn": 139,
+   "rotowire": 95,
+   "rotoballer": 113,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 32
+    }
+   ]
+  },
+  "2280": {
+   "espn": 248
+  },
+  "2281": {
+   "espn": 180
+  },
+  "2284": {
+   "espn": 6,
+   "rotowire": 11,
+   "rotoballer": 8,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 1,
+     "rank": 2
+    }
+   ]
+  },
+  "2285": {
+   "espn": 64,
+   "rotowire": 47,
+   "rotoballer": 58,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 4,
+     "rank": 14
+    }
+   ]
+  },
+  "2286": {
+   "espn": 224
+  },
+  "2289": {
+   "espn": 17,
+   "rotowire": 12,
+   "rotoballer": 11,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 1,
+     "rank": 1
+    }
+   ]
+  },
+  "2296": {
+   "rotowire": 126,
+   "rotoballer": 145
+  },
+  "2299": {
+   "espn": 225
+  },
+  "2301": {
+   "espn": 150,
+   "rotowire": 132,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 33
+    }
+   ]
+  },
+  "2302": {
+   "espn": 128,
+   "rotowire": 104,
+   "rotoballer": 107,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 29
+    }
+   ]
+  },
+  "2303": {
+   "espn": 274
+  },
+  "2304": {
+   "espn": 58,
+   "rotowire": 52,
+   "rotoballer": 62,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 4,
+     "rank": 12
+    }
+   ]
+  },
+  "2305": {
+   "espn": 151,
+   "rotowire": 117,
+   "rotoballer": 100
+  },
+  "2306": {
+   "espn": 156,
+   "rotoballer": 116
+  },
+  "2308": {
+   "espn": 22,
+   "rotowire": 14,
+   "rotoballer": 12,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 4,
+     "rank": 4
+    }
+   ]
+  },
+  "2309": {
+   "espn": 91,
+   "rotowire": 99,
+   "rotoballer": 83,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 8,
+     "rank": 20
+    }
+   ]
+  },
+  "2313": {
+   "espn": 18,
+   "rotowire": 29,
+   "rotoballer": 14,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 3,
+     "rank": 7
+    }
+   ]
+  },
+  "2316": {
+   "espn": 31,
+   "rotowire": 24,
+   "rotoballer": 32,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 2,
+     "rank": 4
+    }
+   ]
+  },
+  "2322": {
+   "espn": 245
+  },
+  "2329": {
+   "espn": 202
+  },
+  "2416": {
+   "espn": 132,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 32
+    }
+   ]
+  },
+  "2417": {
+   "espn": 243
+  },
+  "2422": {
+   "espn": 115,
+   "rotowire": 147,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 27
+    }
+   ]
+  },
+  "2432": {
+   "espn": 241
+  },
+  "2435": {
+   "espn": 165,
+   "rotowire": 145
+  },
+  "2438": {
+   "espn": 27,
+   "rotowire": 34,
+   "rotoballer": 36,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 5,
+     "rank": 6
+    }
+   ]
+  },
+  "2440": {
+   "rotoballer": 142
+  },
+  "2441": {
+   "espn": 69,
+   "rotowire": 37,
+   "rotoballer": 59,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 13
+    }
+   ]
+  },
+  "2444": {
+   "espn": 147,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 20
+    }
+   ]
+  },
+  "2445": {
+   "espn": 121,
+   "rotowire": 93,
+   "rotoballer": 97,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 16
+    }
+   ]
+  },
+  "2447": {
+   "espn": 205,
+   "rotowire": 148
+  },
+  "2449": {
+   "espn": 49,
+   "rotowire": 61,
+   "rotoballer": 51,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 3,
+     "rank": 7
+    }
+   ]
+  },
+  "2451": {
+   "espn": 246
+  },
+  "2453": {
+   "espn": 34,
+   "rotowire": 43,
+   "rotoballer": 41,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 4,
+     "rank": 6
+    }
+   ]
+  },
+  "2454": {
+   "espn": 117,
+   "rotowire": 118,
+   "rotoballer": 103,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 28
+    }
+   ]
+  },
+  "2455": {
+   "espn": 71,
+   "rotowire": 31,
+   "rotoballer": 48,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 15
+    }
+   ]
+  },
+  "2456": {
+   "espn": 116,
+   "rotowire": 125,
+   "rotoballer": 99,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 8,
+     "rank": 15
+    }
+   ]
+  },
+  "2457": {
+   "espn": 208,
+   "rotowire": 140
+  },
+  "2458": {
+   "espn": 46,
+   "rotowire": 28,
+   "rotoballer": 17,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 5,
+     "rank": 8
+    }
+   ]
+  },
+  "2461": {
+   "espn": 124,
+   "rotowire": 142,
+   "rotoballer": 130,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 28
+    }
+   ]
+  },
+  "2463": {
+   "espn": 97,
+   "rotowire": 81,
+   "rotoballer": 70,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 7,
+     "rank": 16
+    }
+   ]
+  },
+  "2468": {
+   "espn": 187
+  },
+  "2474": {
+   "espn": 168,
+   "rotoballer": 150
+  },
+  "2475": {
+   "espn": 237
+  },
+  "2480": {
+   "espn": 236
+  },
+  "2488": {
+   "espn": 242
+  },
+  "2494": {
+   "espn": 134,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 8,
+     "rank": 30
+    }
+   ]
+  },
+  "2497": {
+   "espn": 268
+  },
+  "2537": {
+   "espn": 271
+  },
+  "2563": {
+   "espn": 279
+  },
+  "2564": {
+   "espn": 75,
+   "rotowire": 112,
+   "rotoballer": 105,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 4,
+     "rank": 12
+    }
+   ]
+  },
+  "2565": {
+   "espn": 198
+  },
+  "2566": {
+   "espn": 103,
+   "rotowire": 82,
+   "rotoballer": 72,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 23
+    }
+   ]
+  },
+  "2568": {
+   "espn": 60,
+   "rotowire": 42,
+   "rotoballer": 52,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 4,
+     "rank": 13
+    }
+   ]
+  },
+  "2571": {
+   "espn": 272
+  },
+  "2574": {
+   "espn": 19,
+   "rotowire": 18,
+   "rotoballer": 28,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 1,
+     "rank": 2
+    }
+   ]
+  },
+  "2577": {
+   "espn": 4,
+   "rotowire": 2,
+   "rotoballer": 2,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 2,
+     "rank": 2
+    }
+   ]
+  },
+  "2578": {
+   "espn": 222
+  },
+  "2580": {
+   "espn": 63,
+   "rotowire": 60,
+   "rotoballer": 56,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 7,
+     "rank": 19
+    }
+   ]
+  },
+  "2581": {
+   "espn": 213
+  },
+  "2583": {
+   "espn": 114,
+   "rotowire": 100,
+   "rotoballer": 131,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 27
+    }
+   ]
+  },
+  "2584": {
+   "espn": 153
+  },
+  "2585": {
+   "espn": 270
+  },
+  "2586": {
+   "espn": 146,
+   "rotowire": 135,
+   "rotoballer": 149,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 9,
+     "rank": 28
+    }
+   ]
+  },
+  "2587": {
+   "espn": 291
+  },
+  "2590": {
+   "espn": 131,
+   "rotowire": 138,
+   "rotoballer": 143,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 31
+    }
+   ]
+  },
+  "2596": {
+   "espn": 284
+  },
+  "2597": {
+   "espn": 260
+  },
+  "2603": {
+   "espn": 188
+  },
+  "2606": {
+   "espn": 289
+  },
+  "2608": {
+   "espn": 239
+  },
+  "2613": {
+   "espn": 152,
+   "rotowire": 123,
+   "rotoballer": 138
+  },
+  "2620": {
+   "espn": 172,
+   "rotoballer": 127
+  },
+  "2710": {
+   "espn": 235
+  },
+  "2711": {
+   "espn": 240
+  },
+  "2712": {
+   "espn": 190
+  },
+  "2713": {
+   "espn": 223
+  },
+  "2714": {
+   "espn": 127,
+   "rotowire": 131,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 8,
+     "rank": 24
+    }
+   ]
+  },
+  "2715": {
+   "espn": 181
+  },
+  "2716": {
+   "espn": 283
+  },
+  "2717": {
+   "espn": 264
+  },
+  "2718": {
+   "espn": 118,
+   "rotowire": 80,
+   "rotoballer": 61,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 26
+    }
+   ]
+  },
+  "2719": {
+   "espn": 88,
+   "rotowire": 130,
+   "rotoballer": 146,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 6,
+     "rank": 15
+    }
+   ]
+  },
+  "2720": {
+   "espn": 179
+  },
+  "2721": {
+   "espn": 227
+  },
+  "2722": {
+   "espn": 53,
+   "rotowire": 46,
+   "rotoballer": 49,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 6,
+     "rank": 16
+    }
+   ]
+  },
+  "2723": {
+   "espn": 256
+  },
+  "2724": {
+   "espn": 182
+  },
+  "2725": {
+   "espn": 281
+  },
+  "2726": {
+   "espn": 76,
+   "rotowire": 74,
+   "rotoballer": 73,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 8,
+     "rank": 21
+    }
+   ]
+  },
+  "2728": {
+   "espn": 68,
+   "rotowire": 44,
+   "rotoballer": 57,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 12
+    }
+   ]
+  },
+  "2733": {
+   "espn": 78,
+   "rotowire": 70,
+   "rotoballer": 81,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 7,
+     "rank": 17
+    }
+   ]
+  },
+  "2737": {
+   "espn": 230
+  },
+  "2749": {
+   "espn": 275
+  },
+  "2753": {
+   "espn": 233
+  },
+  "2764": {
+   "espn": 169
+  },
+  "2766": {
+   "espn": 149,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 9,
+     "rank": 34
+    }
+   ]
+  },
+  "2771": {
+   "espn": 125,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 9,
+     "rank": 17
+    }
+   ]
+  },
+  "2772": {
+   "espn": 226,
+   "rotowire": 113,
+   "rotoballer": 137
+  },
+  "2835": {
+   "espn": 79,
+   "rotowire": 53,
+   "rotoballer": 42,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 5,
+     "rank": 16
+    }
+   ]
+  },
+  "2836": {
+   "espn": 249
+  },
+  "4737": {
+   "espn": 77,
+   "rotowire": 68,
+   "rotoballer": 95,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 5,
+     "rank": 14
+    }
+   ]
+  },
+  "4738": {
+   "espn": 215
+  },
+  "4740": {
+   "espn": 40,
+   "rotowire": 39,
+   "rotoballer": 76,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 3,
+     "rank": 6
+    }
+   ]
+  },
+  "4741": {
+   "espn": 297
+  },
+  "4742": {
+   "espn": 204
+  },
+  "4743": {
+   "espn": 157
+  },
+  "4744": {
+   "espn": 107,
+   "rotowire": 139,
+   "rotoballer": 135,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 9,
+     "rank": 29
+    }
+   ]
+  },
+  "4748": {
+   "espn": 120,
+   "rotowire": 96,
+   "rotoballer": 94,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 7,
+     "rank": 29
+    }
+   ]
+  },
+  "4750": {
+   "espn": 111,
+   "rotowire": 116,
+   "rotoballer": 114,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 8,
+     "rank": 22
+    }
+   ]
+  },
+  "4751": {
+   "espn": 86,
+   "rotowire": 78,
+   "rotoballer": 91,
+   "tiers": [
+    {
+     "position": "C",
+     "tier": 8,
+     "rank": 20
+    }
+   ]
+  },
+  "4752": {
+   "espn": 262
+  },
+  "4754": {
+   "espn": 85,
+   "rotowire": 73,
+   "rotoballer": 89,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 22
+    }
+   ]
+  },
+  "4755": {
+   "espn": 184,
+   "rotowire": 120,
+   "rotoballer": 98
+  },
+  "4757": {
+   "espn": 177
+  },
+  "4758": {
+   "espn": 133,
+   "rotowire": 119,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 8,
+     "rank": 31
+    }
+   ]
+  },
+  "4759": {
+   "espn": 232
+  },
+  "4760": {
+   "espn": 11,
+   "rotowire": 7,
+   "rotoballer": 9,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 1,
+     "rank": 3
+    }
+   ]
+  },
+  "4761": {
+   "espn": 218,
+   "rotowire": 115
+  },
+  "4764": {
+   "espn": 211
+  },
+  "4777": {
+   "espn": 196
+  },
+  "4793": {
+   "rotowire": 133
+  },
+  "4862": {
+   "espn": 66,
+   "rotowire": 64,
+   "rotoballer": 85,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 4,
+     "rank": 15
+    }
+   ]
+  },
+  "4864": {
+   "espn": 173,
+   "rotowire": 111,
+   "rotoballer": 147
+  },
+  "4866": {
+   "espn": 81,
+   "rotowire": 66,
+   "rotoballer": 136,
+   "tiers": [
+    {
+     "position": "SF",
+     "tier": 5,
+     "rank": 18
+    }
+   ]
+  },
+  "4869": {
+   "espn": 254
+  },
+  "4871": {
+   "espn": 162,
+   "rotowire": 144
+  },
+  "4873": {
+   "espn": 67,
+   "rotowire": 51,
+   "rotoballer": 66,
+   "tiers": [
+    {
+     "position": "PF",
+     "tier": 6,
+     "rank": 12
+    }
+   ]
+  },
+  "4876": {
+   "espn": 192
+  },
+  "4881": {
+   "espn": 164
+  },
+  "4882": {
+   "espn": 108,
+   "rotowire": 89,
+   "rotoballer": 110,
+   "tiers": [
+    {
+     "position": "SG",
+     "tier": 7,
+     "rank": 19
+    }
+   ]
+  },
+  "4883": {
+   "espn": 193
+  },
+  "4884": {
+   "espn": 295
+  },
+  "4885": {
+   "espn": 174,
+   "rotoballer": 140
+  },
+  "4891": {
+   "espn": 95,
+   "rotowire": 101,
+   "rotoballer": 126,
+   "tiers": [
+    {
+     "position": "PG",
+     "tier": 8,
+     "rank": 26
+    }
+   ]
+  }
+ }
+}
