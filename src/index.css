@@ -1,25 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: #0d1311;
-  --panel: #141c19;
-  --panel-2: #1b2521;
-  --line: #26332e;
-  --text: #eef2ec;
-  --muted: #8a9a93;
+  /* Stained hardwood under arena lights: espresso floor, darker boards for panels, cream court paint. */
+  --bg: #15100c;
+  --panel: #1f1812;
+  --panel-2: #2a2118;
+  --line: #3b2e22;
+  --text: #f4ece0;
+  --muted: #a8967f;
+  --court: #e9d6b0;
   --slime: #b0f01d;
-  --orange: #f08a24;
+  --orange: #f07c2a;
   --red: #ff6b5b;
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
+  /* Floor planks: a seam every 72px, alternating board shades, and warm light falling from above. */
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(240, 124, 42, .14), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 71px, rgba(0, 0, 0, .28) 71px 72px),
+    repeating-linear-gradient(90deg, rgba(255, 214, 160, .025) 0 72px, transparent 72px 144px, rgba(255, 214, 160, .012) 144px 216px);
+  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: var(--bg); }
+body { margin: 0; min-width: 320px; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 #root { min-height: 100svh; }
