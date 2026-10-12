@@ -1,7 +1,9 @@
-// Expert points-league rankings and ESPN's positional tiers, from the snapshot that
-// `npm run rankings` (scripts/rankings.mjs) writes. Keyed on Sleeper player id.
+// Expert points-league rankings, ESPN's positional tiers and ESPN's and FantasyPros' stat
+// projections, from the snapshot that `npm run rankings` (scripts/rankings.mjs) writes. Keyed on
+// Sleeper player id.
 
 import snapshot from '../data/rankings.json'
+import type { StatLine } from './sleeper'
 
 export type ExpertSource = 'espn' | 'rotowire' | 'rotoballer'
 
@@ -12,9 +14,16 @@ export type Tier = {
   rank: number
 }
 
-export type ExpertRanks = Partial<Record<ExpertSource, number>> & { tiers?: Tier[] }
+export type ProjectionSource = 'espnProjection' | 'fantasypros'
+
+// Per-game stat lines under Sleeper's stat keys, plus `gp` for projected games.
+export type ExpertRanks = Partial<Record<ExpertSource, number>> & {
+  tiers?: Tier[]
+  projections?: Partial<Record<ProjectionSource, StatLine>>
+}
 
 export const expertSources: ExpertSource[] = ['espn', 'rotowire', 'rotoballer']
+export const projectionSources: ProjectionSource[] = ['espnProjection', 'fantasypros']
 export const rankingSources = snapshot.sources
 export const rankingsFetchedAt = snapshot.fetchedAt
 

@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react'
 import './App.css'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
-import { expertAverage, expertRanks, rankingSources, rankingsFetchedAt, type ExpertRanks, type Tier } from './lib/rankings'
+import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
 import { scoreLine, scoringLegend } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
@@ -42,6 +42,11 @@ type BoardPlayer = {
   rookie: boolean
   experts: ExpertRanks
   expert: number | null
+  // Each projection source's FP/G in this league's scoring, and their mean with Sleeper's.
+  sourceProj: Partial<Record<ProjectionSource, number>>
+  consensus: number
+  // Mean of ESPN's and FantasyPros' projected games; Sleeper projects none.
+  projGp: number | null
   tiers: Tier[]
 }
 
@@ -64,7 +69,7 @@ export type Account = {
   getToken: () => Promise<string | null>
 }
 
-type SortKey = 'rank' | 'proj' | 'expert' | 'tier' | 'last' | 'lastGp' | 'adp' | 'gap'
+type SortKey = 'rank' | 'proj' | 'consensus' | 'projGp' | 'expert' | 'tier' | 'last' | 'lastGp' | 'adp' | 'gap'
 type PositionFilter = 'ALL' | 'PG' | 'SG' | 'SF' | 'PF' | 'C' | 'G' | 'F'
 
 const positionOrder = ['PG', 'SG', 'SF', 'PF', 'C']
@@ -87,7 +92,9 @@ const userId = params.get('user') ?? defaultUserId
 
 const sortLabels: Record<SortKey, string> = {
   rank: 'Rank',
-  proj: 'Proj FP/G',
+  proj: 'Sleeper',
+  consensus: 'Cons FP/G',
+  projGp: 'Proj GP',
   expert: 'Experts',
   tier: 'Tier',
   last: 'Last FP/G',
@@ -107,6 +114,26 @@ function tierFor(player: BoardPlayer, position: PositionFilter) {
 function expertTitle(player: BoardPlayer) {
   const parts = (['espn', 'rotowire', 'rotoballer'] as const).map((source) => `${rankingSources[source].name} ${player.experts[source] ?? '—'}`)
   return parts.join(' · ')
+}
+
+function gamesTitle(player: BoardPlayer) {
+  return projectionSources.map((source) => `${rankingSources[source].name} ${player.experts.projections?.[source]?.gp ?? '—'}`).join(' · ')
+}
+
+function consensusTitle(player: BoardPlayer) {
+  const parts = projectionSources.map((source) => `${rankingSources[source].name} ${formatPoints(player.sourceProj[source] ?? null)}`)
+  return [`Sleeper ${formatPoints(player.proj)}`, ...parts].join(' · ')
+}
+
+// ESPN and FantasyPros project no double- or triple-doubles, so each borrows Sleeper's rate for
+// the player. Otherwise those 2 and 5 point bonuses would read as a gap between sources.
+function sourceProjections(experts: ExpertRanks, sleeperLine: StatLine, scoring: Record<string, number>) {
+  const result: Partial<Record<ProjectionSource, number>> = {}
+  for (const source of projectionSources) {
+    const line = experts.projections?.[source]
+    if (line) result[source] = scoreLine({ ...line, dd: sleeperLine.dd ?? 0, td: sleeperLine.td ?? 0 }, scoring)
+  }
+  return result
 }
 
 function readStarred() {
@@ -170,25 +197,33 @@ function buildBoard(
     const positions = (player.fantasy_positions?.length ? player.fantasy_positions : [player.position ?? ''])
       .filter(Boolean)
       .sort((a, b) => positionOrder.indexOf(a) - positionOrder.indexOf(b))
+    const experts = expertRanks(id)
+    const proj = scoreLine(line, scoring) / (line.gp || 1)
+    const sourceProj = sourceProjections(experts, line, scoring)
+    const projs = [proj, ...Object.values(sourceProj)]
+    const games = projectionSources.map((source) => experts.projections?.[source]?.gp).filter((value): value is number => !!value)
     rows.push({
       id,
       name: player.full_name ?? `${player.first_name ?? ''} ${player.last_name ?? ''}`.trim(),
       team: player.team ?? 'FA',
       positions,
       injury: player.injury_status ?? '',
-      proj: scoreLine(line, scoring) / (line.gp || 1),
+      proj,
       last: lastGp ? scoreLine(lastLine, scoring) / lastGp : null,
       lastGp,
       adp,
       rank: 0,
       gap: null,
       rookie: player.years_exp === 0,
-      experts: expertRanks(id),
-      expert: expertAverage(expertRanks(id)),
-      tiers: expertRanks(id).tiers ?? [],
+      experts,
+      expert: expertAverage(experts),
+      tiers: experts.tiers ?? [],
+      sourceProj,
+      consensus: projs.reduce((sum, value) => sum + value, 0) / projs.length,
+      projGp: games.length ? Math.round(games.reduce((sum, value) => sum + value, 0) / games.length) : null,
     })
   }
-  rows.sort((a, b) => b.proj - a.proj)
+  rows.sort((a, b) => b.consensus - a.consensus)
   rows.forEach((row, index) => {
     row.rank = index + 1
     // Only players our points would draft get a gap; beyond that the gap only measures how
@@ -217,6 +252,9 @@ function unprojectedPlayer(pick: Pick): BoardPlayer {
     rookie: false,
     experts: {},
     expert: null,
+    sourceProj: {},
+    consensus: 0,
+    projGp: null,
     tiers: [],
   }
 }
@@ -443,7 +481,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const bestAvailable = base.board.filter((player) => !draftState.drafted.has(player.id)).slice(0, 8)
 
   const sortBy = (key: SortKey) =>
-    setSort((current) => (current.key === key ? { key, desc: !current.desc } : { key, desc: key === 'proj' || key === 'last' || key === 'lastGp' || key === 'gap' }))
+    setSort((current) => (current.key === key ? { key, desc: !current.desc } : { key, desc: key === 'proj' || key === 'consensus' || key === 'projGp' || key === 'last' || key === 'lastGp' || key === 'gap' }))
 
   const header = (key: SortKey, className = '') => (
     <th className={`sortable ${className} ${sort.key === key ? 'sorted' : ''}`} onClick={() => sortBy(key)}>
@@ -524,7 +562,9 @@ export default function App({ account, accountControl }: { account: Account | nu
                     <th className="star-cell" />
                     {header('rank', 'num')}
                     <th>Player</th>
-                    {header('proj', 'num')}
+                    {header('consensus', 'num')}
+                    {header('projGp', 'num wide')}
+                    {header('proj', 'num wide')}
                     {header('expert', 'num wide')}
                     {header('tier', 'wide')}
                     {header('last', 'num wide')}
@@ -542,7 +582,7 @@ export default function App({ account, accountControl }: { account: Account | nu
                     const tierStarts = sort.key === 'tier' && !sort.desc && tier && (index === 0 || tier.tier !== tierFor(visible[index - 1], position)?.tier)
                     return (
                       <Fragment key={player.id}>
-                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 11 : 10}>Tier {tier.tier}</td></tr>}
+                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 13 : 12}>Tier {tier.tier}</td></tr>}
                         <tr className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
                           <td className="star-cell">
                             <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
@@ -565,7 +605,9 @@ export default function App({ account, accountControl }: { account: Account | nu
                               </span>
                             </div>
                           </td>
-                          <td className="num strong">{formatPoints(player.proj)}</td>
+                          <td className="num strong" title={consensusTitle(player)}>{formatPoints(player.consensus)}</td>
+                          <td className={`num wide ${player.projGp !== null && player.projGp < 60 ? 'warn' : ''}`} title={gamesTitle(player)}>{player.projGp ?? '—'}</td>
+                          <td className="num wide">{formatPoints(player.proj)}</td>
                           <td className="num wide" title={expertTitle(player)}>{player.expert === null ? '—' : Math.round(player.expert)}</td>
                           <td className="wide tier-cell">{tier ? `${tier.position} ${tier.tier}` : '—'}</td>
                           <td className="num wide">{formatPoints(player.last)}</td>
@@ -597,14 +639,14 @@ export default function App({ account, accountControl }: { account: Account | nu
                   <li key={`${entry.slot}-${index}`} className={entry.player ? '' : 'open'}>
                     <span className="slot">{entry.slot}</span>
                     <span>{entry.player ? entry.player.name : 'Open'}</span>
-                    <span className="num">{entry.player ? formatPoints(entry.player.proj) : ''}</span>
+                    <span className="num">{entry.player ? formatPoints(entry.player.consensus) : ''}</span>
                   </li>
                 ))}
                 {draftState.myLineup.bench.map((player) => (
                   <li key={player.id}>
                     <span className="slot">BN</span>
                     <span>{player.name}</span>
-                    <span className="num">{formatPoints(player.proj)}</span>
+                    <span className="num">{formatPoints(player.consensus)}</span>
                   </li>
                 ))}
               </ul>
@@ -620,7 +662,7 @@ export default function App({ account, accountControl }: { account: Account | nu
                     <li key={player.id}>
                       <span className="name">{player.name}</span>
                       <span className="meta">{player.positions.join('/')}{fills && <em className="tag need">need</em>}</span>
-                      <span className="num">{formatPoints(player.proj)}</span>
+                      <span className="num">{formatPoints(player.consensus)}</span>
                     </li>
                   )
                 })}
@@ -655,7 +697,7 @@ export default function App({ account, accountControl }: { account: Account | nu
               const players = draftState.byRoster.get(rosterId) ?? []
               const lineup = assignLineup(base.league.roster_positions, players)
               const open = lineup.starters.filter((entry) => !entry.player).map((entry) => entry.slot)
-              const total = players.reduce((sum, player) => sum + player.proj, 0)
+              const total = players.reduce((sum, player) => sum + player.consensus, 0)
               return (
                 <article key={slot} className={`team ${rosterId === draftState.myRosterId ? 'mine' : ''} ${rosterId === draftState.onClock && draft.status === 'drafting' ? 'clock-on' : ''}`}>
                   <header>
@@ -679,7 +721,14 @@ export default function App({ account, accountControl }: { account: Account | nu
       )}
 
       <footer className="footer">
-        Projections, ADP and stats from Sleeper. Rank is projected points per game in this league's scoring; projections leave out the 40/50 point, 15 assist and 20 rebound bonuses. Last season is {Number(base.league.season) - 1}, with its bonuses. ADP gap is standard ADP minus rank, shown for the top players a full draft would take: positive means the room usually takes him later than his points say.
+        Rank orders Cons FP/G: projected points per game in this league's scoring, averaged across Sleeper's projection and{' '}
+        {projectionSources.map((source, index) => (
+          <Fragment key={source}>
+            {index ? ' and ' : ''}
+            <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}'s</a>
+          </Fragment>
+        ))}. The other two project no double- or triple-doubles, so they borrow Sleeper's rates, and no projection includes the 40/50 point, 15 assist and 20 rebound bonuses. Proj GP averages ESPN's and FantasyPros' projected games, in orange under 60.
+        {' '}ADP and last season ({Number(base.league.season) - 1}, with its bonuses) are from Sleeper. ADP gap is standard ADP minus rank, shown for the top players a full draft would take: positive means the room usually takes him later than his points say.
         {' '}Experts is the average of the{' '}
         {(['espn', 'rotowire', 'rotoballer'] as const).map((source, index) => (
           <Fragment key={source}>
@@ -687,7 +736,7 @@ export default function App({ account, accountControl }: { account: Account | nu
             <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}</a>
           </Fragment>
         ))}{' '}
-        points-league rankings; tiers are <a href={rankingSources.tiers.url} target="_blank" rel="noreferrer">ESPN's points draft tiers</a> by position. Both as of {new Date(rankingsFetchedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}.
+        points-league rankings, which publish an order but no stats to rescore. Tiers are <a href={rankingSources.tiers.url} target="_blank" rel="noreferrer">ESPN's points draft tiers</a> by position. Outside data as of {new Date(rankingsFetchedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}.
       </footer>
     </div>
   )

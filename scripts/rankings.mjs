@@ -1,8 +1,10 @@
-// Pulls expert points-league rankings and ESPN's positional tiers into src/data/rankings.json,
-// keyed on Sleeper player ids. Run with `npm run rankings` and commit the result; the board
-// reads the snapshot, so a source changing its page never breaks the live site.
+// Pulls expert points-league rankings, ESPN's positional tiers, and ESPN's and FantasyPros'
+// per-game stat projections into src/data/rankings.json, keyed on Sleeper player ids. Run with
+// `npm run rankings` and commit the result; the board reads the snapshot, so a source changing
+// its page never breaks the live site.
 //
-// Only rank numbers and tiers are kept, never the articles' write-ups.
+// Projections are stored as raw per-game stats under Sleeper's stat keys, so the board scores
+// them with the league's own scoring_settings. Only numbers are kept, never the articles' write-ups.
 
 import { writeFile } from 'node:fs/promises'
 
@@ -31,7 +33,22 @@ const sources = {
     label: 'ESPN points league draft tiers by position',
     url: 'https://www.espn.com/fantasy/basketball/story/_/id/50125975/fantasy-basketball-points-league-draft-tiers-nba-2026-27',
   },
+  espnProjection: {
+    name: 'ESPN',
+    label: 'ESPN season projections, per game',
+    url: 'https://fantasy.espn.com/basketball/players/projections',
+  },
+  fantasypros: {
+    name: 'FantasyPros',
+    label: 'FantasyPros consensus projections, per game',
+    url: 'https://www.fantasypros.com/nba/projections/avg-overall.php',
+  },
 }
+
+// ESPN's numeric stat ids, mapped to Sleeper's stat keys. 42 is games played.
+const espnStats = { 0: 'pts', 1: 'blk', 2: 'stl', 3: 'ast', 6: 'reb', 11: 'to', 17: 'tpm', 42: 'gp' }
+const fantasyprosStats = { PTS: 'pts', REB: 'reb', AST: 'ast', BLK: 'blk', STL: 'stl', '3PM': 'tpm', TO: 'to', GP: 'gp' }
+const round = (value) => Math.round(value * 100) / 100
 
 // Names a source spells differently from Sleeper, after normalizing.
 const aliases = {
@@ -86,14 +103,46 @@ async function sleeperIndex() {
   return (name) => byName.get(normalize(name))?.id
 }
 
-async function espnRanks() {
+async function espnPlayers() {
   const filter = { players: { limit: 400, sortDraftRanks: { sortPriority: 100, sortAsc: true, value: 'STANDARD' } } }
   const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/${season + 1}/segments/0/leaguedefaults/1?view=kona_player_info`
   const data = await (await get(url, { headers: { 'x-fantasy-filter': JSON.stringify(filter) } })).json()
-  // STANDARD is ESPN's H2H points rank; ROTO is categories.
-  return data.players
-    .map(({ player }) => ({ name: player.fullName, rank: player.draftRanksByRankType?.STANDARD?.rank }))
+  return data.players.map(({ player }) => player)
+}
+
+// STANDARD is ESPN's H2H points rank; ROTO is categories.
+function espnRanks(players) {
+  return players
+    .map((player) => ({ name: player.fullName, rank: player.draftRanksByRankType?.STANDARD?.rank }))
     .filter((row) => row.rank && row.rank < 300)
+}
+
+// ESPN's season projection is the stats entry with statSourceId 1 for the coming season.
+function espnProjections(players) {
+  return players.flatMap((player) => {
+    const projection = player.stats?.find((entry) => entry.statSourceId === 1 && entry.seasonId === season + 1 && entry.statSplitTypeId === 0)
+    const averages = projection?.averageStats
+    if (!averages || !(averages[0] > 0)) return []
+    const line = Object.fromEntries(Object.entries(espnStats).map(([statId, key]) => [key, round(averages[statId] ?? 0)]))
+    return [{ name: player.fullName, line }]
+  })
+}
+
+async function fantasyprosProjections() {
+  const html = await (await get(sources.fantasypros.url)).text()
+  const table = [...html.matchAll(/<table[\s\S]*?<\/table>/g)].map((m) => m[0]).find((t) => t.includes('3PM')) ?? ''
+  const rows = [...table.matchAll(/<tr[\s\S]*?<\/tr>/g)].map((row) => [...row[0].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g)].map((cell) => decode(cell[1])))
+  const [heading, ...body] = rows
+  return body.map((cells) => {
+    // "Shai Gilgeous-Alexander (OKC - PG)"
+    const name = cells[0].replace(/\s*\(.*$/, '').trim()
+    const line = {}
+    heading.forEach((column, index) => {
+      const key = fantasyprosStats[column]
+      if (key) line[key] = Number(cells[index].replace(/,/g, '')) || 0
+    })
+    return { name, line }
+  })
 }
 
 async function rotowireRanks() {
@@ -139,7 +188,8 @@ const unmatched = {}
 const counts = {}
 const entry = (id) => (players[id] ??= {})
 
-const ranked = { espn: await espnRanks(), rotowire: await rotowireRanks(), rotoballer: await rotoballerRanks() }
+const espn = await espnPlayers()
+const ranked = { espn: espnRanks(espn), rotowire: await rotowireRanks(), rotoballer: await rotoballerRanks() }
 for (const [key, rows] of Object.entries(ranked)) {
   if (rows.length < 140) throw new Error(`${key}: only ${rows.length} players parsed, the page has probably changed`)
   counts[key] = rows.length
@@ -158,9 +208,20 @@ for (const row of tiers) {
   else (unmatched.tiers ??= []).push(row.name)
 }
 
+const projected = { espnProjection: espnProjections(espn), fantasypros: await fantasyprosProjections() }
+for (const [key, rows] of Object.entries(projected)) {
+  if (rows.length < 150) throw new Error(`${key}: only ${rows.length} projections parsed, the source has probably changed`)
+  counts[key] = rows.length
+  for (const row of rows) {
+    const id = sleeperId(row.name)
+    if (id) (entry(id).projections ??= {})[key] = row.line
+    else (unmatched[key] ??= []).push(row.name)
+  }
+}
+
 await writeFile(out, `${JSON.stringify({ fetchedAt: new Date().toISOString(), sources, players }, null, 1)}\n`)
 
 for (const [key, count] of Object.entries(counts)) {
   const missed = unmatched[key] ?? []
-  console.log(`${key.padEnd(10)} ${count} players${missed.length ? `, unmatched: ${missed.join(', ')}` : ''}`)
+  console.log(`${key.padEnd(15)} ${count} players${missed.length ? `, unmatched: ${missed.join(', ')}` : ''}`)
 }

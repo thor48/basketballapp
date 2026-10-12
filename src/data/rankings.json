@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-12T01:53:41.870Z",
+ "fetchedAt": "2026-10-12T01:57:55.509Z",
  "sources": {
   "espn": {
    "name": "ESPN",
@@ -20,15 +20,69 @@
    "name": "ESPN tiers",
    "label": "ESPN points league draft tiers by position",
    "url": "https://www.espn.com/fantasy/basketball/story/_/id/50125975/fantasy-basketball-points-league-draft-tiers-nba-2026-27"
+  },
+  "espnProjection": {
+   "name": "ESPN",
+   "label": "ESPN season projections, per game",
+   "url": "https://fantasy.espn.com/basketball/players/projections"
+  },
+  "fantasypros": {
+   "name": "FantasyPros",
+   "label": "FantasyPros consensus projections, per game",
+   "url": "https://www.fantasypros.com/nba/projections/avg-overall.php"
   }
  },
  "players": {
   "1000": {
    "espn": 207,
-   "rotoballer": 96
+   "rotoballer": 96,
+   "projections": {
+    "espnProjection": {
+     "pts": 19.41,
+     "blk": 0.31,
+     "stl": 1.41,
+     "ast": 5.1,
+     "reb": 5.41,
+     "to": 1.51,
+     "tpm": 0.82,
+     "gp": 39
+    },
+    "fantasypros": {
+     "pts": 18.4,
+     "reb": 5.2,
+     "ast": 4.9,
+     "blk": 0.3,
+     "stl": 1.4,
+     "tpm": 0.8,
+     "gp": 44,
+     "to": 1.5
+    }
+   }
   },
   "1029": {
-   "espn": 171
+   "espn": 171,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.28,
+     "blk": 0.1,
+     "stl": 0.5,
+     "ast": 1.4,
+     "reb": 2.6,
+     "to": 0.6,
+     "tpm": 2.71,
+     "gp": 80
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 2.3,
+     "ast": 1.3,
+     "blk": 0.1,
+     "stl": 0.5,
+     "tpm": 2.3,
+     "gp": 79,
+     "to": 0.5
+    }
+   }
   },
   "1054": {
    "espn": 55,
@@ -40,7 +94,29 @@
      "tier": 6,
      "rank": 17
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 24.58,
+     "blk": 0.51,
+     "stl": 1.31,
+     "ast": 4.8,
+     "reb": 4.8,
+     "to": 2,
+     "tpm": 2.85,
+     "gp": 59
+    },
+    "fantasypros": {
+     "pts": 24,
+     "reb": 4.5,
+     "ast": 4.8,
+     "blk": 0.4,
+     "stl": 1.2,
+     "tpm": 2.6,
+     "gp": 69,
+     "to": 2
+    }
+   }
   },
   "1074": {
    "espn": 109,
@@ -52,10 +128,54 @@
      "tier": 7,
      "rank": 26
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.82,
+     "blk": 0.51,
+     "stl": 1.71,
+     "ast": 3.8,
+     "reb": 5.4,
+     "to": 2.11,
+     "tpm": 2.93,
+     "gp": 55
+    },
+    "fantasypros": {
+     "pts": 19,
+     "reb": 5.4,
+     "ast": 3.7,
+     "blk": 0.5,
+     "stl": 1.4,
+     "tpm": 3.1,
+     "gp": 63,
+     "to": 2.1
+    }
+   }
   },
   "1081": {
-   "espn": 234
+   "espn": 234,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.4,
+     "blk": 0.3,
+     "stl": 0.5,
+     "ast": 1.5,
+     "reb": 2.3,
+     "to": 1,
+     "tpm": 2.97,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 12.7,
+     "reb": 2.5,
+     "ast": 1.7,
+     "blk": 0.3,
+     "stl": 0.6,
+     "tpm": 3,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "1082": {
    "espn": 148,
@@ -66,7 +186,29 @@
      "tier": 9,
      "rank": 21
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 8.69,
+     "blk": 0.8,
+     "stl": 1.09,
+     "ast": 5.7,
+     "reb": 6.09,
+     "to": 2.59,
+     "tpm": 1.25,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 8.2,
+     "reb": 5.7,
+     "ast": 5.3,
+     "blk": 0.7,
+     "stl": 1.2,
+     "tpm": 1.3,
+     "gp": 72,
+     "to": 2.5
+    }
+   }
   },
   "1085": {
    "espn": 37,
@@ -78,19 +220,109 @@
      "tier": 5,
      "rank": 13
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 25.79,
+     "blk": 0.39,
+     "stl": 1,
+     "ast": 5.3,
+     "reb": 4.2,
+     "to": 2.8,
+     "tpm": 4.56,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 25.9,
+     "reb": 4.2,
+     "ast": 5.3,
+     "blk": 0.4,
+     "stl": 1.1,
+     "tpm": 4.6,
+     "gp": 73,
+     "to": 3
+    }
+   }
   },
   "1092": {
-   "espn": 251
+   "espn": 251,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.65,
+     "blk": 0.1,
+     "stl": 0.5,
+     "ast": 1.2,
+     "reb": 2.4,
+     "to": 0.5,
+     "tpm": 1.4,
+     "gp": 80
+    }
+   }
   },
   "1128": {
-   "espn": 228
+   "espn": 228,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.56,
+     "blk": 0.41,
+     "stl": 0.8,
+     "ast": 3.3,
+     "reb": 2.91,
+     "to": 1.7,
+     "tpm": 1.5,
+     "gp": 54
+    },
+    "fantasypros": {
+     "pts": 12.4,
+     "reb": 2.6,
+     "ast": 2.7,
+     "blk": 0.4,
+     "stl": 0.8,
+     "tpm": 1.4,
+     "gp": 66,
+     "to": 1.4
+    }
+   }
   },
   "1131": {
-   "espn": 253
+   "espn": 253,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.65,
+     "blk": 0.7,
+     "stl": 0.7,
+     "ast": 1.2,
+     "reb": 8.4,
+     "to": 1,
+     "tpm": 0.42,
+     "gp": 60
+    },
+    "fantasypros": {
+     "pts": 5.7,
+     "reb": 7.3,
+     "ast": 1,
+     "blk": 0.6,
+     "stl": 0.6,
+     "tpm": 0.4,
+     "gp": 69,
+     "to": 0.9
+    }
+   }
   },
   "1141": {
-   "espn": 259
+   "espn": 259,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.74,
+     "blk": 0.29,
+     "stl": 1,
+     "ast": 1.9,
+     "reb": 2,
+     "to": 0.79,
+     "tpm": 1.22,
+     "gp": 68
+    }
+   }
   },
   "1178": {
    "espn": 137,
@@ -100,7 +332,53 @@
      "tier": 9,
      "rank": 31
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 10.63,
+     "blk": 1.69,
+     "stl": 0.6,
+     "ast": 1.5,
+     "reb": 4.31,
+     "to": 0.9,
+     "tpm": 1.61,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 9.2,
+     "reb": 3.8,
+     "ast": 1.3,
+     "blk": 1.4,
+     "stl": 0.6,
+     "tpm": 1.4,
+     "gp": 75,
+     "to": 0.8
+    }
+   }
+  },
+  "1200": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.93,
+     "blk": 0.2,
+     "stl": 0.71,
+     "ast": 3,
+     "reb": 1.71,
+     "to": 0.71,
+     "tpm": 1.09,
+     "gp": 55
+    },
+    "fantasypros": {
+     "pts": 5.4,
+     "reb": 1.9,
+     "ast": 2.8,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 1.2,
+     "gp": 67,
+     "to": 0.7
+    }
+   }
   },
   "1240": {
    "espn": 25,
@@ -112,13 +390,79 @@
      "tier": 4,
      "rank": 10
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.58,
+     "blk": 0.6,
+     "stl": 1.21,
+     "ast": 8.1,
+     "reb": 5,
+     "to": 3.4,
+     "tpm": 2.81,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 20.4,
+     "reb": 5.3,
+     "ast": 8,
+     "blk": 0.6,
+     "stl": 1.3,
+     "tpm": 2.8,
+     "gp": 76,
+     "to": 3.3
+    }
+   }
   },
   "1254": {
-   "espn": 178
+   "espn": 178,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.17,
+     "blk": 0.19,
+     "stl": 0.69,
+     "ast": 4.9,
+     "reb": 2.5,
+     "to": 1.69,
+     "tpm": 1.33,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 9.5,
+     "reb": 2.2,
+     "ast": 4.1,
+     "blk": 0.1,
+     "stl": 0.6,
+     "tpm": 1.3,
+     "gp": 75,
+     "to": 1.5
+    }
+   }
   },
   "1257": {
-   "espn": 221
+   "espn": 221,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.7,
+     "blk": 1,
+     "stl": 0.61,
+     "ast": 2.39,
+     "reb": 5.8,
+     "to": 0.8,
+     "tpm": 1.75,
+     "gp": 56
+    },
+    "fantasypros": {
+     "pts": 8.1,
+     "reb": 5.3,
+     "ast": 2.3,
+     "blk": 0.9,
+     "stl": 0.7,
+     "tpm": 1.6,
+     "gp": 68,
+     "to": 0.8
+    }
+   }
   },
   "1265": {
    "espn": 135,
@@ -130,7 +474,29 @@
      "tier": 9,
      "rank": 30
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.19,
+     "blk": 0.4,
+     "stl": 0.9,
+     "ast": 4.5,
+     "reb": 4.4,
+     "to": 1.79,
+     "tpm": 1.93,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 10.5,
+     "reb": 3.8,
+     "ast": 3.8,
+     "blk": 0.3,
+     "stl": 0.8,
+     "tpm": 1.6,
+     "gp": 73,
+     "to": 1.7
+    }
+   }
   },
   "1272": {
    "espn": 29,
@@ -142,7 +508,29 @@
      "tier": 5,
      "rank": 7
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.59,
+     "blk": 2.1,
+     "stl": 1.1,
+     "ast": 3.2,
+     "reb": 11.39,
+     "to": 2,
+     "tpm": 0.44,
+     "gp": 61
+    },
+    "fantasypros": {
+     "pts": 22,
+     "reb": 11,
+     "ast": 3,
+     "blk": 2,
+     "stl": 1.1,
+     "tpm": 0.5,
+     "gp": 70,
+     "to": 2.2
+    }
+   }
   },
   "1308": {
    "espn": 33,
@@ -154,7 +542,29 @@
      "tier": 2,
      "rank": 5
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 25.06,
+     "blk": 0.6,
+     "stl": 1.7,
+     "ast": 3.51,
+     "reb": 6.21,
+     "to": 1.9,
+     "tpm": 2.32,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 24.9,
+     "reb": 6.2,
+     "ast": 3.7,
+     "blk": 0.5,
+     "stl": 1.6,
+     "tpm": 2.2,
+     "gp": 69,
+     "to": 2
+    }
+   }
   },
   "1321": {
    "espn": 87,
@@ -166,7 +576,29 @@
      "tier": 6,
      "rank": 19
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.6,
+     "blk": 0.3,
+     "stl": 0.81,
+     "ast": 3.81,
+     "reb": 3,
+     "to": 1.19,
+     "tpm": 0.71,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 16.7,
+     "reb": 3.1,
+     "ast": 3.6,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 0.7,
+     "gp": 77,
+     "to": 1.1
+    }
+   }
   },
   "1350": {
    "espn": 70,
@@ -178,7 +610,29 @@
      "tier": 7,
      "rank": 14
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.93,
+     "blk": 1.69,
+     "stl": 0.69,
+     "ast": 1.6,
+     "reb": 11.69,
+     "to": 1.4,
+     "tpm": 0,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 11.3,
+     "reb": 11.1,
+     "ast": 1.7,
+     "blk": 1.6,
+     "stl": 0.8,
+     "tpm": 0,
+     "gp": 75,
+     "to": 1.3
+    }
+   }
   },
   "1362": {
    "espn": 42,
@@ -190,10 +644,54 @@
      "tier": 3,
      "rank": 8
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.05,
+     "blk": 0.5,
+     "stl": 1,
+     "ast": 7,
+     "reb": 6.3,
+     "to": 3,
+     "tpm": 1.63,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 21.5,
+     "reb": 6.8,
+     "ast": 6.9,
+     "blk": 0.6,
+     "stl": 1.1,
+     "tpm": 1.6,
+     "gp": 68,
+     "to": 3
+    }
+   }
   },
   "1378": {
-   "espn": 267
+   "espn": 267,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.09,
+     "blk": 0.21,
+     "stl": 0.7,
+     "ast": 3.21,
+     "reb": 3.4,
+     "to": 1.6,
+     "tpm": 1.11,
+     "gp": 53
+    },
+    "fantasypros": {
+     "pts": 8.6,
+     "reb": 2.9,
+     "ast": 2.7,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 0.9,
+     "gp": 66,
+     "to": 1.4
+    }
+   }
   },
   "1380": {
    "espn": 5,
@@ -205,7 +703,53 @@
      "tier": 1,
      "rank": 1
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 32.06,
+     "blk": 0.81,
+     "stl": 1.1,
+     "ast": 6.3,
+     "reb": 11.4,
+     "to": 3.7,
+     "tpm": 0.49,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 31.1,
+     "reb": 11.4,
+     "ast": 6.5,
+     "blk": 0.9,
+     "stl": 1.1,
+     "tpm": 0.4,
+     "gp": 73,
+     "to": 3.4
+    }
+   }
+  },
+  "1432": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.24,
+     "blk": 0.4,
+     "stl": 0.3,
+     "ast": 0.9,
+     "reb": 4.7,
+     "to": 0.7,
+     "tpm": 0,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 3.2,
+     "reb": 4.7,
+     "ast": 0.9,
+     "blk": 0.4,
+     "stl": 0.3,
+     "tpm": 0,
+     "gp": 71,
+     "to": 0.7
+    }
+   }
   },
   "1433": {
    "espn": 23,
@@ -217,7 +761,29 @@
      "tier": 3,
      "rank": 4
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 24.99,
+     "blk": 1,
+     "stl": 0.81,
+     "ast": 4.4,
+     "reb": 5.6,
+     "to": 3,
+     "tpm": 2.26,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 25.1,
+     "reb": 5.7,
+     "ast": 4.2,
+     "blk": 1,
+     "stl": 0.8,
+     "tpm": 2.3,
+     "gp": 75,
+     "to": 3
+    }
+   }
   },
   "1444": {
    "espn": 61,
@@ -229,7 +795,29 @@
      "tier": 7,
      "rank": 18
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.66,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 6.2,
+     "reb": 4,
+     "to": 2.4,
+     "tpm": 2.88,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 22.3,
+     "reb": 4.2,
+     "ast": 6.1,
+     "blk": 0.2,
+     "stl": 1.2,
+     "tpm": 3,
+     "gp": 72,
+     "to": 2.8
+    }
+   }
   },
   "1450": {
    "espn": 82,
@@ -241,7 +829,29 @@
      "tier": 5,
      "rank": 13
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.11,
+     "blk": 0.51,
+     "stl": 0.79,
+     "ast": 3.9,
+     "reb": 3.4,
+     "to": 1.79,
+     "tpm": 2.64,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 18.9,
+     "reb": 3.2,
+     "ast": 4,
+     "blk": 0.5,
+     "stl": 0.8,
+     "tpm": 2.6,
+     "gp": 76,
+     "to": 1.8
+    }
+   }
   },
   "1486": {
    "espn": 101,
@@ -252,7 +862,29 @@
      "tier": 8,
      "rank": 23
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.76,
+     "blk": 0.6,
+     "stl": 0.6,
+     "ast": 2.69,
+     "reb": 7.69,
+     "to": 1.19,
+     "tpm": 1.21,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 6.7,
+     "ast": 2.2,
+     "blk": 0.5,
+     "stl": 0.6,
+     "tpm": 1,
+     "gp": 75,
+     "to": 1
+    }
+   }
   },
   "1487": {
    "espn": 106,
@@ -263,7 +895,29 @@
      "tier": 8,
      "rank": 14
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.52,
+     "blk": 0.61,
+     "stl": 1,
+     "ast": 2.61,
+     "reb": 5.7,
+     "to": 1.1,
+     "tpm": 1.28,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 14,
+     "reb": 5.7,
+     "ast": 2.4,
+     "blk": 0.6,
+     "stl": 0.9,
+     "tpm": 1.3,
+     "gp": 75,
+     "to": 1
+    }
+   }
   },
   "1511": {
    "espn": 72,
@@ -275,7 +929,29 @@
      "tier": 7,
      "rank": 16
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 27.41,
+     "blk": 1.2,
+     "stl": 0.7,
+     "ast": 4.2,
+     "reb": 8.2,
+     "to": 3,
+     "tpm": 1.37,
+     "gp": 54
+    },
+    "fantasypros": {
+     "pts": 26,
+     "reb": 8.1,
+     "ast": 4.1,
+     "blk": 1.2,
+     "stl": 0.6,
+     "tpm": 1.3,
+     "gp": 59,
+     "to": 3
+    }
+   }
   },
   "1512": {
    "espn": 145,
@@ -286,7 +962,29 @@
      "tier": 9,
      "rank": 19
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.62,
+     "blk": 0.71,
+     "stl": 0.71,
+     "ast": 2.1,
+     "reb": 3.4,
+     "to": 1.9,
+     "tpm": 2.28,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 14.5,
+     "reb": 2.8,
+     "ast": 1.9,
+     "blk": 0.6,
+     "stl": 0.7,
+     "tpm": 2,
+     "gp": 73,
+     "to": 1.5
+    }
+   }
   },
   "1525": {
    "espn": 105,
@@ -298,7 +996,29 @@
      "tier": 7,
      "rank": 25
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.66,
+     "blk": 1,
+     "stl": 1.1,
+     "ast": 2.7,
+     "reb": 4.81,
+     "to": 1.51,
+     "tpm": 2.04,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 15.8,
+     "reb": 4.6,
+     "ast": 2.7,
+     "blk": 0.9,
+     "stl": 1.1,
+     "tpm": 1.9,
+     "gp": 73,
+     "to": 1.5
+    }
+   }
   },
   "1526": {
    "espn": 130,
@@ -310,10 +1030,44 @@
      "tier": 9,
      "rank": 25
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.51,
+     "blk": 0.2,
+     "stl": 0.7,
+     "ast": 3.39,
+     "reb": 3.8,
+     "to": 2.3,
+     "tpm": 2.75,
+     "gp": 61
+    },
+    "fantasypros": {
+     "pts": 19.8,
+     "reb": 3.6,
+     "ast": 3.3,
+     "blk": 0.2,
+     "stl": 0.8,
+     "tpm": 2.6,
+     "gp": 70,
+     "to": 2.3
+    }
+   }
   },
   "1534": {
-   "espn": 290
+   "espn": 290,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.59,
+     "blk": 0.11,
+     "stl": 0.5,
+     "ast": 1.7,
+     "reb": 2,
+     "to": 1.11,
+     "tpm": 1.12,
+     "gp": 66
+    }
+   }
   },
   "1535": {
    "espn": 50,
@@ -325,21 +1079,135 @@
      "tier": 5,
      "rank": 9
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.04,
+     "blk": 0.19,
+     "stl": 0.69,
+     "ast": 5,
+     "reb": 8.1,
+     "to": 3.1,
+     "tpm": 1.57,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 19.5,
+     "reb": 6.8,
+     "ast": 4.6,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 1.4,
+     "gp": 75,
+     "to": 2.9
+    }
+   }
   },
   "1541": {
-   "espn": 258
+   "espn": 258,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.63,
+     "blk": 0.9,
+     "stl": 0.5,
+     "ast": 0.9,
+     "reb": 6.69,
+     "to": 0.69,
+     "tpm": 0,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 4.4,
+     "reb": 4.6,
+     "ast": 0.6,
+     "blk": 0.6,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 45,
+     "to": 0.5
+    }
+   }
   },
   "1546": {
-   "espn": 250
+   "espn": 250,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.18,
+     "blk": 0.31,
+     "stl": 1.31,
+     "ast": 3,
+     "reb": 2.4,
+     "to": 1.6,
+     "tpm": 1.48,
+     "gp": 62
+    }
+   }
   },
   "1548": {
-   "espn": 266
+   "espn": 266,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.45,
+     "blk": 0.5,
+     "stl": 0.81,
+     "ast": 2.9,
+     "reb": 3.1,
+     "to": 0.81,
+     "tpm": 0.19,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 4.8,
+     "reb": 2.7,
+     "ast": 2.4,
+     "blk": 0.5,
+     "stl": 0.7,
+     "tpm": 0.2,
+     "gp": 70,
+     "to": 0.7
+    }
+   }
+  },
+  "1581": {
+   "projections": {
+    "espnProjection": {
+     "pts": 2.88,
+     "blk": 0.21,
+     "stl": 0.6,
+     "ast": 1,
+     "reb": 1.29,
+     "to": 0.4,
+     "tpm": 0.63,
+     "gp": 48
+    }
+   }
   },
   "1583": {
    "espn": 155,
    "rotowire": 122,
-   "rotoballer": 77
+   "rotoballer": 77,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.44,
+     "blk": 0.7,
+     "stl": 1,
+     "ast": 3.41,
+     "reb": 9.09,
+     "to": 2,
+     "tpm": 0.45,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 9.3,
+     "reb": 8.3,
+     "ast": 3.3,
+     "blk": 0.6,
+     "stl": 1,
+     "tpm": 0.5,
+     "gp": 68,
+     "to": 2
+    }
+   }
   },
   "1585": {
    "espn": 136,
@@ -351,10 +1219,54 @@
      "tier": 9,
      "rank": 18
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.55,
+     "blk": 0.3,
+     "stl": 0.5,
+     "ast": 3.11,
+     "reb": 5.5,
+     "to": 1.3,
+     "tpm": 1.52,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 15,
+     "reb": 5.3,
+     "ast": 2.9,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 1.5,
+     "gp": 72,
+     "to": 1.3
+    }
+   }
   },
   "1589": {
-   "espn": 167
+   "espn": 167,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.65,
+     "blk": 0.2,
+     "stl": 0.6,
+     "ast": 1.6,
+     "reb": 6.71,
+     "to": 1,
+     "tpm": 1.86,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 12.4,
+     "reb": 6.5,
+     "ast": 1.6,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 1.5,
+     "gp": 72,
+     "to": 0.9
+    }
+   }
   },
   "1590": {
    "espn": 99,
@@ -366,7 +1278,29 @@
      "tier": 8,
      "rank": 22
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.85,
+     "blk": 1.59,
+     "stl": 0.69,
+     "ast": 2.2,
+     "reb": 6.51,
+     "to": 1.41,
+     "tpm": 2,
+     "gp": 59
+    },
+    "fantasypros": {
+     "pts": 17.4,
+     "reb": 5.8,
+     "ast": 2.1,
+     "blk": 1.3,
+     "stl": 0.8,
+     "tpm": 1.9,
+     "gp": 54,
+     "to": 1.4
+    }
+   }
   },
   "1595": {
    "espn": 122,
@@ -378,16 +1312,104 @@
      "tier": 9,
      "rank": 27
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.42,
+     "blk": 1.7,
+     "stl": 0.7,
+     "ast": 1.51,
+     "reb": 5.51,
+     "to": 1.3,
+     "tpm": 2.08,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 12.4,
+     "reb": 5.3,
+     "ast": 1.4,
+     "blk": 1.5,
+     "stl": 0.7,
+     "tpm": 2,
+     "gp": 75,
+     "to": 1.4
+    }
+   }
   },
   "1598": {
-   "espn": 287
+   "espn": 287,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.23,
+     "blk": 0.4,
+     "stl": 0.51,
+     "ast": 1.71,
+     "reb": 5.8,
+     "to": 0.6,
+     "tpm": 0.02,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 3.8,
+     "reb": 5.2,
+     "ast": 1.4,
+     "blk": 0.4,
+     "stl": 0.5,
+     "tpm": 0,
+     "gp": 72,
+     "to": 0.5
+    }
+   }
   },
   "1602": {
-   "espn": 163
+   "espn": 163,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.43,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 4.9,
+     "reb": 2.5,
+     "to": 1.4,
+     "tpm": 0.24,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 8.5,
+     "reb": 2.2,
+     "ast": 4.3,
+     "blk": 0.2,
+     "stl": 0.8,
+     "tpm": 0.2,
+     "gp": 74,
+     "to": 1.2
+    }
+   }
   },
   "1604": {
-   "espn": 200
+   "espn": 200,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.24,
+     "blk": 0.51,
+     "stl": 1.1,
+     "ast": 1.3,
+     "reb": 4.4,
+     "to": 1.1,
+     "tpm": 1.19,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 4.2,
+     "ast": 1.4,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 1.1,
+     "gp": 73,
+     "to": 1
+    }
+   }
   },
   "1613": {
    "espn": 24,
@@ -399,13 +1421,73 @@
      "tier": 4,
      "rank": 5
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.94,
+     "blk": 0.6,
+     "stl": 0.9,
+     "ast": 4.4,
+     "reb": 11.2,
+     "to": 2.6,
+     "tpm": 1.83,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 21.2,
+     "reb": 11.7,
+     "ast": 3.7,
+     "blk": 0.7,
+     "stl": 0.9,
+     "tpm": 1.7,
+     "gp": 74,
+     "to": 2.5
+    }
+   }
   },
   "1614": {
-   "espn": 293
+   "espn": 293,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.7,
+     "blk": 0.1,
+     "stl": 0.59,
+     "ast": 3.1,
+     "reb": 1.41,
+     "to": 0.51,
+     "tpm": 0.88,
+     "gp": 69
+    }
+   }
   },
   "1620": {
-   "espn": 277
+   "espn": 277,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.9,
+     "blk": 0.31,
+     "stl": 0.81,
+     "ast": 1.5,
+     "reb": 4.19,
+     "to": 0.69,
+     "tpm": 0.73,
+     "gp": 62
+    }
+   }
+  },
+  "1621": {
+   "projections": {
+    "espnProjection": {
+     "pts": 9.02,
+     "blk": 0.21,
+     "stl": 0.5,
+     "ast": 3.5,
+     "reb": 2,
+     "to": 1.5,
+     "tpm": 1.27,
+     "gp": 48
+    }
+   }
   },
   "1637": {
    "espn": 65,
@@ -417,10 +1499,44 @@
      "tier": 4,
      "rank": 10
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 24.03,
+     "blk": 0.3,
+     "stl": 1.2,
+     "ast": 2.59,
+     "reb": 3.8,
+     "to": 2.1,
+     "tpm": 3.07,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 21.6,
+     "reb": 3.3,
+     "ast": 2.4,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 2.8,
+     "gp": 74,
+     "to": 1.9
+    }
+   }
   },
   "1640": {
-   "espn": 286
+   "espn": 286,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.89,
+     "blk": 0.3,
+     "stl": 0.5,
+     "ast": 1.2,
+     "reb": 4.5,
+     "to": 0.59,
+     "tpm": 1.3,
+     "gp": 64
+    }
+   }
   },
   "1648": {
    "espn": 20,
@@ -432,7 +1548,43 @@
      "tier": 3,
      "rank": 8
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 26.46,
+     "blk": 0.31,
+     "stl": 0.9,
+     "ast": 6.69,
+     "reb": 4.19,
+     "to": 2.9,
+     "tpm": 2.21,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 25.5,
+     "reb": 4.2,
+     "ast": 6.4,
+     "blk": 0.3,
+     "stl": 1,
+     "tpm": 2.1,
+     "gp": 75,
+     "to": 2.9
+    }
+   }
+  },
+  "1652": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.24,
+     "blk": 0.11,
+     "stl": 0.3,
+     "ast": 0.8,
+     "reb": 1.8,
+     "to": 0.3,
+     "tpm": 0.56,
+     "gp": 66
+    }
+   }
   },
   "1658": {
    "espn": 1,
@@ -444,13 +1596,83 @@
      "tier": 1,
      "rank": 1
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 28.25,
+     "blk": 0.81,
+     "stl": 1.6,
+     "ast": 10.1,
+     "reb": 12.69,
+     "to": 3.4,
+     "tpm": 1.69,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 27.3,
+     "reb": 12.4,
+     "ast": 9.6,
+     "blk": 0.8,
+     "stl": 1.5,
+     "tpm": 1.7,
+     "gp": 75,
+     "to": 3.3
+    }
+   }
+  },
+  "1676": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5,
+     "blk": 0.51,
+     "stl": 0.7,
+     "ast": 5.3,
+     "reb": 5,
+     "to": 1.89,
+     "tpm": 0,
+     "gp": 37
+    }
+   }
   },
   "1690": {
-   "espn": 261
+   "espn": 261,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.54,
+     "blk": 0.61,
+     "stl": 0.9,
+     "ast": 2.9,
+     "reb": 2.3,
+     "to": 1.39,
+     "tpm": 1.13,
+     "gp": 61
+    }
+   }
   },
   "1691": {
-   "espn": 210
+   "espn": 210,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.99,
+     "blk": 0.31,
+     "stl": 1.4,
+     "ast": 3.11,
+     "reb": 2.91,
+     "to": 1.11,
+     "tpm": 0.83,
+     "gp": 75
+    },
+    "fantasypros": {
+     "pts": 5.6,
+     "reb": 2.8,
+     "ast": 2.7,
+     "blk": 0.3,
+     "stl": 1.3,
+     "tpm": 0.8,
+     "gp": 77,
+     "to": 1
+    }
+   }
   },
   "1697": {
    "espn": 73,
@@ -462,7 +1684,29 @@
      "tier": 7,
      "rank": 18
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.86,
+     "blk": 1.1,
+     "stl": 0.51,
+     "ast": 2.2,
+     "reb": 11.3,
+     "to": 1.59,
+     "tpm": 0,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 15.7,
+     "reb": 11,
+     "ast": 2.5,
+     "blk": 1,
+     "stl": 0.5,
+     "tpm": 0,
+     "gp": 74,
+     "to": 1.5
+    }
+   }
   },
   "1698": {
    "espn": 110,
@@ -474,10 +1718,58 @@
      "tier": 4,
      "rank": 11
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.56,
+     "blk": 0.71,
+     "stl": 0.8,
+     "ast": 4.8,
+     "reb": 5.71,
+     "to": 2.8,
+     "tpm": 1.75,
+     "gp": 55
+    },
+    "fantasypros": {
+     "pts": 21.3,
+     "reb": 5.6,
+     "ast": 4.1,
+     "blk": 0.7,
+     "stl": 0.8,
+     "tpm": 1.9,
+     "gp": 64,
+     "to": 2.6
+    }
+   }
+  },
+  "1704": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.81,
+     "blk": 0.19,
+     "stl": 0.5,
+     "ast": 1.19,
+     "reb": 2.1,
+     "to": 0.69,
+     "tpm": 1.39,
+     "gp": 62
+    }
+   }
   },
   "1707": {
-   "espn": 278
+   "espn": 278,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.73,
+     "blk": 0.19,
+     "stl": 0.81,
+     "ast": 1.5,
+     "reb": 2.5,
+     "to": 1,
+     "tpm": 1.76,
+     "gp": 62
+    }
+   }
   },
   "1711": {
    "espn": 41,
@@ -489,7 +1781,29 @@
      "tier": 3,
      "rank": 7
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.93,
+     "blk": 0.39,
+     "stl": 1.1,
+     "ast": 4.3,
+     "reb": 5.9,
+     "to": 2.8,
+     "tpm": 1.89,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 25,
+     "reb": 6,
+     "ast": 4.3,
+     "blk": 0.4,
+     "stl": 1.2,
+     "tpm": 1.6,
+     "gp": 75,
+     "to": 3.1
+    }
+   }
   },
   "1713": {
    "espn": 52,
@@ -501,7 +1815,29 @@
      "tier": 3,
      "rank": 8
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.53,
+     "blk": 0.29,
+     "stl": 1.5,
+     "ast": 6.4,
+     "reb": 5.4,
+     "to": 2.79,
+     "tpm": 2.09,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 17.1,
+     "reb": 5.4,
+     "ast": 5.9,
+     "blk": 0.3,
+     "stl": 1.4,
+     "tpm": 1.6,
+     "gp": 73,
+     "to": 2.8
+    }
+   }
   },
   "1716": {
    "espn": 26,
@@ -513,7 +1849,29 @@
      "tier": 3,
      "rank": 5
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.8,
+     "blk": 0.5,
+     "stl": 1,
+     "ast": 4,
+     "reb": 7.3,
+     "to": 1.8,
+     "tpm": 1.55,
+     "gp": 74
+    },
+    "fantasypros": {
+     "pts": 22.2,
+     "reb": 6.8,
+     "ast": 3.8,
+     "blk": 0.5,
+     "stl": 0.9,
+     "tpm": 1.5,
+     "gp": 76,
+     "to": 1.7
+    }
+   }
   },
   "1717": {
    "espn": 89,
@@ -525,7 +1883,29 @@
      "tier": 8,
      "rank": 23
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.97,
+     "blk": 0.5,
+     "stl": 1.29,
+     "ast": 6,
+     "reb": 3.4,
+     "to": 1.4,
+     "tpm": 2.54,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 13.1,
+     "reb": 3.4,
+     "ast": 5.4,
+     "blk": 0.5,
+     "stl": 1.3,
+     "tpm": 2.4,
+     "gp": 73,
+     "to": 1.4
+    }
+   }
   },
   "1718": {
    "espn": 113,
@@ -537,10 +1917,68 @@
      "tier": 9,
      "rank": 25
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.05,
+     "blk": 1.11,
+     "stl": 0.89,
+     "ast": 2.39,
+     "reb": 8.39,
+     "to": 1.61,
+     "tpm": 0,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 11.9,
+     "reb": 8.1,
+     "ast": 2.3,
+     "blk": 1.1,
+     "stl": 0.9,
+     "tpm": 0,
+     "gp": 72,
+     "to": 1.5
+    }
+   }
+  },
+  "1728": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.33,
+     "blk": 0.2,
+     "stl": 0.5,
+     "ast": 1,
+     "reb": 2.7,
+     "to": 0.59,
+     "tpm": 0.97,
+     "gp": 64
+    }
+   }
   },
   "1736": {
-   "espn": 219
+   "espn": 219,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.71,
+     "blk": 0.79,
+     "stl": 0.9,
+     "ast": 1.1,
+     "reb": 3.4,
+     "to": 0.79,
+     "tpm": 1.06,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 9.8,
+     "reb": 3.3,
+     "ast": 1,
+     "blk": 0.7,
+     "stl": 0.9,
+     "tpm": 1.1,
+     "gp": 73,
+     "to": 0.8
+    }
+   }
   },
   "1739": {
    "espn": 12,
@@ -552,7 +1990,29 @@
      "tier": 3,
      "rank": 3
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.94,
+     "blk": 0.51,
+     "stl": 0.8,
+     "ast": 6.8,
+     "reb": 13.59,
+     "to": 3.1,
+     "tpm": 0.59,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 17.5,
+     "reb": 12.7,
+     "ast": 5.9,
+     "blk": 0.4,
+     "stl": 0.8,
+     "tpm": 0.6,
+     "gp": 74,
+     "to": 2.9
+    }
+   }
   },
   "1747": {
    "espn": 28,
@@ -564,7 +2024,29 @@
      "tier": 4,
      "rank": 12
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.06,
+     "blk": 0.51,
+     "stl": 1.1,
+     "ast": 6.59,
+     "reb": 4.1,
+     "to": 2.2,
+     "tpm": 2.77,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 22.5,
+     "reb": 4.1,
+     "ast": 6.3,
+     "blk": 0.5,
+     "stl": 1,
+     "tpm": 2.6,
+     "gp": 74,
+     "to": 2.2
+    }
+   }
   },
   "1752": {
    "espn": 51,
@@ -576,13 +2058,79 @@
      "tier": 5,
      "rank": 10
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.83,
+     "blk": 0.51,
+     "stl": 0.9,
+     "ast": 1.9,
+     "reb": 7.2,
+     "to": 1.51,
+     "tpm": 3.04,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 22.2,
+     "reb": 6.2,
+     "ast": 1.8,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 2.7,
+     "gp": 74,
+     "to": 1.3
+    }
+   }
   },
   "1759": {
-   "espn": 257
+   "espn": 257,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.99,
+     "blk": 0.8,
+     "stl": 0.39,
+     "ast": 1.3,
+     "reb": 4.39,
+     "to": 0.3,
+     "tpm": 0,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 4.7,
+     "reb": 4.1,
+     "ast": 1.2,
+     "blk": 0.7,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 75,
+     "to": 0.3
+    }
+   }
   },
   "1777": {
-   "espn": 220
+   "espn": 220,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.54,
+     "blk": 0.09,
+     "stl": 0.7,
+     "ast": 2.41,
+     "reb": 2.41,
+     "to": 0.8,
+     "tpm": 1.55,
+     "gp": 74
+    },
+    "fantasypros": {
+     "pts": 7.8,
+     "reb": 2.4,
+     "ast": 2.2,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 1.5,
+     "gp": 76,
+     "to": 0.8
+    }
+   }
   },
   "1779": {
    "espn": 138,
@@ -592,7 +2140,29 @@
      "tier": 9,
      "rank": 26
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.85,
+     "blk": 0.5,
+     "stl": 0.71,
+     "ast": 4.5,
+     "reb": 2.79,
+     "to": 2,
+     "tpm": 2.06,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 12.6,
+     "reb": 2.4,
+     "ast": 3.8,
+     "blk": 0.4,
+     "stl": 0.6,
+     "tpm": 1.8,
+     "gp": 73,
+     "to": 1.7
+    }
+   }
   },
   "1787": {
    "espn": 54,
@@ -604,7 +2174,29 @@
      "tier": 6,
      "rank": 9
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.77,
+     "blk": 1,
+     "stl": 0.9,
+     "ast": 2.2,
+     "reb": 10,
+     "to": 1.39,
+     "tpm": 0,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 15.1,
+     "reb": 9.7,
+     "ast": 2,
+     "blk": 1,
+     "stl": 1,
+     "tpm": 0,
+     "gp": 75,
+     "to": 1.3
+    }
+   }
   },
   "1792": {
    "espn": 140,
@@ -614,16 +2206,94 @@
      "tier": 8,
      "rank": 32
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.58,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 1.7,
+     "reb": 3.59,
+     "to": 1.59,
+     "tpm": 2.28,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 17.4,
+     "reb": 3.6,
+     "ast": 1.8,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 2.4,
+     "gp": 74,
+     "to": 1.5
+    }
+   }
   },
   "1797": {
-   "espn": 296
+   "espn": 296,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.19,
+     "blk": 0.5,
+     "stl": 0.29,
+     "ast": 0.6,
+     "reb": 3.5,
+     "to": 0.5,
+     "tpm": 0.74,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 4.6,
+     "reb": 2.7,
+     "ast": 0.5,
+     "blk": 0.4,
+     "stl": 0.3,
+     "tpm": 0.5,
+     "gp": 48,
+     "to": 0.4
+    }
+   }
   },
   "1799": {
-   "espn": 191
+   "espn": 191,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.03,
+     "blk": 0.4,
+     "stl": 0.6,
+     "ast": 2.6,
+     "reb": 4.6,
+     "to": 1.79,
+     "tpm": 1.22,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 11.6,
+     "reb": 4.1,
+     "ast": 2.2,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 1.1,
+     "gp": 73,
+     "to": 1.6
+    }
+   }
   },
   "1801": {
-   "espn": 175
+   "espn": 175,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.38,
+     "blk": 0.51,
+     "stl": 1.7,
+     "ast": 2.7,
+     "reb": 3.59,
+     "to": 1.1,
+     "tpm": 1.3,
+     "gp": 69
+    }
+   }
   },
   "1803": {
    "espn": 94,
@@ -635,7 +2305,29 @@
      "tier": 6,
      "rank": 21
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.21,
+     "blk": 0.29,
+     "stl": 1.21,
+     "ast": 5,
+     "reb": 7.71,
+     "to": 2,
+     "tpm": 1.44,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 12.1,
+     "reb": 8.2,
+     "ast": 5,
+     "blk": 0.3,
+     "stl": 1.3,
+     "tpm": 1.4,
+     "gp": 73,
+     "to": 2
+    }
+   }
   },
   "1809": {
    "espn": 102,
@@ -647,7 +2339,29 @@
      "tier": 7,
      "rank": 13
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.37,
+     "blk": 0.9,
+     "stl": 0.79,
+     "ast": 1.29,
+     "reb": 7.71,
+     "to": 1.71,
+     "tpm": 1.44,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 16.1,
+     "reb": 7.2,
+     "ast": 1.4,
+     "blk": 1,
+     "stl": 0.9,
+     "tpm": 1.3,
+     "gp": 73,
+     "to": 1.7
+    }
+   }
   },
   "1822": {
    "espn": 9,
@@ -659,7 +2373,29 @@
      "tier": 2,
      "rank": 3
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 26.7,
+     "blk": 0.5,
+     "stl": 1.1,
+     "ast": 5.8,
+     "reb": 8.6,
+     "to": 2.8,
+     "tpm": 3.37,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 27.5,
+     "reb": 8.9,
+     "ast": 5.7,
+     "blk": 0.5,
+     "stl": 1.1,
+     "tpm": 3.5,
+     "gp": 74,
+     "to": 3.1
+    }
+   }
   },
   "1830": {
    "espn": 36,
@@ -671,7 +2407,29 @@
      "tier": 2,
      "rank": 3
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.56,
+     "blk": 1.19,
+     "stl": 1.1,
+     "ast": 5.3,
+     "reb": 4.51,
+     "to": 1.81,
+     "tpm": 2.86,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 17.2,
+     "reb": 4.5,
+     "ast": 5,
+     "blk": 1.1,
+     "stl": 1,
+     "tpm": 3.1,
+     "gp": 78,
+     "to": 1.9
+    }
+   }
   },
   "1831": {
    "espn": 93,
@@ -683,10 +2441,54 @@
      "tier": 6,
      "rank": 20
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.91,
+     "blk": 0.71,
+     "stl": 1.5,
+     "ast": 2.21,
+     "reb": 5.21,
+     "to": 1.79,
+     "tpm": 2.34,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 17,
+     "reb": 5.2,
+     "ast": 2.1,
+     "blk": 0.9,
+     "stl": 1.5,
+     "tpm": 2.3,
+     "gp": 73,
+     "to": 1.6
+    }
+   }
   },
   "1841": {
-   "espn": 186
+   "espn": 186,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.47,
+     "blk": 0.39,
+     "stl": 0.89,
+     "ast": 2.3,
+     "reb": 4.2,
+     "to": 1.11,
+     "tpm": 2.32,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 7.9,
+     "reb": 3.8,
+     "ast": 2,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 2.2,
+     "gp": 77,
+     "to": 1
+    }
+   }
   },
   "1845": {
    "espn": 10,
@@ -698,7 +2500,29 @@
      "tier": 1,
      "rank": 2
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 26.79,
+     "blk": 0.3,
+     "stl": 1.61,
+     "ast": 5.7,
+     "reb": 4.8,
+     "to": 2.61,
+     "tpm": 3.32,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 26.7,
+     "reb": 4.8,
+     "ast": 5.6,
+     "blk": 0.3,
+     "stl": 1.6,
+     "tpm": 3.2,
+     "gp": 75,
+     "to": 2.6
+    }
+   }
   },
   "1846": {
    "espn": 32,
@@ -710,10 +2534,68 @@
      "tier": 5,
      "rank": 8
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.15,
+     "blk": 0.7,
+     "stl": 1.21,
+     "ast": 3.21,
+     "reb": 10,
+     "to": 1.6,
+     "tpm": 1.75,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 19.5,
+     "reb": 9.7,
+     "ast": 3.5,
+     "blk": 0.7,
+     "stl": 1.3,
+     "tpm": 1.5,
+     "gp": 76,
+     "to": 1.7
+    }
+   }
+  },
+  "1866": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.98,
+     "blk": 0.39,
+     "stl": 0.3,
+     "ast": 1.5,
+     "reb": 4.2,
+     "to": 0.89,
+     "tpm": 0.61,
+     "gp": 56
+    },
+    "fantasypros": {
+     "pts": 5.8,
+     "reb": 3.5,
+     "ast": 1.3,
+     "blk": 0.3,
+     "stl": 0.3,
+     "tpm": 0.5,
+     "gp": 67,
+     "to": 0.8
+    }
+   }
   },
   "1871": {
-   "espn": 273
+   "espn": 273,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.75,
+     "blk": 0.2,
+     "stl": 0.6,
+     "ast": 1.91,
+     "reb": 2.11,
+     "to": 0.91,
+     "tpm": 1.58,
+     "gp": 65
+    }
+   }
   },
   "1872": {
    "espn": 43,
@@ -725,10 +2607,78 @@
      "tier": 5,
      "rank": 15
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.63,
+     "blk": 0.3,
+     "stl": 1.39,
+     "ast": 5.61,
+     "reb": 4,
+     "to": 2.3,
+     "tpm": 2.01,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 19.1,
+     "reb": 3.9,
+     "ast": 5.6,
+     "blk": 0.3,
+     "stl": 1.3,
+     "tpm": 1.8,
+     "gp": 75,
+     "to": 2.3
+    }
+   }
+  },
+  "1879": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.35,
+     "blk": 0.71,
+     "stl": 0.51,
+     "ast": 0.51,
+     "reb": 3,
+     "to": 0.4,
+     "tpm": 0.25,
+     "gp": 55
+    },
+    "fantasypros": {
+     "pts": 2.8,
+     "reb": 2.5,
+     "ast": 0.4,
+     "blk": 0.5,
+     "stl": 0.4,
+     "tpm": 0.3,
+     "gp": 42,
+     "to": 0.3
+    }
+   }
   },
   "1883": {
-   "espn": 176
+   "espn": 176,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.97,
+     "blk": 0.5,
+     "stl": 0.69,
+     "ast": 1.81,
+     "reb": 6.69,
+     "to": 1.1,
+     "tpm": 0.81,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 10.2,
+     "reb": 7,
+     "ast": 1.9,
+     "blk": 0.6,
+     "stl": 0.7,
+     "tpm": 0.8,
+     "gp": 75,
+     "to": 1.1
+    }
+   }
   },
   "1887": {
    "espn": 142,
@@ -739,7 +2689,29 @@
      "tier": 9,
      "rank": 33
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 7.34,
+     "blk": 1.51,
+     "stl": 1.2,
+     "ast": 1.1,
+     "reb": 11.1,
+     "to": 0.9,
+     "tpm": 0,
+     "gp": 61
+    },
+    "fantasypros": {
+     "pts": 6.2,
+     "reb": 9.5,
+     "ast": 0.9,
+     "blk": 1.3,
+     "stl": 0.9,
+     "tpm": 0,
+     "gp": 70,
+     "to": 0.8
+    }
+   }
   },
   "1892": {
    "espn": 123,
@@ -749,10 +2721,44 @@
      "tier": 8,
      "rank": 23
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.33,
+     "blk": 0.2,
+     "stl": 0.9,
+     "ast": 4.1,
+     "reb": 2.5,
+     "to": 2.2,
+     "tpm": 1.69,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 15.7,
+     "reb": 2.3,
+     "ast": 3.5,
+     "blk": 0.1,
+     "stl": 0.9,
+     "tpm": 1.5,
+     "gp": 75,
+     "to": 2
+    }
+   }
   },
   "1899": {
-   "espn": 288
+   "espn": 288,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.39,
+     "blk": 0.19,
+     "stl": 0.6,
+     "ast": 1.19,
+     "reb": 1.6,
+     "to": 0.6,
+     "tpm": 1.79,
+     "gp": 67
+    }
+   }
   },
   "1913": {
    "espn": 80,
@@ -764,7 +2770,29 @@
      "tier": 5,
      "rank": 17
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.14,
+     "blk": 0.51,
+     "stl": 0.7,
+     "ast": 3.39,
+     "reb": 6.7,
+     "to": 1.8,
+     "tpm": 2.1,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 17.5,
+     "reb": 6.3,
+     "ast": 3.2,
+     "blk": 0.5,
+     "stl": 0.8,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 1.6
+    }
+   }
   },
   "1924": {
    "espn": 84,
@@ -776,7 +2804,57 @@
      "tier": 7,
      "rank": 19
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.89,
+     "blk": 1.6,
+     "stl": 1.19,
+     "ast": 2.1,
+     "reb": 5.69,
+     "to": 2.31,
+     "tpm": 1.9,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 20.2,
+     "reb": 5.1,
+     "ast": 2,
+     "blk": 1.3,
+     "stl": 1.2,
+     "tpm": 1.8,
+     "gp": 70,
+     "to": 2.1
+    }
+   }
+  },
+  "1925": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.06,
+     "blk": 0.2,
+     "stl": 0.71,
+     "ast": 1.61,
+     "reb": 1.61,
+     "to": 0.61,
+     "tpm": 1.39,
+     "gp": 51
+    }
+   }
+  },
+  "1932": {
+   "projections": {
+    "espnProjection": {
+     "pts": 8.03,
+     "blk": 0.1,
+     "stl": 0.5,
+     "ast": 0.9,
+     "reb": 3.5,
+     "to": 0.69,
+     "tpm": 0.65,
+     "gp": 62
+    }
+   }
   },
   "1934": {
    "espn": 129,
@@ -788,10 +2866,54 @@
      "tier": 9,
      "rank": 30
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 9.47,
+     "blk": 0.8,
+     "stl": 1,
+     "ast": 3.5,
+     "reb": 9.59,
+     "to": 1.7,
+     "tpm": 0,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 9.7,
+     "reb": 9,
+     "ast": 3.3,
+     "blk": 0.8,
+     "stl": 0.9,
+     "tpm": 0,
+     "gp": 71,
+     "to": 1.6
+    }
+   }
   },
   "1941": {
-   "espn": 194
+   "espn": 194,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.32,
+     "blk": 0.51,
+     "stl": 0.9,
+     "ast": 2.59,
+     "reb": 3.51,
+     "to": 1.1,
+     "tpm": 1.58,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 9.1,
+     "reb": 3.2,
+     "ast": 2.2,
+     "blk": 0.5,
+     "stl": 0.9,
+     "tpm": 1.4,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "1945": {
    "espn": 16,
@@ -803,13 +2925,69 @@
      "tier": 3,
      "rank": 6
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.83,
+     "blk": 0.2,
+     "stl": 1.2,
+     "ast": 10.8,
+     "reb": 2.8,
+     "to": 4.3,
+     "tpm": 2.9,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 21.2,
+     "reb": 2.8,
+     "ast": 9.2,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 2.4,
+     "gp": 75,
+     "to": 4.1
+    }
+   }
   },
   "1946": {
-   "espn": 299
+   "espn": 299,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.32,
+     "blk": 0.11,
+     "stl": 0.6,
+     "ast": 1.4,
+     "reb": 3.31,
+     "to": 0.71,
+     "tpm": 0.89,
+     "gp": 65
+    }
+   }
   },
   "1950": {
-   "espn": 189
+   "espn": 189,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.53,
+     "blk": 1.69,
+     "stl": 0.69,
+     "ast": 1.2,
+     "reb": 7.8,
+     "to": 1,
+     "tpm": 0.15,
+     "gp": 59
+    },
+    "fantasypros": {
+     "pts": 6,
+     "reb": 6.4,
+     "ast": 1,
+     "blk": 1.4,
+     "stl": 0.6,
+     "tpm": 0.1,
+     "gp": 69,
+     "to": 0.8
+    }
+   }
   },
   "1957": {
    "espn": 2,
@@ -821,15 +2999,95 @@
      "tier": 1,
      "rank": 1
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 31.25,
+     "blk": 0.89,
+     "stl": 1.7,
+     "ast": 6.39,
+     "reb": 4.89,
+     "to": 2.3,
+     "tpm": 1.71,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 31.4,
+     "reb": 4.5,
+     "ast": 6.3,
+     "blk": 0.8,
+     "stl": 1.6,
+     "tpm": 1.7,
+     "gp": 77,
+     "to": 2.3
+    }
+   }
   },
   "1959": {
    "espn": 170,
    "rotowire": 150,
-   "rotoballer": 148
+   "rotoballer": 148,
+   "projections": {
+    "espnProjection": {
+     "pts": 14.05,
+     "blk": 0.3,
+     "stl": 1.1,
+     "ast": 3.21,
+     "reb": 2.9,
+     "to": 1.4,
+     "tpm": 2.73,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 11.9,
+     "reb": 2.5,
+     "ast": 2.6,
+     "blk": 0.2,
+     "stl": 0.9,
+     "tpm": 2.4,
+     "gp": 71,
+     "to": 1.2
+    }
+   }
   },
   "1961": {
-   "espn": 183
+   "espn": 183,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.7,
+     "blk": 0.2,
+     "stl": 0.61,
+     "ast": 2.11,
+     "reb": 2.5,
+     "to": 0.8,
+     "tpm": 2.72,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 11.5,
+     "reb": 2.5,
+     "ast": 2.1,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 2.7,
+     "gp": 77,
+     "to": 0.9
+    }
+   }
+  },
+  "1964": {
+   "projections": {
+    "espnProjection": {
+     "pts": 10.25,
+     "blk": 0.25,
+     "stl": 1,
+     "ast": 3,
+     "reb": 3.25,
+     "to": 1.25,
+     "tpm": 2.5,
+     "gp": 4
+    }
+   }
   },
   "1967": {
    "espn": 15,
@@ -841,7 +3099,29 @@
      "tier": 3,
      "rank": 5
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 26.92,
+     "blk": 0.1,
+     "stl": 0.9,
+     "ast": 6.9,
+     "reb": 3.31,
+     "to": 2.4,
+     "tpm": 2.61,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 26.2,
+     "reb": 3.3,
+     "ast": 6.8,
+     "blk": 0.1,
+     "stl": 0.9,
+     "tpm": 2.5,
+     "gp": 75,
+     "to": 2.4
+    }
+   }
   },
   "1970": {
    "espn": 3,
@@ -853,13 +3133,79 @@
      "tier": 1,
      "rank": 2
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 33.01,
+     "blk": 0.5,
+     "stl": 1.6,
+     "ast": 8.9,
+     "reb": 8.5,
+     "to": 4,
+     "tpm": 3.96,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 31.1,
+     "reb": 8,
+     "ast": 8.1,
+     "blk": 0.5,
+     "stl": 1.6,
+     "tpm": 3.7,
+     "gp": 74,
+     "to": 4
+    }
+   }
   },
   "1972": {
-   "espn": 199
+   "espn": 199,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.15,
+     "blk": 0.4,
+     "stl": 1.6,
+     "ast": 2.6,
+     "reb": 3.2,
+     "to": 1.8,
+     "tpm": 1.49,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 3.1,
+     "ast": 2.4,
+     "blk": 0.4,
+     "stl": 1.5,
+     "tpm": 1.5,
+     "gp": 72,
+     "to": 1.7
+    }
+   }
   },
   "1974": {
-   "espn": 185
+   "espn": 185,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.47,
+     "blk": 0.7,
+     "stl": 0.59,
+     "ast": 1,
+     "reb": 7.59,
+     "to": 1.2,
+     "tpm": 0.03,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 10,
+     "reb": 6.9,
+     "ast": 0.9,
+     "blk": 0.7,
+     "stl": 0.5,
+     "tpm": 0,
+     "gp": 71,
+     "to": 1.1
+    }
+   }
   },
   "1975": {
    "espn": 45,
@@ -871,19 +3217,119 @@
      "tier": 3,
      "rank": 9
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.2,
+     "blk": 0.7,
+     "stl": 1.2,
+     "ast": 3.7,
+     "reb": 3.7,
+     "to": 1.2,
+     "tpm": 1.95,
+     "gp": 82
+    },
+    "fantasypros": {
+     "pts": 15.2,
+     "reb": 3.7,
+     "ast": 3.6,
+     "blk": 0.7,
+     "stl": 1.2,
+     "tpm": 1.9,
+     "gp": 80,
+     "to": 1.3
+    }
+   }
   },
   "1982": {
-   "espn": 292
+   "espn": 292,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.93,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 1.19,
+     "reb": 1.3,
+     "to": 0.6,
+     "tpm": 2.01,
+     "gp": 67
+    }
+   }
   },
   "1983": {
-   "espn": 203
+   "espn": 203,
+   "projections": {
+    "espnProjection": {
+     "pts": 14.73,
+     "blk": 0.11,
+     "stl": 0.5,
+     "ast": 3,
+     "reb": 2.3,
+     "to": 1.39,
+     "tpm": 2.53,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 13.1,
+     "reb": 2.1,
+     "ast": 2.8,
+     "blk": 0.1,
+     "stl": 0.5,
+     "tpm": 2.1,
+     "gp": 72,
+     "to": 1.3
+    }
+   }
   },
   "1986": {
-   "espn": 238
+   "espn": 238,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.95,
+     "blk": 0.7,
+     "stl": 0.39,
+     "ast": 1.3,
+     "reb": 5.8,
+     "to": 1,
+     "tpm": 0.36,
+     "gp": 61
+    },
+    "fantasypros": {
+     "pts": 8,
+     "reb": 4.6,
+     "ast": 1,
+     "blk": 0.5,
+     "stl": 0.3,
+     "tpm": 0.3,
+     "gp": 70,
+     "to": 0.7
+    }
+   }
   },
   "1987": {
-   "espn": 298
+   "espn": 298,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.55,
+     "blk": 0.31,
+     "stl": 1,
+     "ast": 1.19,
+     "reb": 4.69,
+     "to": 0.9,
+     "tpm": 0.37,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 3.9,
+     "reb": 4.4,
+     "ast": 1.1,
+     "blk": 0.3,
+     "stl": 0.8,
+     "tpm": 0.3,
+     "gp": 71,
+     "to": 0.8
+    }
+   }
   },
   "1988": {
    "espn": 48,
@@ -895,7 +3341,29 @@
      "tier": 3,
      "rank": 10
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.51,
+     "blk": 0.3,
+     "stl": 1,
+     "ast": 2.9,
+     "reb": 7.2,
+     "to": 2.2,
+     "tpm": 3.32,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 20.7,
+     "reb": 6.4,
+     "ast": 2.5,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 3,
+     "gp": 74,
+     "to": 2
+    }
+   }
   },
   "1997": {
    "espn": 126,
@@ -905,7 +3373,29 @@
      "tier": 9,
      "rank": 28
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 10.69,
+     "blk": 1.71,
+     "stl": 0.71,
+     "ast": 1.29,
+     "reb": 7.1,
+     "to": 1.1,
+     "tpm": 0,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 9.2,
+     "reb": 5.7,
+     "ast": 1.1,
+     "blk": 1.3,
+     "stl": 0.6,
+     "tpm": 0,
+     "gp": 73,
+     "to": 0.9
+    }
+   }
   },
   "1998": {
    "espn": 83,
@@ -917,10 +3407,54 @@
      "tier": 8,
      "rank": 20
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20,
+     "blk": 0.19,
+     "stl": 0.69,
+     "ast": 4.81,
+     "reb": 4.1,
+     "to": 2.5,
+     "tpm": 2.78,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 20.2,
+     "reb": 3.9,
+     "ast": 4.5,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 3,
+     "gp": 75,
+     "to": 2.7
+    }
+   }
   },
   "1999": {
-   "espn": 209
+   "espn": 209,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.85,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 3.19,
+     "reb": 4,
+     "to": 1.19,
+     "tpm": 2.04,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 8.2,
+     "reb": 3.7,
+     "ast": 2.6,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 1.8,
+     "gp": 70,
+     "to": 1
+    }
+   }
   },
   "2001": {
    "espn": 104,
@@ -932,7 +3466,29 @@
      "tier": 7,
      "rank": 24
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.74,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 3.89,
+     "reb": 5.61,
+     "to": 2.11,
+     "tpm": 1.7,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 19.6,
+     "reb": 5.6,
+     "ast": 4,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 1.7,
+     "gp": 72,
+     "to": 2.2
+    }
+   }
   },
   "2007": {
    "espn": 38,
@@ -944,10 +3500,44 @@
      "tier": 5,
      "rank": 14
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.62,
+     "blk": 0.2,
+     "stl": 1.3,
+     "ast": 7.41,
+     "reb": 3,
+     "to": 3.1,
+     "tpm": 2.93,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 19.9,
+     "reb": 2.8,
+     "ast": 6.7,
+     "blk": 0.2,
+     "stl": 1.2,
+     "tpm": 2.7,
+     "gp": 74,
+     "to": 2.9
+    }
+   }
   },
   "2008": {
-   "espn": 294
+   "espn": 294,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.55,
+     "blk": 0.4,
+     "stl": 0.71,
+     "ast": 1.21,
+     "reb": 4.1,
+     "to": 0.29,
+     "tpm": 1.33,
+     "gp": 58
+    }
+   }
   },
   "2009": {
    "espn": 100,
@@ -959,24 +3549,170 @@
      "tier": 7,
      "rank": 18
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.08,
+     "blk": 0.39,
+     "stl": 1.7,
+     "ast": 5.7,
+     "reb": 4.3,
+     "to": 2.39,
+     "tpm": 0.98,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 11.2,
+     "reb": 3.5,
+     "ast": 4.5,
+     "blk": 0.3,
+     "stl": 1.3,
+     "tpm": 0.8,
+     "gp": 72,
+     "to": 1.9
+    }
+   }
   },
   "2010": {
-   "espn": 265
+   "espn": 265,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.03,
+     "blk": 0.91,
+     "stl": 0.51,
+     "ast": 1.2,
+     "reb": 4.31,
+     "to": 0.6,
+     "tpm": 0.03,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 4.7,
+     "reb": 4.2,
+     "ast": 1.2,
+     "blk": 0.9,
+     "stl": 0.5,
+     "tpm": 0,
+     "gp": 72,
+     "to": 0.6
+    }
+   }
   },
   "2012": {
-   "espn": 216
+   "espn": 216,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.23,
+     "blk": 0.3,
+     "stl": 0.8,
+     "ast": 3.2,
+     "reb": 2,
+     "to": 1.89,
+     "tpm": 2.05,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 11.1,
+     "reb": 1.7,
+     "ast": 2.6,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 1.7,
+     "gp": 47,
+     "to": 1.5
+    }
+   }
   },
   "2017": {
-   "espn": 263
+   "espn": 263,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.86,
+     "blk": 0.59,
+     "stl": 1.9,
+     "ast": 1.2,
+     "reb": 2.2,
+     "to": 0.8,
+     "tpm": 1.25,
+     "gp": 59
+    },
+    "fantasypros": {
+     "pts": 5.6,
+     "reb": 2.2,
+     "ast": 1.1,
+     "blk": 0.5,
+     "stl": 1.7,
+     "tpm": 1.1,
+     "gp": 68,
+     "to": 0.8
+    }
+   }
   },
   "2020": {
-   "espn": 166
+   "espn": 166,
+   "projections": {
+    "espnProjection": {
+     "pts": 13,
+     "blk": 0.39,
+     "stl": 0.7,
+     "ast": 1.1,
+     "reb": 4.1,
+     "to": 0.7,
+     "tpm": 1.77,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 12.8,
+     "reb": 4.2,
+     "ast": 1.1,
+     "blk": 0.4,
+     "stl": 0.7,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 0.7
+    }
+   }
+  },
+  "2028": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.73,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 1.51,
+     "reb": 2.7,
+     "to": 0.81,
+     "tpm": 0.46,
+     "gp": 67
+    }
+   }
   },
   "2029": {
    "espn": 160,
    "rotowire": 136,
-   "rotoballer": 119
+   "rotoballer": 119,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.19,
+     "blk": 1,
+     "stl": 0.91,
+     "ast": 1.7,
+     "reb": 6.59,
+     "to": 1.59,
+     "tpm": 1.33,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 13.4,
+     "reb": 6.5,
+     "ast": 1.9,
+     "blk": 0.9,
+     "stl": 0.9,
+     "tpm": 1.4,
+     "gp": 71,
+     "to": 1.6
+    }
+   }
   },
   "2032": {
    "espn": 112,
@@ -988,7 +3724,29 @@
      "tier": 9,
      "rank": 24
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.55,
+     "blk": 1.2,
+     "stl": 0.7,
+     "ast": 3.41,
+     "reb": 7.1,
+     "to": 1.41,
+     "tpm": 0.06,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 11.6,
+     "reb": 6.8,
+     "ast": 3.2,
+     "blk": 1.3,
+     "stl": 0.7,
+     "tpm": 0.1,
+     "gp": 74,
+     "to": 1.3
+    }
+   }
   },
   "2036": {
    "espn": 44,
@@ -1000,7 +3758,43 @@
      "tier": 6,
      "rank": 10
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.59,
+     "blk": 1.2,
+     "stl": 1.11,
+     "ast": 2.61,
+     "reb": 7.39,
+     "to": 1.89,
+     "tpm": 2.57,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 14.8,
+     "reb": 6.5,
+     "ast": 2.3,
+     "blk": 1,
+     "stl": 0.9,
+     "tpm": 2.5,
+     "gp": 77,
+     "to": 1.7
+    }
+   }
+  },
+  "2037": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.19,
+     "blk": 0.09,
+     "stl": 0.59,
+     "ast": 1.59,
+     "reb": 1.09,
+     "to": 0.41,
+     "tpm": 0.63,
+     "gp": 64
+    }
+   }
   },
   "2040": {
    "espn": 74,
@@ -1012,14 +3806,80 @@
      "tier": 8,
      "rank": 21
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.6,
+     "blk": 0.31,
+     "stl": 1.11,
+     "ast": 7.4,
+     "reb": 3.91,
+     "to": 3.51,
+     "tpm": 1.46,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 20.6,
+     "reb": 3.8,
+     "ast": 6.7,
+     "blk": 0.3,
+     "stl": 1.1,
+     "tpm": 1.4,
+     "gp": 72,
+     "to": 3.5
+    }
+   }
   },
   "2050": {
    "espn": 201,
-   "rotoballer": 144
+   "rotoballer": 144,
+   "projections": {
+    "espnProjection": {
+     "pts": 15.48,
+     "blk": 0.2,
+     "stl": 0.71,
+     "ast": 1.71,
+     "reb": 4,
+     "to": 1.51,
+     "tpm": 2.06,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 14.6,
+     "reb": 3.8,
+     "ast": 1.6,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 1.9,
+     "gp": 72,
+     "to": 1.5
+    }
+   }
   },
   "2053": {
-   "espn": 276
+   "espn": 276,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.34,
+     "blk": 0.7,
+     "stl": 0.5,
+     "ast": 0.8,
+     "reb": 3.91,
+     "to": 0.59,
+     "tpm": 0.03,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 5.4,
+     "reb": 3.4,
+     "ast": 0.7,
+     "blk": 0.6,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 71,
+     "to": 0.5
+    }
+   }
   },
   "2054": {
    "espn": 57,
@@ -1031,7 +3891,29 @@
      "tier": 5,
      "rank": 11
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.84,
+     "blk": 0.7,
+     "stl": 1.09,
+     "ast": 4.3,
+     "reb": 6.09,
+     "to": 2.5,
+     "tpm": 0.06,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 22.2,
+     "reb": 5.8,
+     "ast": 4.3,
+     "blk": 0.6,
+     "stl": 1,
+     "tpm": 0,
+     "gp": 69,
+     "to": 2.4
+    }
+   }
   },
   "2055": {
    "espn": 47,
@@ -1043,10 +3925,54 @@
      "tier": 3,
      "rank": 6
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.15,
+     "blk": 0.51,
+     "stl": 1.2,
+     "ast": 3.51,
+     "reb": 3.41,
+     "to": 1.9,
+     "tpm": 3.03,
+     "gp": 79
+    },
+    "fantasypros": {
+     "pts": 16.3,
+     "reb": 3.1,
+     "ast": 3.3,
+     "blk": 0.5,
+     "stl": 1,
+     "tpm": 2.6,
+     "gp": 79,
+     "to": 1.7
+    }
+   }
   },
   "2061": {
-   "espn": 285
+   "espn": 285,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.89,
+     "blk": 0.51,
+     "stl": 0.51,
+     "ast": 1.51,
+     "reb": 3.7,
+     "to": 0.9,
+     "tpm": 1.35,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 6.2,
+     "reb": 3.2,
+     "ast": 1.4,
+     "blk": 0.4,
+     "stl": 0.5,
+     "tpm": 1.2,
+     "gp": 71,
+     "to": 0.8
+    }
+   }
   },
   "2065": {
    "espn": 143,
@@ -1056,10 +3982,44 @@
      "tier": 8,
      "rank": 33
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.65,
+     "blk": 0.19,
+     "stl": 0.6,
+     "ast": 1.81,
+     "reb": 5.19,
+     "to": 1.1,
+     "tpm": 1.34,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 11.1,
+     "reb": 4.3,
+     "ast": 1.4,
+     "blk": 0.2,
+     "stl": 0.5,
+     "tpm": 1,
+     "gp": 78,
+     "to": 0.9
+    }
+   }
   },
   "2074": {
-   "espn": 252
+   "espn": 252,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.32,
+     "blk": 0.2,
+     "stl": 0.7,
+     "ast": 2.7,
+     "reb": 3.1,
+     "to": 1,
+     "tpm": 0.87,
+     "gp": 71
+    }
+   }
   },
   "2086": {
    "espn": 56,
@@ -1071,7 +4031,29 @@
      "tier": 4,
      "rank": 9
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.54,
+     "blk": 0.3,
+     "stl": 0.81,
+     "ast": 4.7,
+     "reb": 5.1,
+     "to": 2.19,
+     "tpm": 2.9,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 21.7,
+     "reb": 4.7,
+     "ast": 4.6,
+     "blk": 0.2,
+     "stl": 0.8,
+     "tpm": 2.9,
+     "gp": 73,
+     "to": 2.3
+    }
+   }
   },
   "2090": {
    "espn": 59,
@@ -1083,27 +4065,171 @@
      "tier": 4,
      "rank": 11
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.48,
+     "blk": 0.2,
+     "stl": 1.41,
+     "ast": 5.8,
+     "reb": 3.3,
+     "to": 2,
+     "tpm": 2.81,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 17.4,
+     "reb": 2.9,
+     "ast": 5,
+     "blk": 0.2,
+     "stl": 1.3,
+     "tpm": 2.3,
+     "gp": 71,
+     "to": 1.9
+    }
+   }
   },
   "2091": {
    "espn": 154,
    "rotowire": 129,
-   "rotoballer": 141
+   "rotoballer": 141,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.16,
+     "blk": 0.4,
+     "stl": 0.79,
+     "ast": 2.5,
+     "reb": 3.9,
+     "to": 1,
+     "tpm": 2.18,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 13.9,
+     "reb": 4,
+     "ast": 2.6,
+     "blk": 0.5,
+     "stl": 0.8,
+     "tpm": 2.1,
+     "gp": 73,
+     "to": 1.1
+    }
+   }
   },
   "2095": {
-   "espn": 206
+   "espn": 206,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.58,
+     "blk": 0.5,
+     "stl": 1,
+     "ast": 1.4,
+     "reb": 3.81,
+     "to": 0.81,
+     "tpm": 2.11,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 8.9,
+     "reb": 3.6,
+     "ast": 1.4,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 2,
+     "gp": 75,
+     "to": 0.8
+    }
+   }
   },
   "2118": {
-   "espn": 282
+   "espn": 282,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.89,
+     "blk": 0.4,
+     "stl": 0.69,
+     "ast": 1.4,
+     "reb": 2.9,
+     "to": 1,
+     "tpm": 1.25,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 6.6,
+     "reb": 2.8,
+     "ast": 1.4,
+     "blk": 0.4,
+     "stl": 0.7,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 1
+    }
+   }
   },
   "2119": {
-   "espn": 231
+   "espn": 231,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.59,
+     "blk": 0.4,
+     "stl": 0.6,
+     "ast": 1.7,
+     "reb": 4,
+     "to": 0.9,
+     "tpm": 1.35,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 9.7,
+     "reb": 3.7,
+     "ast": 1.6,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 1.2,
+     "gp": 71,
+     "to": 0.8
+    }
+   }
   },
   "2120": {
-   "espn": 280
+   "espn": 280,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.38,
+     "blk": 0.4,
+     "stl": 0.6,
+     "ast": 1.29,
+     "reb": 2.29,
+     "to": 0.6,
+     "tpm": 0.94,
+     "gp": 68
+    }
+   }
   },
   "2125": {
-   "espn": 217
+   "espn": 217,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.75,
+     "blk": 0.19,
+     "stl": 0.69,
+     "ast": 1.4,
+     "reb": 2.5,
+     "to": 0.6,
+     "tpm": 2.53,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 10.1,
+     "reb": 2.6,
+     "ast": 1.4,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 2.4,
+     "gp": 75,
+     "to": 0.6
+    }
+   }
   },
   "2126": {
    "espn": 13,
@@ -1115,11 +4241,55 @@
      "tier": 3,
      "rank": 4
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 24.83,
+     "blk": 0.61,
+     "stl": 1.61,
+     "ast": 5.8,
+     "reb": 3.51,
+     "to": 2.1,
+     "tpm": 2.82,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 25.5,
+     "reb": 3.8,
+     "ast": 6,
+     "blk": 0.7,
+     "stl": 1.6,
+     "tpm": 2.8,
+     "gp": 75,
+     "to": 2.2
+    }
+   }
   },
   "2128": {
    "espn": 244,
-   "rotoballer": 125
+   "rotoballer": 125,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.43,
+     "blk": 0.9,
+     "stl": 0.9,
+     "ast": 1.21,
+     "reb": 4.4,
+     "to": 0.9,
+     "tpm": 0.19,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 6.4,
+     "reb": 3.9,
+     "ast": 1,
+     "blk": 0.8,
+     "stl": 0.8,
+     "tpm": 0.2,
+     "gp": 71,
+     "to": 0.8
+    }
+   }
   },
   "2131": {
    "espn": 144,
@@ -1130,7 +4300,29 @@
      "tier": 8,
      "rank": 34
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.73,
+     "blk": 0.1,
+     "stl": 0.8,
+     "ast": 2.1,
+     "reb": 4.9,
+     "to": 0.8,
+     "tpm": 1.76,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 13.5,
+     "reb": 4.4,
+     "ast": 1.9,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 1.6,
+     "gp": 75,
+     "to": 0.8
+    }
+   }
   },
   "2133": {
    "espn": 8,
@@ -1142,7 +4334,29 @@
      "tier": 1,
      "rank": 1
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 30.31,
+     "blk": 0.81,
+     "stl": 1.31,
+     "ast": 4,
+     "reb": 5.19,
+     "to": 3,
+     "tpm": 3.64,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 28.6,
+     "reb": 5.5,
+     "ast": 4.2,
+     "blk": 0.8,
+     "stl": 1.4,
+     "tpm": 3.5,
+     "gp": 75,
+     "to": 3
+    }
+   }
   },
   "2135": {
    "espn": 96,
@@ -1154,7 +4368,29 @@
      "tier": 6,
      "rank": 22
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.18,
+     "blk": 1,
+     "stl": 1.09,
+     "ast": 2.5,
+     "reb": 4.41,
+     "to": 1.7,
+     "tpm": 1.38,
+     "gp": 74
+    },
+    "fantasypros": {
+     "pts": 13.8,
+     "reb": 4.7,
+     "ast": 2.4,
+     "blk": 1,
+     "stl": 1.2,
+     "tpm": 1.3,
+     "gp": 76,
+     "to": 1.6
+    }
+   }
   },
   "2136": {
    "espn": 62,
@@ -1166,10 +4402,54 @@
      "tier": 6,
      "rank": 11
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.96,
+     "blk": 1,
+     "stl": 1.1,
+     "ast": 3,
+     "reb": 7.81,
+     "to": 1.6,
+     "tpm": 1.75,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 14.1,
+     "reb": 7.5,
+     "ast": 2.8,
+     "blk": 1,
+     "stl": 1,
+     "tpm": 1.5,
+     "gp": 75,
+     "to": 1.5
+    }
+   }
   },
   "2139": {
-   "espn": 255
+   "espn": 255,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.6,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 2,
+     "reb": 2.31,
+     "to": 0.69,
+     "tpm": 2.6,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 9.7,
+     "reb": 2.3,
+     "ast": 1.9,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 2.4,
+     "gp": 70,
+     "to": 0.7
+    }
+   }
   },
   "2142": {
    "espn": 90,
@@ -1181,7 +4461,29 @@
      "tier": 8,
      "rank": 24
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.04,
+     "blk": 0.1,
+     "stl": 0.69,
+     "ast": 4.81,
+     "reb": 3.81,
+     "to": 1.31,
+     "tpm": 2.63,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 16.4,
+     "reb": 3.8,
+     "ast": 4.4,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 2.9,
+     "gp": 75,
+     "to": 1.3
+    }
+   }
   },
   "2143": {
    "espn": 39,
@@ -1193,13 +4495,79 @@
      "tier": 2,
      "rank": 5
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.68,
+     "blk": 0.5,
+     "stl": 1.1,
+     "ast": 4.81,
+     "reb": 4.81,
+     "to": 2.31,
+     "tpm": 2.38,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 19.3,
+     "reb": 4.8,
+     "ast": 4.4,
+     "blk": 0.5,
+     "stl": 1.1,
+     "tpm": 2.2,
+     "gp": 75,
+     "to": 2.2
+    }
+   }
   },
   "2144": {
-   "espn": 195
+   "espn": 195,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.06,
+     "blk": 0.5,
+     "stl": 0.8,
+     "ast": 1.5,
+     "reb": 4.09,
+     "to": 1,
+     "tpm": 2.09,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 12.7,
+     "reb": 4.1,
+     "ast": 1.5,
+     "blk": 0.5,
+     "stl": 0.7,
+     "tpm": 2,
+     "gp": 71,
+     "to": 1
+    }
+   }
   },
   "2145": {
-   "espn": 158
+   "espn": 158,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.13,
+     "blk": 0.1,
+     "stl": 1,
+     "ast": 4.5,
+     "reb": 2.6,
+     "to": 1.1,
+     "tpm": 0.51,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 9.3,
+     "reb": 2.2,
+     "ast": 3.8,
+     "blk": 0.1,
+     "stl": 0.8,
+     "tpm": 0.4,
+     "gp": 73,
+     "to": 1
+    }
+   }
   },
   "2146": {
    "espn": 141,
@@ -1210,13 +4578,93 @@
      "tier": 9,
      "rank": 27
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.3,
+     "blk": 0.41,
+     "stl": 0.9,
+     "ast": 2.7,
+     "reb": 3.51,
+     "to": 1.1,
+     "tpm": 2.14,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 13.2,
+     "reb": 3.6,
+     "ast": 2.5,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 2.1,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "2152": {
-   "espn": 161
+   "espn": 161,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.94,
+     "blk": 0.7,
+     "stl": 0.9,
+     "ast": 1.39,
+     "reb": 6.8,
+     "to": 0.9,
+     "tpm": 0.37,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 8.1,
+     "reb": 5.6,
+     "ast": 1.1,
+     "blk": 0.7,
+     "stl": 0.8,
+     "tpm": 0.3,
+     "gp": 75,
+     "to": 0.8
+    }
+   }
+  },
+  "2155": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.98,
+     "blk": 0.1,
+     "stl": 0.69,
+     "ast": 1,
+     "reb": 2,
+     "to": 0.69,
+     "tpm": 1.07,
+     "gp": 59
+    }
+   }
   },
   "2156": {
-   "espn": 214
+   "espn": 214,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.79,
+     "blk": 0.8,
+     "stl": 0.39,
+     "ast": 1.2,
+     "reb": 6.39,
+     "to": 0.89,
+     "tpm": 1.42,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 9.9,
+     "reb": 6.3,
+     "ast": 1.2,
+     "blk": 0.8,
+     "stl": 0.4,
+     "tpm": 1.4,
+     "gp": 72,
+     "to": 0.9
+    }
+   }
   },
   "2157": {
    "espn": 92,
@@ -1228,10 +4676,54 @@
      "tier": 8,
      "rank": 25
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.05,
+     "blk": 0.11,
+     "stl": 1.11,
+     "ast": 5.8,
+     "reb": 4,
+     "to": 1.51,
+     "tpm": 2.62,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 16.6,
+     "reb": 3.9,
+     "ast": 5.7,
+     "blk": 0.1,
+     "stl": 1.1,
+     "tpm": 2.5,
+     "gp": 72,
+     "to": 1.5
+    }
+   }
   },
   "2159": {
-   "espn": 159
+   "espn": 159,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.33,
+     "blk": 1.7,
+     "stl": 0.3,
+     "ast": 1.41,
+     "reb": 5.7,
+     "to": 1.2,
+     "tpm": 0.71,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 7.5,
+     "reb": 4.4,
+     "ast": 1.2,
+     "blk": 1.2,
+     "stl": 0.3,
+     "tpm": 0.5,
+     "gp": 74,
+     "to": 0.9
+    }
+   }
   },
   "2161": {
    "espn": 21,
@@ -1243,7 +4735,29 @@
      "tier": 3,
      "rank": 9
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.16,
+     "blk": 0.7,
+     "stl": 1.3,
+     "ast": 9.91,
+     "reb": 3.7,
+     "to": 1.91,
+     "tpm": 2.92,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 18.8,
+     "reb": 3.7,
+     "ast": 9.7,
+     "blk": 0.6,
+     "stl": 1.2,
+     "tpm": 2.8,
+     "gp": 71,
+     "to": 1.8
+    }
+   }
   },
   "2179": {
    "espn": 14,
@@ -1255,7 +4769,29 @@
      "tier": 4,
      "rank": 11
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.88,
+     "blk": 0.29,
+     "stl": 1.4,
+     "ast": 8.29,
+     "reb": 5.6,
+     "to": 3.29,
+     "tpm": 4.37,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 22.8,
+     "reb": 5.2,
+     "ast": 7.9,
+     "blk": 0.3,
+     "stl": 1.4,
+     "tpm": 3.8,
+     "gp": 73,
+     "to": 3.1
+    }
+   }
   },
   "2181": {
    "espn": 30,
@@ -1267,13 +4803,83 @@
      "tier": 2,
      "rank": 4
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.03,
+     "blk": 0.6,
+     "stl": 0.81,
+     "ast": 6.31,
+     "reb": 7.19,
+     "to": 3.6,
+     "tpm": 1.86,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 22.3,
+     "reb": 7.3,
+     "ast": 5.8,
+     "blk": 0.6,
+     "stl": 0.9,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 3.5
+    }
+   }
   },
   "2185": {
-   "espn": 212
+   "espn": 212,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.71,
+     "blk": 0.51,
+     "stl": 0.8,
+     "ast": 3.11,
+     "reb": 3.31,
+     "to": 1.11,
+     "tpm": 1.91,
+     "gp": 65
+    }
+   }
+  },
+  "2193": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.5,
+     "blk": 0.09,
+     "stl": 0.5,
+     "ast": 0.8,
+     "reb": 2.3,
+     "to": 0.41,
+     "tpm": 0.28,
+     "gp": 54
+    }
+   }
   },
   "2233": {
-   "espn": 197
+   "espn": 197,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.44,
+     "blk": 0.1,
+     "stl": 0.9,
+     "ast": 2.6,
+     "reb": 4.1,
+     "to": 1.3,
+     "tpm": 0.8,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 10.7,
+     "reb": 3.6,
+     "ast": 2.5,
+     "blk": 0.1,
+     "stl": 0.8,
+     "tpm": 0.7,
+     "gp": 74,
+     "to": 1.2
+    }
+   }
   },
   "2255": {
    "espn": 98,
@@ -1285,10 +4891,68 @@
      "tier": 7,
      "rank": 17
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.26,
+     "blk": 0.31,
+     "stl": 0.9,
+     "ast": 3.9,
+     "reb": 3.6,
+     "to": 1.5,
+     "tpm": 1.83,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 14.3,
+     "reb": 3.5,
+     "ast": 3.8,
+     "blk": 0.3,
+     "stl": 1,
+     "tpm": 1.7,
+     "gp": 75,
+     "to": 1.4
+    }
+   }
   },
   "2256": {
-   "espn": 247
+   "espn": 247,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.71,
+     "blk": 0.2,
+     "stl": 0.8,
+     "ast": 2.2,
+     "reb": 2.11,
+     "to": 0.6,
+     "tpm": 2.15,
+     "gp": 65
+    }
+   }
+  },
+  "2257": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.44,
+     "blk": 0.3,
+     "stl": 0.3,
+     "ast": 1.41,
+     "reb": 5.2,
+     "to": 1,
+     "tpm": 0,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 3.4,
+     "reb": 4.1,
+     "ast": 1.1,
+     "blk": 0.3,
+     "stl": 0.3,
+     "tpm": 0,
+     "gp": 46,
+     "to": 0.8
+    }
+   }
   },
   "2258": {
    "espn": 119,
@@ -1299,7 +4963,29 @@
      "tier": 8,
      "rank": 21
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.92,
+     "blk": 0.4,
+     "stl": 1,
+     "ast": 3.4,
+     "reb": 4.21,
+     "to": 1.9,
+     "tpm": 2.07,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 13.9,
+     "reb": 3.9,
+     "ast": 3.2,
+     "blk": 0.3,
+     "stl": 0.9,
+     "tpm": 1.9,
+     "gp": 76,
+     "to": 1.9
+    }
+   }
   },
   "2259": {
    "espn": 35,
@@ -1311,13 +4997,107 @@
      "tier": 4,
      "rank": 7
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.92,
+     "blk": 1.7,
+     "stl": 0.89,
+     "ast": 3.61,
+     "reb": 9.8,
+     "to": 2,
+     "tpm": 0.97,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 18.8,
+     "reb": 9.6,
+     "ast": 3.6,
+     "blk": 1.6,
+     "stl": 0.9,
+     "tpm": 1.1,
+     "gp": 72,
+     "to": 2
+    }
+   }
   },
   "2260": {
-   "espn": 229
+   "espn": 229,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.55,
+     "blk": 1,
+     "stl": 0.7,
+     "ast": 1.1,
+     "reb": 5.9,
+     "to": 1.19,
+     "tpm": 0,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 6.9,
+     "reb": 5.5,
+     "ast": 1,
+     "blk": 0.9,
+     "stl": 0.7,
+     "tpm": 0,
+     "gp": 73,
+     "to": 1.1
+    }
+   }
+  },
+  "2262": {
+   "projections": {
+    "espnProjection": {
+     "pts": 11.58,
+     "blk": 0.5,
+     "stl": 0.92,
+     "ast": 1.5,
+     "reb": 3.17,
+     "to": 0.92,
+     "tpm": 2.33,
+     "gp": 12
+    },
+    "fantasypros": {
+     "pts": 10.3,
+     "reb": 2.8,
+     "ast": 1.3,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 2,
+     "gp": 36,
+     "to": 0.8
+    }
+   }
+  },
+  "2265": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.24,
+     "blk": 0.82,
+     "stl": 0.29,
+     "ast": 0.53,
+     "reb": 4.29,
+     "to": 0.53,
+     "tpm": 0,
+     "gp": 17
+    }
+   }
   },
   "2266": {
-   "espn": 269
+   "espn": 269,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.86,
+     "blk": 0.2,
+     "stl": 0.31,
+     "ast": 1.6,
+     "reb": 2.4,
+     "to": 0.8,
+     "tpm": 1.62,
+     "gp": 65
+    }
+   }
   },
   "2267": {
    "espn": 7,
@@ -1329,7 +5109,29 @@
      "tier": 2,
      "rank": 3
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 24.62,
+     "blk": 0.8,
+     "stl": 1.41,
+     "ast": 9.8,
+     "reb": 5.59,
+     "to": 3.8,
+     "tpm": 2,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 24.7,
+     "reb": 5.8,
+     "ast": 9.5,
+     "blk": 0.8,
+     "stl": 1.3,
+     "tpm": 2.1,
+     "gp": 74,
+     "to": 4
+    }
+   }
   },
   "2275": {
    "espn": 139,
@@ -1341,13 +5143,69 @@
      "tier": 9,
      "rank": 32
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 9.71,
+     "blk": 1,
+     "stl": 0.9,
+     "ast": 2.2,
+     "reb": 8.41,
+     "to": 1.59,
+     "tpm": 0.22,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 8.8,
+     "reb": 6.9,
+     "ast": 2.1,
+     "blk": 0.8,
+     "stl": 0.9,
+     "tpm": 0.2,
+     "gp": 74,
+     "to": 1.5
+    }
+   }
   },
   "2280": {
-   "espn": 248
+   "espn": 248,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.12,
+     "blk": 0.4,
+     "stl": 1.31,
+     "ast": 1.11,
+     "reb": 2.8,
+     "to": 1.11,
+     "tpm": 1.54,
+     "gp": 65
+    }
+   }
   },
   "2281": {
-   "espn": 180
+   "espn": 180,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.02,
+     "blk": 0.61,
+     "stl": 0.7,
+     "ast": 2.39,
+     "reb": 5.61,
+     "to": 1,
+     "tpm": 1.56,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 9.9,
+     "reb": 4.8,
+     "ast": 2.2,
+     "blk": 0.5,
+     "stl": 0.6,
+     "tpm": 1.3,
+     "gp": 72,
+     "to": 0.8
+    }
+   }
   },
   "2284": {
    "espn": 6,
@@ -1359,7 +5217,29 @@
      "tier": 1,
      "rank": 2
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.99,
+     "blk": 0.5,
+     "stl": 1.31,
+     "ast": 7.9,
+     "reb": 10.6,
+     "to": 3.4,
+     "tpm": 1.68,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 21.3,
+     "reb": 9.8,
+     "ast": 7.1,
+     "blk": 0.5,
+     "stl": 1.2,
+     "tpm": 1.6,
+     "gp": 75,
+     "to": 3.1
+    }
+   }
   },
   "2285": {
    "espn": 64,
@@ -1371,10 +5251,54 @@
      "tier": 4,
      "rank": 14
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.54,
+     "blk": 0.4,
+     "stl": 1.29,
+     "ast": 3.4,
+     "reb": 5.21,
+     "to": 1.6,
+     "tpm": 2.99,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 20,
+     "reb": 5.1,
+     "ast": 3.3,
+     "blk": 0.4,
+     "stl": 1.2,
+     "tpm": 2.9,
+     "gp": 73,
+     "to": 1.7
+    }
+   }
   },
   "2286": {
-   "espn": 224
+   "espn": 224,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.62,
+     "blk": 0.51,
+     "stl": 1.51,
+     "ast": 2.6,
+     "reb": 3.21,
+     "to": 1.21,
+     "tpm": 1.32,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 8.7,
+     "reb": 3.3,
+     "ast": 2.6,
+     "blk": 0.5,
+     "stl": 1.4,
+     "tpm": 1.3,
+     "gp": 71,
+     "to": 1.3
+    }
+   }
   },
   "2289": {
    "espn": 17,
@@ -1386,14 +5310,72 @@
      "tier": 1,
      "rank": 1
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.82,
+     "blk": 1.31,
+     "stl": 1.4,
+     "ast": 6,
+     "reb": 7.69,
+     "to": 2.69,
+     "tpm": 1.04,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 18.6,
+     "reb": 7.4,
+     "ast": 5.9,
+     "blk": 1.3,
+     "stl": 1.4,
+     "tpm": 1,
+     "gp": 75,
+     "to": 2.6
+    }
+   }
   },
   "2296": {
    "rotowire": 126,
    "rotoballer": 145
   },
+  "2297": {
+   "projections": {
+    "espnProjection": {
+     "pts": 7.22,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 2.1,
+     "reb": 2.19,
+     "to": 1.3,
+     "tpm": 1.19,
+     "gp": 67
+    }
+   }
+  },
   "2299": {
-   "espn": 225
+   "espn": 225,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.14,
+     "blk": 0.19,
+     "stl": 0.69,
+     "ast": 1.5,
+     "reb": 3.31,
+     "to": 0.9,
+     "tpm": 1.43,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 8.3,
+     "reb": 2.7,
+     "ast": 1.3,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 0.8
+    }
+   }
   },
   "2301": {
    "espn": 150,
@@ -1404,7 +5386,29 @@
      "tier": 9,
      "rank": 33
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 8.92,
+     "blk": 0.2,
+     "stl": 0.9,
+     "ast": 6,
+     "reb": 2.51,
+     "to": 1.51,
+     "tpm": 1.23,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 8.8,
+     "reb": 2.4,
+     "ast": 5.8,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 1.5
+    }
+   }
   },
   "2302": {
    "espn": 128,
@@ -1416,10 +5420,44 @@
      "tier": 9,
      "rank": 29
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 9.47,
+     "blk": 1.19,
+     "stl": 0.69,
+     "ast": 1.5,
+     "reb": 7.69,
+     "to": 0.9,
+     "tpm": 0.01,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 9,
+     "reb": 7.1,
+     "ast": 1.3,
+     "blk": 1,
+     "stl": 0.6,
+     "tpm": 0,
+     "gp": 75,
+     "to": 0.9
+    }
+   }
   },
   "2303": {
-   "espn": 274
+   "espn": 274,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.34,
+     "blk": 0.19,
+     "stl": 0.6,
+     "ast": 2.6,
+     "reb": 1.69,
+     "to": 1,
+     "tpm": 1.63,
+     "gp": 62
+    }
+   }
   },
   "2304": {
    "espn": 58,
@@ -1431,16 +5469,82 @@
      "tier": 4,
      "rank": 12
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.55,
+     "blk": 0.39,
+     "stl": 1.2,
+     "ast": 4.2,
+     "reb": 5.7,
+     "to": 2.11,
+     "tpm": 1.56,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 22.2,
+     "reb": 5.6,
+     "ast": 4.2,
+     "blk": 0.4,
+     "stl": 1.2,
+     "tpm": 1.5,
+     "gp": 72,
+     "to": 2
+    }
+   }
   },
   "2305": {
    "espn": 151,
    "rotowire": 117,
-   "rotoballer": 100
+   "rotoballer": 100,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.21,
+     "blk": 0.69,
+     "stl": 1.5,
+     "ast": 4,
+     "reb": 3.4,
+     "to": 2.31,
+     "tpm": 2,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 13.4,
+     "reb": 3.7,
+     "ast": 4.3,
+     "blk": 0.7,
+     "stl": 1.5,
+     "tpm": 2,
+     "gp": 70,
+     "to": 2.4
+    }
+   }
   },
   "2306": {
    "espn": 156,
-   "rotoballer": 116
+   "rotoballer": 116,
+   "projections": {
+    "espnProjection": {
+     "pts": 15.12,
+     "blk": 0.4,
+     "stl": 0.81,
+     "ast": 2.6,
+     "reb": 6.19,
+     "to": 2.1,
+     "tpm": 1.1,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 14.7,
+     "reb": 5.4,
+     "ast": 2.3,
+     "blk": 0.4,
+     "stl": 0.8,
+     "tpm": 1,
+     "gp": 72,
+     "to": 1.8
+    }
+   }
   },
   "2308": {
    "espn": 22,
@@ -1452,7 +5556,29 @@
      "tier": 4,
      "rank": 4
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.03,
+     "blk": 1,
+     "stl": 1.19,
+     "ast": 5.69,
+     "reb": 9.4,
+     "to": 2.9,
+     "tpm": 0.46,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 19.3,
+     "reb": 9.4,
+     "ast": 5.5,
+     "blk": 1,
+     "stl": 1.2,
+     "tpm": 0.4,
+     "gp": 75,
+     "to": 2.9
+    }
+   }
   },
   "2309": {
    "espn": 91,
@@ -1464,7 +5590,29 @@
      "tier": 8,
      "rank": 20
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 21.41,
+     "blk": 0.3,
+     "stl": 1.1,
+     "ast": 3.5,
+     "reb": 4.6,
+     "to": 2.6,
+     "tpm": 2.76,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 20.3,
+     "reb": 4.5,
+     "ast": 3.5,
+     "blk": 0.3,
+     "stl": 1.1,
+     "tpm": 2.7,
+     "gp": 74,
+     "to": 2.5
+    }
+   }
   },
   "2313": {
    "espn": 18,
@@ -1476,7 +5624,29 @@
      "tier": 3,
      "rank": 7
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.5,
+     "blk": 0.6,
+     "stl": 1.21,
+     "ast": 9.6,
+     "reb": 9.21,
+     "to": 3.79,
+     "tpm": 2.01,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 17.8,
+     "reb": 8.5,
+     "ast": 9.1,
+     "blk": 0.6,
+     "stl": 1.2,
+     "tpm": 1.8,
+     "gp": 73,
+     "to": 3.6
+    }
+   }
   },
   "2316": {
    "espn": 31,
@@ -1488,13 +5658,79 @@
      "tier": 2,
      "rank": 4
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 25.36,
+     "blk": 0.4,
+     "stl": 1.1,
+     "ast": 5.9,
+     "reb": 4.9,
+     "to": 3,
+     "tpm": 2.73,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 22.8,
+     "reb": 4.7,
+     "ast": 5.5,
+     "blk": 0.4,
+     "stl": 1.1,
+     "tpm": 2.6,
+     "gp": 73,
+     "to": 2.9
+    }
+   }
   },
   "2322": {
-   "espn": 245
+   "espn": 245,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.82,
+     "blk": 0.11,
+     "stl": 1,
+     "ast": 3.5,
+     "reb": 2.5,
+     "to": 1.2,
+     "tpm": 1.52,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 6.9,
+     "reb": 2.1,
+     "ast": 3,
+     "blk": 0.1,
+     "stl": 0.9,
+     "tpm": 1.4,
+     "gp": 72,
+     "to": 1
+    }
+   }
   },
   "2329": {
-   "espn": 202
+   "espn": 202,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.61,
+     "blk": 0.3,
+     "stl": 0.51,
+     "ast": 1.4,
+     "reb": 3.9,
+     "to": 0.4,
+     "tpm": 2.62,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 9.3,
+     "reb": 3.7,
+     "ast": 1.2,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 2.5,
+     "gp": 78,
+     "to": 0.4
+    }
+   }
   },
   "2416": {
    "espn": 132,
@@ -1504,10 +5740,44 @@
      "tier": 9,
      "rank": 32
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.44,
+     "blk": 0.51,
+     "stl": 1.79,
+     "ast": 5.3,
+     "reb": 3.4,
+     "to": 2.51,
+     "tpm": 1.27,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 9.6,
+     "reb": 2.7,
+     "ast": 4.1,
+     "blk": 0.4,
+     "stl": 1.4,
+     "tpm": 1,
+     "gp": 71,
+     "to": 1.9
+    }
+   }
   },
   "2417": {
-   "espn": 243
+   "espn": 243,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.01,
+     "blk": 0.11,
+     "stl": 0.5,
+     "ast": 1.7,
+     "reb": 2.39,
+     "to": 0.8,
+     "tpm": 2.55,
+     "gp": 76
+    }
+   }
   },
   "2422": {
    "espn": 115,
@@ -1518,14 +5788,70 @@
      "tier": 9,
      "rank": 27
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.92,
+     "blk": 0.21,
+     "stl": 1.21,
+     "ast": 4.4,
+     "reb": 3.9,
+     "to": 1.4,
+     "tpm": 2.74,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 9.8,
+     "reb": 3.5,
+     "ast": 3.7,
+     "blk": 0.2,
+     "stl": 1.1,
+     "tpm": 2.2,
+     "gp": 76,
+     "to": 1.2
+    }
+   }
   },
   "2432": {
-   "espn": 241
+   "espn": 241,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.97,
+     "blk": 0.69,
+     "stl": 1.19,
+     "ast": 1.1,
+     "reb": 2,
+     "to": 0.6,
+     "tpm": 1.36,
+     "gp": 72
+    }
+   }
   },
   "2435": {
    "espn": 165,
-   "rotowire": 145
+   "rotowire": 145,
+   "projections": {
+    "espnProjection": {
+     "pts": 16.53,
+     "blk": 0.29,
+     "stl": 0.71,
+     "ast": 2.1,
+     "reb": 5.1,
+     "to": 2,
+     "tpm": 1.37,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 13.9,
+     "reb": 4.4,
+     "ast": 1.6,
+     "blk": 0.2,
+     "stl": 0.6,
+     "tpm": 1.1,
+     "gp": 73,
+     "to": 1.7
+    }
+   }
   },
   "2438": {
    "espn": 27,
@@ -1537,10 +5863,54 @@
      "tier": 5,
      "rank": 6
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.25,
+     "blk": 1,
+     "stl": 0.9,
+     "ast": 2.31,
+     "reb": 11.69,
+     "to": 2,
+     "tpm": 0,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 17.6,
+     "reb": 11.2,
+     "ast": 2.4,
+     "blk": 1.1,
+     "stl": 0.9,
+     "tpm": 0,
+     "gp": 75,
+     "to": 1.9
+    }
+   }
   },
   "2440": {
-   "rotoballer": 142
+   "rotoballer": 142,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.92,
+     "blk": 1,
+     "stl": 0.79,
+     "ast": 1.5,
+     "reb": 8.92,
+     "to": 1.21,
+     "tpm": 0,
+     "gp": 24
+    },
+    "fantasypros": {
+     "pts": 10.7,
+     "reb": 7.3,
+     "ast": 1.3,
+     "blk": 0.9,
+     "stl": 0.7,
+     "tpm": 0,
+     "gp": 29,
+     "to": 1
+    }
+   }
   },
   "2441": {
    "espn": 69,
@@ -1552,7 +5922,29 @@
      "tier": 7,
      "rank": 13
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.5,
+     "blk": 2.59,
+     "stl": 0.7,
+     "ast": 1.7,
+     "reb": 12.41,
+     "to": 1.59,
+     "tpm": 0.13,
+     "gp": 64
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 11.5,
+     "ast": 1.7,
+     "blk": 2.2,
+     "stl": 0.7,
+     "tpm": 0.2,
+     "gp": 72,
+     "to": 1.5
+    }
+   }
   },
   "2444": {
    "espn": 147,
@@ -1562,7 +5954,29 @@
      "tier": 9,
      "rank": 20
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 9.65,
+     "blk": 0.51,
+     "stl": 1.4,
+     "ast": 2.19,
+     "reb": 4.7,
+     "to": 1.3,
+     "tpm": 1.13,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 7.8,
+     "reb": 4,
+     "ast": 1.8,
+     "blk": 0.4,
+     "stl": 1.1,
+     "tpm": 0.9,
+     "gp": 78,
+     "to": 1.1
+    }
+   }
   },
   "2445": {
    "espn": 121,
@@ -1574,11 +5988,55 @@
      "tier": 9,
      "rank": 16
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.14,
+     "blk": 0.79,
+     "stl": 0.6,
+     "ast": 1.6,
+     "reb": 6.79,
+     "to": 1.21,
+     "tpm": 2.03,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 13.9,
+     "reb": 6.7,
+     "ast": 1.5,
+     "blk": 0.8,
+     "stl": 0.6,
+     "tpm": 2,
+     "gp": 76,
+     "to": 1.2
+    }
+   }
   },
   "2447": {
    "espn": 205,
-   "rotowire": 148
+   "rotowire": 148,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.38,
+     "blk": 0.5,
+     "stl": 1.2,
+     "ast": 1.39,
+     "reb": 6.11,
+     "to": 1.3,
+     "tpm": 1.42,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 9.1,
+     "reb": 5.3,
+     "ast": 1.2,
+     "blk": 0.5,
+     "stl": 1.1,
+     "tpm": 1.2,
+     "gp": 72,
+     "to": 1.1
+    }
+   }
   },
   "2449": {
    "espn": 49,
@@ -1590,10 +6048,54 @@
      "tier": 3,
      "rank": 7
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.73,
+     "blk": 0.4,
+     "stl": 2,
+     "ast": 5.6,
+     "reb": 6.51,
+     "to": 1.71,
+     "tpm": 0.37,
+     "gp": 75
+    },
+    "fantasypros": {
+     "pts": 11.7,
+     "reb": 6.1,
+     "ast": 5.2,
+     "blk": 0.5,
+     "stl": 2.1,
+     "tpm": 0.5,
+     "gp": 77,
+     "to": 1.7
+    }
+   }
   },
   "2451": {
-   "espn": 246
+   "espn": 246,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.55,
+     "blk": 0.39,
+     "stl": 0.7,
+     "ast": 2.2,
+     "reb": 4.89,
+     "to": 1.3,
+     "tpm": 0.56,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 6.2,
+     "reb": 3.6,
+     "ast": 1.5,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 0.4,
+     "gp": 47,
+     "to": 1
+    }
+   }
   },
   "2453": {
    "espn": 34,
@@ -1605,7 +6107,29 @@
      "tier": 4,
      "rank": 6
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.63,
+     "blk": 0.6,
+     "stl": 1.4,
+     "ast": 5.3,
+     "reb": 4.9,
+     "to": 2,
+     "tpm": 1.47,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 20.4,
+     "reb": 4.8,
+     "ast": 5,
+     "blk": 0.5,
+     "stl": 1.4,
+     "tpm": 1.4,
+     "gp": 74,
+     "to": 2
+    }
+   }
   },
   "2454": {
    "espn": 117,
@@ -1617,7 +6141,29 @@
      "tier": 7,
      "rank": 28
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.24,
+     "blk": 1.3,
+     "stl": 0.9,
+     "ast": 2.1,
+     "reb": 5,
+     "to": 1.61,
+     "tpm": 1.44,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 12.8,
+     "reb": 4.8,
+     "ast": 1.9,
+     "blk": 1.3,
+     "stl": 1,
+     "tpm": 1.4,
+     "gp": 75,
+     "to": 1.5
+    }
+   }
   },
   "2455": {
    "espn": 71,
@@ -1629,7 +6175,29 @@
      "tier": 7,
      "rank": 15
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.51,
+     "blk": 2.11,
+     "stl": 0.6,
+     "ast": 2,
+     "reb": 8.4,
+     "to": 1.6,
+     "tpm": 1.4,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 16.3,
+     "reb": 8.1,
+     "ast": 1.7,
+     "blk": 1.9,
+     "stl": 0.7,
+     "tpm": 1.3,
+     "gp": 72,
+     "to": 1.5
+    }
+   }
   },
   "2456": {
    "espn": 116,
@@ -1641,11 +6209,55 @@
      "tier": 8,
      "rank": 15
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.83,
+     "blk": 1,
+     "stl": 0.9,
+     "ast": 1.61,
+     "reb": 6,
+     "to": 0.9,
+     "tpm": 2.04,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 13.1,
+     "reb": 5.9,
+     "ast": 1.5,
+     "blk": 1.1,
+     "stl": 0.9,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 0.9
+    }
+   }
   },
   "2457": {
    "espn": 208,
-   "rotowire": 140
+   "rotowire": 140,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.94,
+     "blk": 0.31,
+     "stl": 0.71,
+     "ast": 2.31,
+     "reb": 4.2,
+     "to": 0.8,
+     "tpm": 0.88,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 11.9,
+     "reb": 4.5,
+     "ast": 2.3,
+     "blk": 0.4,
+     "stl": 0.8,
+     "tpm": 1,
+     "gp": 72,
+     "to": 0.8
+    }
+   }
   },
   "2458": {
    "espn": 46,
@@ -1657,7 +6269,29 @@
      "tier": 5,
      "rank": 8
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 23.42,
+     "blk": 0.59,
+     "stl": 0.8,
+     "ast": 5.2,
+     "reb": 7.9,
+     "to": 3.1,
+     "tpm": 1.43,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 23.8,
+     "reb": 7.9,
+     "ast": 5.2,
+     "blk": 0.6,
+     "stl": 0.8,
+     "tpm": 1.5,
+     "gp": 74,
+     "to": 3.1
+    }
+   }
   },
   "2461": {
    "espn": 124,
@@ -1669,7 +6303,29 @@
      "tier": 9,
      "rank": 28
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.59,
+     "blk": 0.1,
+     "stl": 1.1,
+     "ast": 5.9,
+     "reb": 3,
+     "to": 2,
+     "tpm": 1.21,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 13.4,
+     "reb": 3.1,
+     "ast": 6.3,
+     "blk": 0.1,
+     "stl": 1.1,
+     "tpm": 1.3,
+     "gp": 75,
+     "to": 2
+    }
+   }
   },
   "2463": {
    "espn": 97,
@@ -1681,23 +6337,193 @@
      "tier": 7,
      "rank": 16
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.91,
+     "blk": 0.41,
+     "stl": 1.3,
+     "ast": 4.8,
+     "reb": 4,
+     "to": 2.3,
+     "tpm": 2.14,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 13.1,
+     "reb": 3.5,
+     "ast": 4.3,
+     "blk": 0.4,
+     "stl": 1.2,
+     "tpm": 1.9,
+     "gp": 74,
+     "to": 2.1
+    }
+   }
   },
   "2468": {
-   "espn": 187
+   "espn": 187,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.53,
+     "blk": 0.4,
+     "stl": 0.6,
+     "ast": 1.9,
+     "reb": 3.19,
+     "to": 1.19,
+     "tpm": 2.12,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 12,
+     "reb": 3.4,
+     "ast": 2.1,
+     "blk": 0.4,
+     "stl": 0.7,
+     "tpm": 2.1,
+     "gp": 78,
+     "to": 1.2
+    }
+   }
   },
   "2474": {
    "espn": 168,
-   "rotoballer": 150
+   "rotoballer": 150,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.5,
+     "blk": 0.9,
+     "stl": 0.7,
+     "ast": 1.7,
+     "reb": 8.3,
+     "to": 1,
+     "tpm": 0,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 7,
+     "reb": 7.7,
+     "ast": 1.6,
+     "blk": 0.8,
+     "stl": 0.7,
+     "tpm": 0,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "2475": {
-   "espn": 237
+   "espn": 237,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.91,
+     "blk": 0.6,
+     "stl": 0.51,
+     "ast": 2.4,
+     "reb": 5.4,
+     "to": 1,
+     "tpm": 1.46,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 6.1,
+     "reb": 4.8,
+     "ast": 2.1,
+     "blk": 0.5,
+     "stl": 0.5,
+     "tpm": 1.3,
+     "gp": 73,
+     "to": 0.9
+    }
+   }
+  },
+  "2476": {
+   "projections": {
+    "espnProjection": {
+     "pts": 16.81,
+     "blk": 0.11,
+     "stl": 1,
+     "ast": 2.3,
+     "reb": 3.7,
+     "to": 2.19,
+     "tpm": 1.7,
+     "gp": 27
+    },
+    "fantasypros": {
+     "pts": 13.4,
+     "reb": 3.1,
+     "ast": 1.8,
+     "blk": 0.1,
+     "stl": 0.8,
+     "tpm": 1.4,
+     "gp": 18,
+     "to": 1.8
+    }
+   }
   },
   "2480": {
-   "espn": 236
+   "espn": 236,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.68,
+     "blk": 0.39,
+     "stl": 0.7,
+     "ast": 2.8,
+     "reb": 4.2,
+     "to": 1.7,
+     "tpm": 1.35,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 7.1,
+     "reb": 3,
+     "ast": 2.1,
+     "blk": 0.3,
+     "stl": 0.5,
+     "tpm": 1,
+     "gp": 50,
+     "to": 1.2
+    }
+   }
+  },
+  "2485": {
+   "projections": {
+    "espnProjection": {
+     "pts": 8.57,
+     "blk": 0.1,
+     "stl": 0.3,
+     "ast": 1.2,
+     "reb": 1.6,
+     "to": 1.1,
+     "tpm": 1.52,
+     "gp": 60
+    }
+   }
   },
   "2488": {
-   "espn": 242
+   "espn": 242,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.39,
+     "blk": 0.3,
+     "stl": 0.8,
+     "ast": 2.39,
+     "reb": 5.39,
+     "to": 1.3,
+     "tpm": 1.08,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 6.7,
+     "reb": 4.2,
+     "ast": 2,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 1,
+     "gp": 73,
+     "to": 1.2
+    }
+   }
   },
   "2494": {
    "espn": 134,
@@ -1707,16 +6533,108 @@
      "tier": 8,
      "rank": 30
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 10.78,
+     "blk": 0.5,
+     "stl": 0.7,
+     "ast": 1.5,
+     "reb": 5.4,
+     "to": 0.8,
+     "tpm": 2.32,
+     "gp": 82
+    },
+    "fantasypros": {
+     "pts": 9,
+     "reb": 4.5,
+     "ast": 1.3,
+     "blk": 0.4,
+     "stl": 0.6,
+     "tpm": 1.9,
+     "gp": 80,
+     "to": 0.7
+    }
+   }
   },
   "2497": {
-   "espn": 268
+   "espn": 268,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.2,
+     "blk": 0.1,
+     "stl": 0.51,
+     "ast": 1.39,
+     "reb": 3,
+     "to": 0.7,
+     "tpm": 1.63,
+     "gp": 71
+    }
+   }
   },
   "2537": {
-   "espn": 271
+   "espn": 271,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.29,
+     "blk": 0.2,
+     "stl": 0.59,
+     "ast": 1.1,
+     "reb": 3.1,
+     "to": 0.8,
+     "tpm": 1.07,
+     "gp": 69
+    }
+   }
+  },
+  "2562": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.61,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 1.4,
+     "reb": 2.5,
+     "to": 0.4,
+     "tpm": 1.1,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 5.2,
+     "reb": 2.4,
+     "ast": 1.3,
+     "blk": 0.1,
+     "stl": 0.5,
+     "tpm": 1,
+     "gp": 70,
+     "to": 0.4
+    }
+   }
   },
   "2563": {
-   "espn": 279
+   "espn": 279,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.71,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 1.79,
+     "reb": 3.6,
+     "to": 1.21,
+     "tpm": 1.21,
+     "gp": 63
+    },
+    "fantasypros": {
+     "pts": 6.9,
+     "reb": 3.2,
+     "ast": 1.6,
+     "blk": 0.3,
+     "stl": 0.6,
+     "tpm": 1,
+     "gp": 71,
+     "to": 1
+    }
+   }
   },
   "2564": {
    "espn": 75,
@@ -1728,10 +6646,54 @@
      "tier": 4,
      "rank": 12
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.66,
+     "blk": 0.2,
+     "stl": 1.2,
+     "ast": 4,
+     "reb": 5.59,
+     "to": 1.7,
+     "tpm": 2.01,
+     "gp": 79
+    },
+    "fantasypros": {
+     "pts": 14,
+     "reb": 5.3,
+     "ast": 3.8,
+     "blk": 0.2,
+     "stl": 1.2,
+     "tpm": 2,
+     "gp": 79,
+     "to": 1.6
+    }
+   }
   },
   "2565": {
-   "espn": 198
+   "espn": 198,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.25,
+     "blk": 0.79,
+     "stl": 1.21,
+     "ast": 2.29,
+     "reb": 3.9,
+     "to": 1.4,
+     "tpm": 1,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 9.3,
+     "reb": 3.6,
+     "ast": 2.1,
+     "blk": 0.7,
+     "stl": 1,
+     "tpm": 0.8,
+     "gp": 73,
+     "to": 1.3
+    }
+   }
   },
   "2566": {
    "espn": 103,
@@ -1743,7 +6705,43 @@
      "tier": 7,
      "rank": 23
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 10.4,
+     "blk": 1,
+     "stl": 2,
+     "ast": 3.1,
+     "reb": 6,
+     "to": 1.6,
+     "tpm": 0.11,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 9.8,
+     "reb": 5.8,
+     "ast": 2.9,
+     "blk": 1,
+     "stl": 1.9,
+     "tpm": 0.1,
+     "gp": 74,
+     "to": 1.5
+    }
+   }
+  },
+  "2567": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.73,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 2.2,
+     "reb": 1.1,
+     "to": 0.9,
+     "tpm": 1.13,
+     "gp": 60
+    }
+   }
   },
   "2568": {
    "espn": 60,
@@ -1755,10 +6753,54 @@
      "tier": 4,
      "rank": 13
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.28,
+     "blk": 0.71,
+     "stl": 1.1,
+     "ast": 3.71,
+     "reb": 5.4,
+     "to": 2.79,
+     "tpm": 3.5,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 20.8,
+     "reb": 4.9,
+     "ast": 3.4,
+     "blk": 0.7,
+     "stl": 1,
+     "tpm": 3.4,
+     "gp": 73,
+     "to": 2.6
+    }
+   }
   },
   "2571": {
-   "espn": 272
+   "espn": 272,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.8,
+     "blk": 0.51,
+     "stl": 0.51,
+     "ast": 1.1,
+     "reb": 3.1,
+     "to": 1.1,
+     "tpm": 1.42,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 8.1,
+     "reb": 2.9,
+     "ast": 1,
+     "blk": 0.5,
+     "stl": 0.5,
+     "tpm": 1.3,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "2574": {
    "espn": 19,
@@ -1770,7 +6812,43 @@
      "tier": 1,
      "rank": 2
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.71,
+     "blk": 0.71,
+     "stl": 1.5,
+     "ast": 5.1,
+     "reb": 7.71,
+     "to": 2.29,
+     "tpm": 0.31,
+     "gp": 78
+    },
+    "fantasypros": {
+     "pts": 16.6,
+     "reb": 7.6,
+     "ast": 4.8,
+     "blk": 0.8,
+     "stl": 1.5,
+     "tpm": 0.3,
+     "gp": 78,
+     "to": 2.3
+    }
+   }
+  },
+  "2576": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.18,
+     "blk": 0.2,
+     "stl": 0.31,
+     "ast": 0.91,
+     "reb": 1.91,
+     "to": 0.71,
+     "tpm": 1.14,
+     "gp": 65
+    }
+   }
   },
   "2577": {
    "espn": 4,
@@ -1782,10 +6860,58 @@
      "tier": 2,
      "rank": 2
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 26.85,
+     "blk": 3.51,
+     "stl": 1.19,
+     "ast": 3.6,
+     "reb": 12.4,
+     "to": 2.9,
+     "tpm": 2.22,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 25.1,
+     "reb": 11.5,
+     "ast": 3.3,
+     "blk": 3.1,
+     "stl": 1.1,
+     "tpm": 2.1,
+     "gp": 73,
+     "to": 2.7
+    }
+   }
   },
   "2578": {
-   "espn": 222
+   "espn": 222,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.24,
+     "blk": 0.19,
+     "stl": 1,
+     "ast": 1.31,
+     "reb": 3.4,
+     "to": 1.1,
+     "tpm": 1.49,
+     "gp": 72
+    }
+   }
+  },
+  "2579": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.42,
+     "blk": 0.1,
+     "stl": 0.31,
+     "ast": 0.9,
+     "reb": 2.1,
+     "to": 0.5,
+     "tpm": 0.47,
+     "gp": 62
+    }
+   }
   },
   "2580": {
    "espn": 63,
@@ -1797,10 +6923,54 @@
      "tier": 7,
      "rank": 19
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 22.26,
+     "blk": 0.21,
+     "stl": 1,
+     "ast": 6.1,
+     "reb": 3.71,
+     "to": 3.1,
+     "tpm": 2.54,
+     "gp": 68
+    },
+    "fantasypros": {
+     "pts": 20.2,
+     "reb": 3.5,
+     "ast": 5.8,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 2.4,
+     "gp": 73,
+     "to": 2.8
+    }
+   }
   },
   "2581": {
-   "espn": 213
+   "espn": 213,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.38,
+     "blk": 0.1,
+     "stl": 0.69,
+     "ast": 1.69,
+     "reb": 2.9,
+     "to": 1.5,
+     "tpm": 2.01,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 2.5,
+     "ast": 1.5,
+     "blk": 0.1,
+     "stl": 0.6,
+     "tpm": 1.8,
+     "gp": 75,
+     "to": 1.3
+    }
+   }
   },
   "2583": {
    "espn": 114,
@@ -1812,13 +6982,69 @@
      "tier": 7,
      "rank": 27
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.36,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 4.3,
+     "reb": 4.91,
+     "to": 1.91,
+     "tpm": 0.76,
+     "gp": 74
+    },
+    "fantasypros": {
+     "pts": 13.2,
+     "reb": 4.5,
+     "ast": 4,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 0.7,
+     "gp": 76,
+     "to": 2
+    }
+   }
   },
   "2584": {
-   "espn": 153
+   "espn": 153,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.85,
+     "blk": 1.51,
+     "stl": 0.6,
+     "ast": 1.6,
+     "reb": 7.2,
+     "to": 1,
+     "tpm": 0,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 8.8,
+     "reb": 6.8,
+     "ast": 2.1,
+     "blk": 1.4,
+     "stl": 0.6,
+     "tpm": 0,
+     "gp": 72,
+     "to": 1
+    }
+   }
   },
   "2585": {
-   "espn": 270
+   "espn": 270,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.88,
+     "blk": 0.2,
+     "stl": 0.7,
+     "ast": 0.91,
+     "reb": 3.3,
+     "to": 0.8,
+     "tpm": 0.98,
+     "gp": 64
+    }
+   }
   },
   "2586": {
    "espn": 146,
@@ -1830,10 +7056,58 @@
      "tier": 9,
      "rank": 28
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 8.42,
+     "blk": 0.39,
+     "stl": 1.89,
+     "ast": 2.5,
+     "reb": 3.11,
+     "to": 0.89,
+     "tpm": 1.28,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 8.2,
+     "reb": 3,
+     "ast": 2.4,
+     "blk": 0.4,
+     "stl": 1.8,
+     "tpm": 1.2,
+     "gp": 77,
+     "to": 0.9
+    }
+   }
   },
   "2587": {
-   "espn": 291
+   "espn": 291,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.6,
+     "blk": 0.4,
+     "stl": 0.79,
+     "ast": 1.29,
+     "reb": 3.4,
+     "to": 0.79,
+     "tpm": 0.57,
+     "gp": 68
+    }
+   }
+  },
+  "2589": {
+   "projections": {
+    "espnProjection": {
+     "pts": 7.45,
+     "blk": 0.11,
+     "stl": 0.5,
+     "ast": 1.11,
+     "reb": 2,
+     "to": 0.7,
+     "tpm": 1.09,
+     "gp": 66
+    }
+   }
   },
   "2590": {
    "espn": 131,
@@ -1845,43 +7119,413 @@
      "tier": 9,
      "rank": 31
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.83,
+     "blk": 0.7,
+     "stl": 1.41,
+     "ast": 3.51,
+     "reb": 3.7,
+     "to": 2,
+     "tpm": 1.39,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 11.7,
+     "reb": 3.3,
+     "ast": 3.1,
+     "blk": 0.6,
+     "stl": 1.2,
+     "tpm": 1.1,
+     "gp": 74,
+     "to": 1.7
+    }
+   }
+  },
+  "2591": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.21,
+     "blk": 0.2,
+     "stl": 0.2,
+     "ast": 0.8,
+     "reb": 1.5,
+     "to": 0.3,
+     "tpm": 0.97,
+     "gp": 66
+    }
+   }
+  },
+  "2592": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.23,
+     "blk": 0.19,
+     "stl": 0.5,
+     "ast": 0.31,
+     "reb": 1.31,
+     "to": 0.31,
+     "tpm": 0.46,
+     "gp": 52
+    }
+   }
   },
   "2596": {
-   "espn": 284
+   "espn": 284,
+   "projections": {
+    "espnProjection": {
+     "pts": 9,
+     "blk": 0.7,
+     "stl": 0.51,
+     "ast": 1.1,
+     "reb": 3.1,
+     "to": 1.3,
+     "tpm": 1.02,
+     "gp": 61
+    },
+    "fantasypros": {
+     "pts": 7.6,
+     "reb": 2.7,
+     "ast": 0.9,
+     "blk": 0.6,
+     "stl": 0.4,
+     "tpm": 0.8,
+     "gp": 67,
+     "to": 1.1
+    }
+   }
   },
   "2597": {
-   "espn": 260
+   "espn": 260,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.83,
+     "blk": 0.8,
+     "stl": 0.4,
+     "ast": 1.4,
+     "reb": 4.91,
+     "to": 0.71,
+     "tpm": 0,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 4.8,
+     "reb": 3.4,
+     "ast": 1,
+     "blk": 0.5,
+     "stl": 0.3,
+     "tpm": 0,
+     "gp": 47,
+     "to": 0.5
+    }
+   }
+  },
+  "2600": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.95,
+     "blk": 0,
+     "stl": 0.4,
+     "ast": 1.1,
+     "reb": 2.4,
+     "to": 0.79,
+     "tpm": 1.08,
+     "gp": 63
+    }
+   }
+  },
+  "2602": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.04,
+     "blk": 0.1,
+     "stl": 0.71,
+     "ast": 0.6,
+     "reb": 1.71,
+     "to": 0.29,
+     "tpm": 0.5,
+     "gp": 68
+    }
+   }
   },
   "2603": {
-   "espn": 188
+   "espn": 188,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.22,
+     "blk": 0.8,
+     "stl": 0.59,
+     "ast": 1.51,
+     "reb": 4.51,
+     "to": 1.59,
+     "tpm": 1.3,
+     "gp": 69
+    }
+   }
   },
   "2606": {
-   "espn": 289
+   "espn": 289,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.56,
+     "blk": 0.5,
+     "stl": 0.8,
+     "ast": 0.9,
+     "reb": 3.6,
+     "to": 0.4,
+     "tpm": 0.51,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 3.9,
+     "reb": 3,
+     "ast": 0.7,
+     "blk": 0.5,
+     "stl": 0.7,
+     "tpm": 0.4,
+     "gp": 74,
+     "to": 0.3
+    }
+   }
   },
   "2608": {
-   "espn": 239
+   "espn": 239,
+   "projections": {
+    "espnProjection": {
+     "pts": 6.35,
+     "blk": 0.61,
+     "stl": 0.9,
+     "ast": 1,
+     "reb": 4.8,
+     "to": 0.61,
+     "tpm": 0.86,
+     "gp": 71
+    }
+   }
   },
   "2613": {
    "espn": 152,
    "rotowire": 123,
-   "rotoballer": 138
+   "rotoballer": 138,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.67,
+     "blk": 0.51,
+     "stl": 1.11,
+     "ast": 2,
+     "reb": 5,
+     "to": 1.4,
+     "tpm": 1.8,
+     "gp": 75
+    },
+    "fantasypros": {
+     "pts": 11,
+     "reb": 5.1,
+     "ast": 2,
+     "blk": 0.5,
+     "stl": 1.2,
+     "tpm": 1.9,
+     "gp": 77,
+     "to": 1.4
+    }
+   }
+  },
+  "2615": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.87,
+     "blk": 0.1,
+     "stl": 0.8,
+     "ast": 1,
+     "reb": 2.7,
+     "to": 0.8,
+     "tpm": 0.64,
+     "gp": 61
+    }
+   }
+  },
+  "2619": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.55,
+     "blk": 0.1,
+     "stl": 0.2,
+     "ast": 1.59,
+     "reb": 1.51,
+     "to": 0.51,
+     "tpm": 0.69,
+     "gp": 49
+    }
+   }
   },
   "2620": {
    "espn": 172,
-   "rotoballer": 127
+   "rotoballer": 127,
+   "projections": {
+    "espnProjection": {
+     "pts": 14.42,
+     "blk": 0.3,
+     "stl": 1,
+     "ast": 4.5,
+     "reb": 2.89,
+     "to": 2.7,
+     "tpm": 1.85,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 11.8,
+     "reb": 2.5,
+     "ast": 3.7,
+     "blk": 0.3,
+     "stl": 0.9,
+     "tpm": 1.5,
+     "gp": 72,
+     "to": 2.3
+    }
+   }
+  },
+  "2621": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.87,
+     "blk": 0.31,
+     "stl": 0.31,
+     "ast": 0.81,
+     "reb": 3.4,
+     "to": 0.69,
+     "tpm": 0.61,
+     "gp": 62
+    }
+   }
+  },
+  "2622": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.45,
+     "blk": 0.31,
+     "stl": 0.6,
+     "ast": 1.31,
+     "reb": 2,
+     "to": 0.81,
+     "tpm": 0.63,
+     "gp": 62
+    }
+   }
+  },
+  "2709": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.18,
+     "blk": 0.2,
+     "stl": 0.2,
+     "ast": 0.5,
+     "reb": 1.7,
+     "to": 0.39,
+     "tpm": 0.88,
+     "gp": 66
+    }
+   }
   },
   "2710": {
-   "espn": 235
+   "espn": 235,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.04,
+     "blk": 0.51,
+     "stl": 1,
+     "ast": 1.61,
+     "reb": 4.8,
+     "to": 0.9,
+     "tpm": 0.99,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 5.8,
+     "reb": 4,
+     "ast": 1.2,
+     "blk": 0.5,
+     "stl": 0.8,
+     "tpm": 0.8,
+     "gp": 75,
+     "to": 0.7
+    }
+   }
   },
   "2711": {
-   "espn": 240
+   "espn": 240,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.34,
+     "blk": 0.3,
+     "stl": 0.7,
+     "ast": 1.4,
+     "reb": 3.19,
+     "to": 0.81,
+     "tpm": 1.32,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 7.1,
+     "reb": 2.9,
+     "ast": 1.2,
+     "blk": 0.3,
+     "stl": 0.6,
+     "tpm": 1.1,
+     "gp": 78,
+     "to": 0.7
+    }
+   }
   },
   "2712": {
-   "espn": 190
+   "espn": 190,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.92,
+     "blk": 0.4,
+     "stl": 0.81,
+     "ast": 2.19,
+     "reb": 5.1,
+     "to": 1.5,
+     "tpm": 1.95,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 11,
+     "reb": 4.6,
+     "ast": 2,
+     "blk": 0.3,
+     "stl": 0.7,
+     "tpm": 1.6,
+     "gp": 70,
+     "to": 1.3
+    }
+   }
   },
   "2713": {
-   "espn": 223
+   "espn": 223,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.06,
+     "blk": 0.1,
+     "stl": 0.7,
+     "ast": 2,
+     "reb": 2.9,
+     "to": 1.2,
+     "tpm": 2.12,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 10.3,
+     "reb": 2.3,
+     "ast": 1.6,
+     "blk": 0.1,
+     "stl": 0.6,
+     "tpm": 1.7,
+     "gp": 74,
+     "to": 1
+    }
+   }
   },
   "2714": {
    "espn": 127,
@@ -1892,16 +7536,84 @@
      "tier": 8,
      "rank": 24
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.98,
+     "blk": 0.89,
+     "stl": 1,
+     "ast": 4.2,
+     "reb": 5.11,
+     "to": 2.39,
+     "tpm": 2.06,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 12.1,
+     "reb": 4.6,
+     "ast": 3.6,
+     "blk": 0.8,
+     "stl": 1,
+     "tpm": 1.8,
+     "gp": 72,
+     "to": 2.1
+    }
+   }
   },
   "2715": {
-   "espn": 181
+   "espn": 181,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.49,
+     "blk": 0.2,
+     "stl": 0.6,
+     "ast": 4.1,
+     "reb": 3.1,
+     "to": 2,
+     "tpm": 1.79,
+     "gp": 82
+    },
+    "fantasypros": {
+     "pts": 8,
+     "reb": 2.9,
+     "ast": 3.5,
+     "blk": 0.2,
+     "stl": 0.5,
+     "tpm": 1.4,
+     "gp": 80,
+     "to": 1.7
+    }
+   }
   },
   "2716": {
-   "espn": 283
+   "espn": 283,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.23,
+     "blk": 0.1,
+     "stl": 0.51,
+     "ast": 1.51,
+     "reb": 2,
+     "to": 0.9,
+     "tpm": 1.17,
+     "gp": 69
+    }
+   }
   },
   "2717": {
-   "espn": 264
+   "espn": 264,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.6,
+     "blk": 0.1,
+     "stl": 1,
+     "ast": 3.1,
+     "reb": 2.71,
+     "to": 2.1,
+     "tpm": 0.88,
+     "gp": 68
+    }
+   }
   },
   "2718": {
    "espn": 118,
@@ -1913,7 +7625,29 @@
      "tier": 9,
      "rank": 26
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.73,
+     "blk": 1.81,
+     "stl": 0.69,
+     "ast": 1.19,
+     "reb": 10.81,
+     "to": 2.1,
+     "tpm": 0.21,
+     "gp": 62
+    },
+    "fantasypros": {
+     "pts": 11.4,
+     "reb": 9.1,
+     "ast": 1.2,
+     "blk": 1.5,
+     "stl": 0.6,
+     "tpm": 0.2,
+     "gp": 70,
+     "to": 1.9
+    }
+   }
   },
   "2719": {
    "espn": 88,
@@ -1925,13 +7659,79 @@
      "tier": 6,
      "rank": 15
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 13.47,
+     "blk": 0.7,
+     "stl": 1.5,
+     "ast": 3.39,
+     "reb": 3,
+     "to": 1.5,
+     "tpm": 2.78,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 10.2,
+     "reb": 2.3,
+     "ast": 2.6,
+     "blk": 0.5,
+     "stl": 1.2,
+     "tpm": 2.1,
+     "gp": 77,
+     "to": 1.2
+    }
+   }
   },
   "2720": {
-   "espn": 179
+   "espn": 179,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.54,
+     "blk": 1.81,
+     "stl": 0.4,
+     "ast": 1.6,
+     "reb": 7.51,
+     "to": 1,
+     "tpm": 0,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 7.9,
+     "reb": 7.3,
+     "ast": 1.5,
+     "blk": 1.6,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 73,
+     "to": 1
+    }
+   }
   },
   "2721": {
-   "espn": 227
+   "espn": 227,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.51,
+     "blk": 0.1,
+     "stl": 0.81,
+     "ast": 2,
+     "reb": 4.69,
+     "to": 0.81,
+     "tpm": 1.69,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 6.4,
+     "reb": 3.9,
+     "ast": 1.6,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 1.5,
+     "gp": 75,
+     "to": 0.7
+    }
+   }
   },
   "2722": {
    "espn": 53,
@@ -1943,16 +7743,84 @@
      "tier": 6,
      "rank": 16
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.14,
+     "blk": 0.31,
+     "stl": 1.19,
+     "ast": 7.6,
+     "reb": 5.6,
+     "to": 3.4,
+     "tpm": 1.32,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 17.2,
+     "reb": 5.1,
+     "ast": 6.7,
+     "blk": 0.3,
+     "stl": 1.1,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 3
+    }
+   }
   },
   "2723": {
-   "espn": 256
+   "espn": 256,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.03,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 1.3,
+     "reb": 2.8,
+     "to": 0.59,
+     "tpm": 1.57,
+     "gp": 69
+    }
+   }
   },
   "2724": {
-   "espn": 182
+   "espn": 182,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.85,
+     "blk": 0.3,
+     "stl": 1,
+     "ast": 6.19,
+     "reb": 2.4,
+     "to": 2.3,
+     "tpm": 0.42,
+     "gp": 67
+    },
+    "fantasypros": {
+     "pts": 9,
+     "reb": 2.4,
+     "ast": 5.8,
+     "blk": 0.2,
+     "stl": 1,
+     "tpm": 0.4,
+     "gp": 73,
+     "to": 2.2
+    }
+   }
   },
   "2725": {
-   "espn": 281
+   "espn": 281,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.92,
+     "blk": 0.41,
+     "stl": 0.7,
+     "ast": 1.91,
+     "reb": 2.7,
+     "to": 1,
+     "tpm": 0.42,
+     "gp": 64
+    }
+   }
   },
   "2726": {
    "espn": 76,
@@ -1964,7 +7832,29 @@
      "tier": 8,
      "rank": 21
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.97,
+     "blk": 1.31,
+     "stl": 0.9,
+     "ast": 0.9,
+     "reb": 10.6,
+     "to": 1,
+     "tpm": 1.32,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 10.4,
+     "reb": 8.2,
+     "ast": 0.8,
+     "blk": 1.1,
+     "stl": 0.7,
+     "tpm": 1,
+     "gp": 75,
+     "to": 0.9
+    }
+   }
   },
   "2728": {
    "espn": 68,
@@ -1976,7 +7866,43 @@
      "tier": 7,
      "rank": 12
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 11.44,
+     "blk": 1.7,
+     "stl": 0.6,
+     "ast": 2,
+     "reb": 11.1,
+     "to": 1.21,
+     "tpm": 0.99,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 10.1,
+     "reb": 10.1,
+     "ast": 1.8,
+     "blk": 1.7,
+     "stl": 0.6,
+     "tpm": 0.8,
+     "gp": 76,
+     "to": 1.1
+    }
+   }
+  },
+  "2732": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.09,
+     "blk": 0.1,
+     "stl": 0.21,
+     "ast": 0.71,
+     "reb": 1.71,
+     "to": 0.21,
+     "tpm": 0.45,
+     "gp": 58
+    }
+   }
   },
   "2733": {
    "espn": 78,
@@ -1988,19 +7914,171 @@
      "tier": 7,
      "rank": 17
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.5,
+     "blk": 2,
+     "stl": 0.8,
+     "ast": 2.8,
+     "reb": 7.61,
+     "to": 1.8,
+     "tpm": 1.21,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 15.1,
+     "reb": 6.9,
+     "ast": 2.5,
+     "blk": 1.8,
+     "stl": 0.7,
+     "tpm": 1.1,
+     "gp": 72,
+     "to": 1.7
+    }
+   }
   },
   "2737": {
-   "espn": 230
+   "espn": 230,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.1,
+     "blk": 0.5,
+     "stl": 0.9,
+     "ast": 1.21,
+     "reb": 3.79,
+     "to": 0.9,
+     "tpm": 1.47,
+     "gp": 68
+    }
+   }
+  },
+  "2744": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.54,
+     "blk": 0.2,
+     "stl": 0.51,
+     "ast": 1,
+     "reb": 3.8,
+     "to": 0.7,
+     "tpm": 0.57,
+     "gp": 61
+    }
+   }
   },
   "2749": {
-   "espn": 275
+   "espn": 275,
+   "projections": {
+    "espnProjection": {
+     "pts": 4.93,
+     "blk": 1.2,
+     "stl": 0.41,
+     "ast": 0.51,
+     "reb": 4.3,
+     "to": 0.8,
+     "tpm": 0.03,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 4.3,
+     "reb": 3.8,
+     "ast": 0.4,
+     "blk": 1.1,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 74,
+     "to": 0.7
+    }
+   }
   },
   "2753": {
-   "espn": 233
+   "espn": 233,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.58,
+     "blk": 0.1,
+     "stl": 0.8,
+     "ast": 1.51,
+     "reb": 3.1,
+     "to": 1,
+     "tpm": 1.76,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 11,
+     "reb": 2.9,
+     "ast": 1.5,
+     "blk": 0.1,
+     "stl": 0.7,
+     "tpm": 1.8,
+     "gp": 75,
+     "to": 0.9
+    }
+   }
+  },
+  "2755": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.89,
+     "blk": 0.1,
+     "stl": 0.6,
+     "ast": 1.6,
+     "reb": 0.79,
+     "to": 0.79,
+     "tpm": 0.68,
+     "gp": 63
+    }
+   }
+  },
+  "2763": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.45,
+     "blk": 0.39,
+     "stl": 0.5,
+     "ast": 1.3,
+     "reb": 3.2,
+     "to": 0.7,
+     "tpm": 0.09,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 2.7,
+     "reb": 2.5,
+     "ast": 1,
+     "blk": 0.3,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 47,
+     "to": 0.6
+    }
+   }
   },
   "2764": {
-   "espn": 169
+   "espn": 169,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.07,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 5.51,
+     "reb": 1.8,
+     "to": 1.51,
+     "tpm": 1.06,
+     "gp": 81
+    },
+    "fantasypros": {
+     "pts": 6.5,
+     "reb": 1.6,
+     "ast": 4.8,
+     "blk": 0.2,
+     "stl": 0.9,
+     "tpm": 1,
+     "gp": 80,
+     "to": 1.3
+    }
+   }
   },
   "2766": {
    "espn": 149,
@@ -2010,7 +8088,29 @@
      "tier": 9,
      "rank": 34
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 10.66,
+     "blk": 0.51,
+     "stl": 0.9,
+     "ast": 2.4,
+     "reb": 6.7,
+     "to": 1.51,
+     "tpm": 0.92,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 9.2,
+     "reb": 5.7,
+     "ast": 2.1,
+     "blk": 0.4,
+     "stl": 0.8,
+     "tpm": 0.8,
+     "gp": 76,
+     "to": 1.3
+    }
+   }
   },
   "2771": {
    "espn": 125,
@@ -2020,12 +8120,56 @@
      "tier": 9,
      "rank": 17
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 7.92,
+     "blk": 0.9,
+     "stl": 1.1,
+     "ast": 2.7,
+     "reb": 6.3,
+     "to": 1.51,
+     "tpm": 0,
+     "gp": 79
+    },
+    "fantasypros": {
+     "pts": 6.7,
+     "reb": 5.5,
+     "ast": 2.3,
+     "blk": 0.8,
+     "stl": 1,
+     "tpm": 0,
+     "gp": 79,
+     "to": 1.2
+    }
+   }
   },
   "2772": {
    "espn": 226,
    "rotowire": 113,
-   "rotoballer": 137
+   "rotoballer": 137,
+   "projections": {
+    "espnProjection": {
+     "pts": 12.16,
+     "blk": 0.31,
+     "stl": 1.11,
+     "ast": 3.31,
+     "reb": 3,
+     "to": 1.31,
+     "tpm": 0.98,
+     "gp": 55
+    },
+    "fantasypros": {
+     "pts": 9.9,
+     "reb": 2.4,
+     "ast": 2.6,
+     "blk": 0.2,
+     "stl": 0.9,
+     "tpm": 0.8,
+     "gp": 67,
+     "to": 1.1
+    }
+   }
   },
   "2835": {
    "espn": 79,
@@ -2037,10 +8181,68 @@
      "tier": 5,
      "rank": 16
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.68,
+     "blk": 1.59,
+     "stl": 0.7,
+     "ast": 2.09,
+     "reb": 6,
+     "to": 2.09,
+     "tpm": 2.31,
+     "gp": 74
+    },
+    "fantasypros": {
+     "pts": 15.3,
+     "reb": 5.4,
+     "ast": 1.9,
+     "blk": 1.5,
+     "stl": 0.7,
+     "tpm": 2,
+     "gp": 76,
+     "to": 1.9
+    }
+   }
   },
   "2836": {
-   "espn": 249
+   "espn": 249,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.65,
+     "blk": 0.3,
+     "stl": 1,
+     "ast": 1.2,
+     "reb": 3.59,
+     "to": 1.1,
+     "tpm": 0.57,
+     "gp": 79
+    },
+    "fantasypros": {
+     "pts": 6.7,
+     "reb": 3.3,
+     "ast": 1,
+     "blk": 0.3,
+     "stl": 0.9,
+     "tpm": 0.5,
+     "gp": 79,
+     "to": 1
+    }
+   }
+  },
+  "4736": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.56,
+     "blk": 0,
+     "stl": 1.3,
+     "ast": 0,
+     "reb": 0,
+     "to": 0,
+     "tpm": 0,
+     "gp": 64
+    }
+   }
   },
   "4737": {
    "espn": 77,
@@ -2052,10 +8254,44 @@
      "tier": 5,
      "rank": 14
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.74,
+     "blk": 0.5,
+     "stl": 1.4,
+     "ast": 4,
+     "reb": 5.4,
+     "to": 1.69,
+     "tpm": 2,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 15.3,
+     "reb": 5.6,
+     "ast": 3.9,
+     "blk": 0.5,
+     "stl": 1.3,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 1.7
+    }
+   }
   },
   "4738": {
-   "espn": 215
+   "espn": 215,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.4,
+     "blk": 0.29,
+     "stl": 0.6,
+     "ast": 2.1,
+     "reb": 3,
+     "to": 1.6,
+     "tpm": 2.04,
+     "gp": 68
+    }
+   }
   },
   "4740": {
    "espn": 40,
@@ -2067,16 +8303,84 @@
      "tier": 3,
      "rank": 6
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.76,
+     "blk": 0.29,
+     "stl": 0.79,
+     "ast": 3.71,
+     "reb": 5.79,
+     "to": 2.21,
+     "tpm": 3.56,
+     "gp": 78
+    },
+    "fantasypros": {
+     "pts": 18.5,
+     "reb": 5.2,
+     "ast": 3.4,
+     "blk": 0.2,
+     "stl": 0.7,
+     "tpm": 3.4,
+     "gp": 78,
+     "to": 2
+    }
+   }
   },
   "4741": {
-   "espn": 297
+   "espn": 297,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.28,
+     "blk": 0.2,
+     "stl": 0.3,
+     "ast": 1.3,
+     "reb": 3.91,
+     "to": 0.7,
+     "tpm": 1.06,
+     "gp": 64
+    }
+   }
   },
   "4742": {
-   "espn": 204
+   "espn": 204,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.06,
+     "blk": 0.51,
+     "stl": 0.9,
+     "ast": 4.3,
+     "reb": 2,
+     "to": 2.61,
+     "tpm": 1.37,
+     "gp": 71
+    }
+   }
   },
   "4743": {
-   "espn": 157
+   "espn": 157,
+   "projections": {
+    "espnProjection": {
+     "pts": 11.54,
+     "blk": 0.61,
+     "stl": 0.61,
+     "ast": 2.61,
+     "reb": 5.7,
+     "to": 1.51,
+     "tpm": 1.44,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 9.2,
+     "reb": 4.8,
+     "ast": 2.2,
+     "blk": 0.5,
+     "stl": 0.5,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 1.2
+    }
+   }
   },
   "4744": {
    "espn": 107,
@@ -2088,7 +8392,29 @@
      "tier": 9,
      "rank": 29
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.34,
+     "blk": 0.39,
+     "stl": 1,
+     "ast": 4.3,
+     "reb": 4.1,
+     "to": 2.1,
+     "tpm": 3.14,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 11.8,
+     "reb": 3.5,
+     "ast": 3.7,
+     "blk": 0.4,
+     "stl": 0.9,
+     "tpm": 2.6,
+     "gp": 75,
+     "to": 1.8
+    }
+   }
   },
   "4748": {
    "espn": 120,
@@ -2100,7 +8426,43 @@
      "tier": 7,
      "rank": 29
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.36,
+     "blk": 0.51,
+     "stl": 0.7,
+     "ast": 3,
+     "reb": 6.51,
+     "to": 1.9,
+     "tpm": 1.7,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 14,
+     "reb": 5.8,
+     "ast": 2.8,
+     "blk": 0.4,
+     "stl": 0.7,
+     "tpm": 1.6,
+     "gp": 74,
+     "to": 1.7
+    }
+   }
+  },
+  "4749": {
+   "projections": {
+    "espnProjection": {
+     "pts": 6.23,
+     "blk": 0.39,
+     "stl": 0.39,
+     "ast": 0.7,
+     "reb": 2.7,
+     "to": 0.61,
+     "tpm": 0.8,
+     "gp": 66
+    }
+   }
   },
   "4750": {
    "espn": 111,
@@ -2112,7 +8474,29 @@
      "tier": 8,
      "rank": 22
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.09,
+     "blk": 0.4,
+     "stl": 1.19,
+     "ast": 3.51,
+     "reb": 3.81,
+     "to": 2.19,
+     "tpm": 1.35,
+     "gp": 77
+    },
+    "fantasypros": {
+     "pts": 13.2,
+     "reb": 3.4,
+     "ast": 3.1,
+     "blk": 0.3,
+     "stl": 1,
+     "tpm": 1.2,
+     "gp": 78,
+     "to": 2
+    }
+   }
   },
   "4751": {
    "espn": 86,
@@ -2124,10 +8508,44 @@
      "tier": 8,
      "rank": 20
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 12.59,
+     "blk": 1,
+     "stl": 1.11,
+     "ast": 3.89,
+     "reb": 7.39,
+     "to": 2.5,
+     "tpm": 0.39,
+     "gp": 76
+    },
+    "fantasypros": {
+     "pts": 11.3,
+     "reb": 6.8,
+     "ast": 3.5,
+     "blk": 0.9,
+     "stl": 1,
+     "tpm": 0.3,
+     "gp": 77,
+     "to": 2.3
+    }
+   }
   },
   "4752": {
-   "espn": 262
+   "espn": 262,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.77,
+     "blk": 0.41,
+     "stl": 0.8,
+     "ast": 0.8,
+     "reb": 4.91,
+     "to": 0.8,
+     "tpm": 0.84,
+     "gp": 74
+    }
+   }
   },
   "4754": {
    "espn": 85,
@@ -2139,15 +8557,71 @@
      "tier": 8,
      "rank": 22
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 15.08,
+     "blk": 0.5,
+     "stl": 1,
+     "ast": 5,
+     "reb": 4.4,
+     "to": 1.9,
+     "tpm": 1.22,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 15,
+     "reb": 4.4,
+     "ast": 4.7,
+     "blk": 0.4,
+     "stl": 1,
+     "tpm": 1.2,
+     "gp": 75,
+     "to": 1.8
+    }
+   }
   },
   "4755": {
    "espn": 184,
    "rotowire": 120,
-   "rotoballer": 98
+   "rotoballer": 98,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.18,
+     "blk": 1,
+     "stl": 1,
+     "ast": 1.89,
+     "reb": 5.2,
+     "to": 1.11,
+     "tpm": 0.3,
+     "gp": 66
+    },
+    "fantasypros": {
+     "pts": 7.8,
+     "reb": 4.4,
+     "ast": 1.6,
+     "blk": 0.8,
+     "stl": 0.8,
+     "tpm": 0.3,
+     "gp": 72,
+     "to": 1
+    }
+   }
   },
   "4757": {
-   "espn": 177
+   "espn": 177,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.52,
+     "blk": 0.3,
+     "stl": 0.8,
+     "ast": 5,
+     "reb": 2.51,
+     "to": 2.1,
+     "tpm": 1.61,
+     "gp": 71
+    }
+   }
   },
   "4758": {
    "espn": 133,
@@ -2158,10 +8632,44 @@
      "tier": 8,
      "rank": 31
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 14.63,
+     "blk": 0.69,
+     "stl": 0.9,
+     "ast": 1.9,
+     "reb": 4.31,
+     "to": 1.5,
+     "tpm": 2.08,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 13.5,
+     "reb": 3.9,
+     "ast": 1.8,
+     "blk": 0.6,
+     "stl": 0.8,
+     "tpm": 1.9,
+     "gp": 75,
+     "to": 1.4
+    }
+   }
   },
   "4759": {
-   "espn": 232
+   "espn": 232,
+   "projections": {
+    "espnProjection": {
+     "pts": 8.04,
+     "blk": 0.21,
+     "stl": 0.79,
+     "ast": 3.29,
+     "reb": 3.29,
+     "to": 1.21,
+     "tpm": 1.51,
+     "gp": 68
+    }
+   }
   },
   "4760": {
    "espn": 11,
@@ -2173,17 +8681,165 @@
      "tier": 1,
      "rank": 3
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 25.26,
+     "blk": 1,
+     "stl": 1.31,
+     "ast": 4.81,
+     "reb": 7,
+     "to": 2.4,
+     "tpm": 1.18,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 23.7,
+     "reb": 6.4,
+     "ast": 5,
+     "blk": 0.9,
+     "stl": 1.2,
+     "tpm": 1.1,
+     "gp": 75,
+     "to": 2.3
+    }
+   }
   },
   "4761": {
    "espn": 218,
-   "rotowire": 115
+   "rotowire": 115,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.78,
+     "blk": 1.91,
+     "stl": 0.31,
+     "ast": 0.31,
+     "reb": 7.51,
+     "to": 1.4,
+     "tpm": 0.4,
+     "gp": 65
+    },
+    "fantasypros": {
+     "pts": 5,
+     "reb": 4.9,
+     "ast": 0.2,
+     "blk": 1.2,
+     "stl": 0.2,
+     "tpm": 0.3,
+     "gp": 72,
+     "to": 0.9
+    }
+   }
+  },
+  "4763": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.32,
+     "blk": 0.4,
+     "stl": 0.11,
+     "ast": 0.91,
+     "reb": 2.8,
+     "to": 1.4,
+     "tpm": 0.62,
+     "gp": 65
+    }
+   }
   },
   "4764": {
-   "espn": 211
+   "espn": 211,
+   "projections": {
+    "espnProjection": {
+     "pts": 9.86,
+     "blk": 0.31,
+     "stl": 1,
+     "ast": 2.6,
+     "reb": 4.1,
+     "to": 1.69,
+     "tpm": 1.15,
+     "gp": 72
+    }
+   }
+  },
+  "4765": {
+   "projections": {
+    "espnProjection": {
+     "pts": 4.48,
+     "blk": 0,
+     "stl": 0.41,
+     "ast": 1.09,
+     "reb": 1.2,
+     "to": 0.5,
+     "tpm": 0.56,
+     "gp": 54
+    }
+   }
+  },
+  "4767": {
+   "projections": {
+    "espnProjection": {
+     "pts": 3.64,
+     "blk": 0.1,
+     "stl": 0.2,
+     "ast": 0.8,
+     "reb": 1.41,
+     "to": 0.41,
+     "tpm": 0.68,
+     "gp": 69
+    }
+   }
+  },
+  "4774": {
+   "projections": {
+    "espnProjection": {
+     "pts": 2.85,
+     "blk": 0.3,
+     "stl": 0.52,
+     "ast": 0.61,
+     "reb": 2.39,
+     "to": 0.52,
+     "tpm": 0,
+     "gp": 33
+    }
+   }
   },
   "4777": {
-   "espn": 196
+   "espn": 196,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.62,
+     "blk": 1.59,
+     "stl": 0.51,
+     "ast": 0.8,
+     "reb": 5.9,
+     "to": 1,
+     "tpm": 0,
+     "gp": 69
+    },
+    "fantasypros": {
+     "pts": 6.2,
+     "reb": 4.6,
+     "ast": 0.7,
+     "blk": 1.3,
+     "stl": 0.4,
+     "tpm": 0,
+     "gp": 74,
+     "to": 0.8
+    }
+   }
+  },
+  "4790": {
+   "projections": {
+    "espnProjection": {
+     "pts": 5.29,
+     "blk": 0,
+     "stl": 0.1,
+     "ast": 1.21,
+     "reb": 1,
+     "to": 0.51,
+     "tpm": 1.4,
+     "gp": 63
+    }
+   }
   },
   "4793": {
    "rotowire": 133
@@ -2198,12 +8854,56 @@
      "tier": 4,
      "rank": 15
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 17.92,
+     "blk": 1.39,
+     "stl": 1.1,
+     "ast": 1.9,
+     "reb": 8.1,
+     "to": 2.1,
+     "tpm": 0.73,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 16.1,
+     "reb": 8.3,
+     "ast": 2.1,
+     "blk": 1.5,
+     "stl": 1,
+     "tpm": 0.9,
+     "gp": 75,
+     "to": 1.9
+    }
+   }
   },
   "4864": {
    "espn": 173,
    "rotowire": 111,
-   "rotoballer": 147
+   "rotoballer": 147,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.61,
+     "blk": 0.8,
+     "stl": 1,
+     "ast": 2.2,
+     "reb": 5.1,
+     "to": 1.51,
+     "tpm": 0.27,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 10.5,
+     "reb": 5.2,
+     "ast": 1.8,
+     "blk": 0.8,
+     "stl": 0.9,
+     "tpm": 0.6,
+     "gp": 75,
+     "to": 1.3
+    }
+   }
   },
   "4866": {
    "espn": 81,
@@ -2215,14 +8915,80 @@
      "tier": 5,
      "rank": 18
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 20.1,
+     "blk": 0.81,
+     "stl": 1,
+     "ast": 2.81,
+     "reb": 4.9,
+     "to": 1.9,
+     "tpm": 0.68,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 19.8,
+     "reb": 6.1,
+     "ast": 3.1,
+     "blk": 0.7,
+     "stl": 1.1,
+     "tpm": 1.7,
+     "gp": 75,
+     "to": 2.1
+    }
+   }
   },
   "4869": {
-   "espn": 254
+   "espn": 254,
+   "projections": {
+    "espnProjection": {
+     "pts": 7.07,
+     "blk": 0.9,
+     "stl": 0.7,
+     "ast": 1.1,
+     "reb": 4.1,
+     "to": 0.9,
+     "tpm": 0.2,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 7.4,
+     "reb": 4.2,
+     "ast": 1.2,
+     "blk": 0.7,
+     "stl": 0.6,
+     "tpm": 0.4,
+     "gp": 75,
+     "to": 0.9
+    }
+   }
   },
   "4871": {
    "espn": 162,
-   "rotowire": 144
+   "rotowire": 144,
+   "projections": {
+    "espnProjection": {
+     "pts": 15.93,
+     "blk": 0.2,
+     "stl": 1.3,
+     "ast": 3.39,
+     "reb": 2.51,
+     "to": 2.39,
+     "tpm": 0.7,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 15.4,
+     "reb": 2.8,
+     "ast": 4.9,
+     "blk": 0.2,
+     "stl": 1.5,
+     "tpm": 1.3,
+     "gp": 75,
+     "to": 3.1
+    }
+   }
   },
   "4873": {
    "espn": 67,
@@ -2234,13 +9000,79 @@
      "tier": 6,
      "rank": 12
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 18.51,
+     "blk": 0.81,
+     "stl": 1.1,
+     "ast": 3.1,
+     "reb": 7.9,
+     "to": 2.5,
+     "tpm": 0.33,
+     "gp": 72
+    },
+    "fantasypros": {
+     "pts": 17.8,
+     "reb": 8.2,
+     "ast": 3,
+     "blk": 0.9,
+     "stl": 1,
+     "tpm": 0.8,
+     "gp": 75,
+     "to": 2.3
+    }
+   }
   },
   "4876": {
-   "espn": 192
+   "espn": 192,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.92,
+     "blk": 0.51,
+     "stl": 1.2,
+     "ast": 3.7,
+     "reb": 2.8,
+     "to": 2.1,
+     "tpm": 0.37,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 12.2,
+     "reb": 2.5,
+     "ast": 4,
+     "blk": 0.3,
+     "stl": 1.2,
+     "tpm": 1.3,
+     "gp": 75,
+     "to": 2
+    }
+   }
   },
   "4881": {
-   "espn": 164
+   "espn": 164,
+   "projections": {
+    "espnProjection": {
+     "pts": 13.33,
+     "blk": 0.2,
+     "stl": 1,
+     "ast": 4.3,
+     "reb": 3.1,
+     "to": 2.3,
+     "tpm": 0.57,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 14.3,
+     "reb": 3,
+     "ast": 4.2,
+     "blk": 0.2,
+     "stl": 1.2,
+     "tpm": 1.5,
+     "gp": 74,
+     "to": 2.2
+    }
+   }
   },
   "4882": {
    "espn": 108,
@@ -2252,17 +9084,95 @@
      "tier": 7,
      "rank": 19
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 19.44,
+     "blk": 0.3,
+     "stl": 1.3,
+     "ast": 2.79,
+     "reb": 3.79,
+     "to": 2.3,
+     "tpm": 0.92,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 18.9,
+     "reb": 4,
+     "ast": 3.2,
+     "blk": 0.3,
+     "stl": 1.4,
+     "tpm": 1.9,
+     "gp": 76,
+     "to": 2.1
+    }
+   }
   },
   "4883": {
-   "espn": 193
+   "espn": 193,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.97,
+     "blk": 0.3,
+     "stl": 1.1,
+     "ast": 4.1,
+     "reb": 2.7,
+     "to": 2.1,
+     "tpm": 0.42,
+     "gp": 71
+    }
+   }
   },
   "4884": {
-   "espn": 295
+   "espn": 295,
+   "projections": {
+    "espnProjection": {
+     "pts": 5.66,
+     "blk": 0.8,
+     "stl": 0.7,
+     "ast": 0.7,
+     "reb": 3.6,
+     "to": 1.1,
+     "tpm": 0.19,
+     "gp": 70
+    },
+    "fantasypros": {
+     "pts": 7.8,
+     "reb": 4.6,
+     "ast": 1.2,
+     "blk": 0.7,
+     "stl": 0.6,
+     "tpm": 0.5,
+     "gp": 74,
+     "to": 1.2
+    }
+   }
   },
   "4885": {
    "espn": 174,
-   "rotoballer": 140
+   "rotoballer": 140,
+   "projections": {
+    "espnProjection": {
+     "pts": 10.61,
+     "blk": 0.9,
+     "stl": 0.8,
+     "ast": 1.61,
+     "reb": 5.61,
+     "to": 1.1,
+     "tpm": 0.27,
+     "gp": 71
+    },
+    "fantasypros": {
+     "pts": 10.8,
+     "reb": 5.6,
+     "ast": 1.6,
+     "blk": 1,
+     "stl": 0.7,
+     "tpm": 0.4,
+     "gp": 75,
+     "to": 1
+    }
+   }
   },
   "4891": {
    "espn": 95,
@@ -2274,7 +9184,29 @@
      "tier": 8,
      "rank": 26
     }
-   ]
+   ],
+   "projections": {
+    "espnProjection": {
+     "pts": 16.9,
+     "blk": 0.3,
+     "stl": 1.1,
+     "ast": 5.9,
+     "reb": 3.3,
+     "to": 2.9,
+     "tpm": 0.86,
+     "gp": 73
+    },
+    "fantasypros": {
+     "pts": 18.6,
+     "reb": 3.3,
+     "ast": 6.6,
+     "blk": 0.3,
+     "stl": 1.4,
+     "tpm": 1.9,
+     "gp": 76,
+     "to": 3.4
+    }
+   }
   }
  }
 }
