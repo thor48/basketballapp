@@ -1,25 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Stained hardwood under arena lights: espresso floor, darker boards for panels, cream court paint. */
-  --bg: #15100c;
-  --panel: #1f1812;
-  --panel-2: #2a2118;
-  --line: #3b2e22;
-  --text: #f4ece0;
-  --muted: #a8967f;
-  --court: #e9d6b0;
-  --slime: #b0f01d;
-  --orange: #f07c2a;
-  --red: #ff6b5b;
+  /* Maple court under gym lights. --slime and --orange are the text-safe ink shades for the light
+     floor; --ecto and --ball are the bright logo colours, used for fills and on the dark scoreboard. */
+  --bg: #e2bd88;
+  --panel: #fffaf1;
+  --panel-2: #f5e8d2;
+  --line: #e4d0ae;
+  --text: #2b1d12;
+  --muted: #7a6450;
+  --floor-muted: #5a4330;
+  --floor-orange: #8f3c06;
+  --lift: 0 1px 3px rgba(70, 35, 5, .18);
+  --slime: #4a8500;
+  --orange: #c25510;
+  --ecto: #b0f01d;
+  --ball: #f07c2a;
+  --red: #c8372a;
+  --board: #1d140d;
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
   background-color: var(--bg);
-  /* Floor planks: a seam every 72px, alternating board shades, and warm light falling from above. */
+  /* Floor planks: a seam every 72px, alternating board shades, and light pooling from above. */
   background-image:
-    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(240, 124, 42, .14), transparent 70%),
-    repeating-linear-gradient(90deg, transparent 0 71px, rgba(0, 0, 0, .28) 71px 72px),
-    repeating-linear-gradient(90deg, rgba(255, 214, 160, .025) 0 72px, transparent 72px 144px, rgba(255, 214, 160, .012) 144px 216px);
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(255, 248, 230, .55), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 71px, rgba(110, 60, 15, .22) 71px 72px),
+    repeating-linear-gradient(90deg, rgba(255, 240, 210, .14) 0 72px, transparent 72px 144px, rgba(150, 85, 25, .07) 144px 216px);
   background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
