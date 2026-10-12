@@ -8,6 +8,9 @@ export const leagueId = '1388653441982664704'
 // from another league is replayed for testing.
 export const defaultUserId = '1388653871391318016'
 
+// Sleeper's CDN answers 403 for players it has no photo of, so callers need a fallback.
+export const headshotUrl = (playerId: string) => `https://sleepercdn.com/content/nba/players/thumb/${playerId}.jpg`
+
 export type StatLine = Record<string, number>
 
 export type SleeperPlayer = {

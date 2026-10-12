@@ -14,6 +14,7 @@ import {
   getRosters,
   getSeasonStats,
   getTradedPicks,
+  headshotUrl,
   leagueId,
   type Draft,
   type League,
@@ -111,6 +112,16 @@ async function syncStarred(account: Account, local: Set<string>) {
     if (insertError) throw insertError
   }
   return new Set([...remote, ...local])
+}
+
+function Headshot({ id, name }: { id: string; name: string }) {
+  const [failed, setFailed] = useState(false)
+  const initials = name.split(' ').map((part) => part[0]).slice(0, 2).join('')
+  return (
+    <span className="headshot">
+      {failed ? initials : <img src={headshotUrl(id)} alt="" loading="lazy" onError={() => setFailed(true)} />}
+    </span>
+  )
 }
 
 function buildBoard(
@@ -489,7 +500,12 @@ export default function App({ account, accountControl }: { account: Account | nu
                         <td className="star-cell">
                           <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
                         </td>
-                        <td className="num muted">{player.rank}</td>
+                        <td className="num muted">
+                          <div className="rank-cell">
+                            {player.rank}
+                            <Headshot id={player.id} name={player.name} />
+                          </div>
+                        </td>
                         <td>
                           <div className="player">
                             <span className="name">{player.name}</span>

@@ -53,6 +53,9 @@ tr.drafted.mine td { opacity: 1; background: rgba(176, 240, 29, .07); }
 tbody tr:hover td { background: var(--panel-2); }
 
 .player { display: grid; gap: 1px; }
+.rank-cell { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.headshot { flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; overflow: hidden; border-radius: 50%; background: var(--panel-2); box-shadow: 0 0 0 1px var(--line); color: var(--muted); font: 700 13px 'Barlow Condensed', sans-serif; letter-spacing: .04em; }
+.headshot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
 .name { font-weight: 600; }
 .meta { color: var(--muted); font-size: 12px; }
 .tag { margin-left: 6px; padding: 0 5px; border-radius: 4px; font-size: 11px; font-style: normal; font-weight: 700; }
@@ -103,5 +106,7 @@ tbody tr:hover td { background: var(--panel-2); }
   .side { order: 0; }
   .table-wrap { max-height: 70svh; }
   th.wide, td.wide { display: none; }
+  .rank-cell { gap: 6px; }
+  .headshot { width: 28px; height: 28px; font-size: 11px; }
   .toggles { flex-wrap: wrap; }
 }
