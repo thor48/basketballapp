@@ -56,5 +56,4 @@ The draft is polled every 3 s while `drafting`, every 30 s before it starts or w
 ## Next
 
 In-season pages: the owner's roster and matchup, games per player per week, free agents ranked in league scoring, and injuries.
-# hoopsapp
 # basketballapp
