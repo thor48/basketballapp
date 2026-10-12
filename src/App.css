@@ -7,6 +7,8 @@
 
 .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .hero h1 { font-size: 44px; line-height: 1; margin: 4px 0 8px; }
+.brand { display: flex; align-items: center; gap: 16px; }
+.logo { width: 96px; height: 96px; flex: none; }
 .eyebrow { color: var(--orange); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
 .legend { color: var(--muted); font-size: 13px; }
 
@@ -108,6 +110,8 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 @media (max-width: 640px) {
   .app { padding: 14px 16px 32px; }
   .hero h1 { font-size: 34px; }
+  .brand { gap: 12px; }
+  .logo { width: 64px; height: 64px; }
   .clock { width: 100%; text-align: left; }
   .side { order: 0; }
   .table-wrap { max-height: 70svh; }

@@ -492,10 +492,13 @@ export default function App({ account, accountControl }: { account: Account | nu
   return (
     <div className="app">
       <header className="hero">
-        <div>
-          <p className="eyebrow">{base.league.name} · {base.league.season} · {draft.settings.teams} teams · {draft.type}</p>
-          <h1>ECTOcooler Hoops</h1>
-          <p className="legend">{scoringLegend(base.league.scoring_settings).join(' · ')}</p>
+        <div className="brand">
+          <img className="logo" src="/logo-192.png" alt="" width="96" height="96" />
+          <div>
+            <p className="eyebrow">{base.league.name} · {base.league.season} · {draft.settings.teams} teams · {draft.type}</p>
+            <h1>ECTOcooler Hoops</h1>
+            <p className="legend">{scoringLegend(base.league.scoring_settings).join(' · ')}</p>
+          </div>
         </div>
         <div className={`clock ${onMyClock ? 'mine' : ''}`}>
           {draft.status === 'pre_draft' && (
