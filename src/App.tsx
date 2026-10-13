@@ -609,9 +609,11 @@ export default function App({ account, accountControl }: { account: Account | nu
             <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
           </>
         )}
-        <span className="sync">
-          {draftState.sorted.length}/{draftState.totalPicks} picks · checked {new Date(live.checkedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
-        </span>
+        {!teamPage && (
+          <span className="sync">
+            {draftState.sorted.length}/{draftState.totalPicks} picks · checked {new Date(live.checkedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
+          </span>
+        )}
         {accountControl && !teamPage && <span className="account">{accountControl}</span>}
       </nav>
 
