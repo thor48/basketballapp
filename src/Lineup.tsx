@@ -15,7 +15,7 @@ export type LineupPlayer = {
 // Statuses that keep a player out for days, not a game-time call. He is shown but valued at 0.
 const unavailable = new Set(['Out', 'IR', 'Sus', 'NA'])
 
-const dayLetter = (date: string) => 'SMTWTFS'[new Date(`${date}T12:00:00`).getDay()]
+const dayLetter = (date: string) => 'SMTWHFS'[new Date(`${date}T12:00:00`).getDay()]
 const shortDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })
 const format = (value: number) => value.toFixed(1)
 
