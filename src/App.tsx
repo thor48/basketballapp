@@ -92,7 +92,15 @@ const syncedKey = 'hoops.starred.synced'
 const params = new URLSearchParams(window.location.search)
 // `?draft=` and `?user=` replay another draft, e.g. last season's finished one, for testing.
 const draftOverride = params.get('draft')
-const userId = params.get('user') ?? defaultUserId
+// Unlisted lineup-only pages, one per team, keyed by the lowercased path. Owners are pinned by
+// Sleeper user id so a renamed team keeps its URL.
+const teamPages: Record<string, string> = {
+  thorbergbc: defaultUserId,
+  ccanderson99: '1257439963113345024',
+  rimjob: '995037716922372096',
+}
+const teamPage = teamPages[window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase()]
+const userId = teamPage ?? params.get('user') ?? defaultUserId
 
 const sortLabels: Record<SortKey, string> = {
   rank: 'Rank',
@@ -328,7 +336,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const [starredOnly, setStarredOnly] = useState(false)
   const [needsOnly, setNeedsOnly] = useState(false)
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: 'rank', desc: false })
-  const [tab, setTab] = useState<'board' | 'teams' | 'lineup'>('board')
+  const [tab, setTab] = useState<'board' | 'teams' | 'lineup'>(teamPage ? 'lineup' : 'board')
   const [starred, setStarred] = useState(readStarred)
   const [now, setNow] = useState(() => Date.now())
   const [attempt, setAttempt] = useState(0)
@@ -535,6 +543,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const timer = draft.status === 'drafting' && lastPicked && draft.settings.pick_timer
     ? Math.max(0, Math.round(draft.settings.pick_timer - (now - lastPicked) / 1000))
     : null
+  const myTeamName = teamName(base.users.find((user) => user.user_id === userId), draftState.myRosterId ?? 0)
   const bestAvailable = base.board.filter((player) => !draftState.drafted.has(player.id)).slice(0, 8)
 
   const sortBy = (key: SortKey) =>
@@ -589,13 +598,19 @@ export default function App({ account, accountControl }: { account: Account | nu
       </header>
 
       <nav className="tabs">
-        <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
-        <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
-        <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
+        {teamPage ? (
+          <button className="active">{myTeamName} lineup</button>
+        ) : (
+          <>
+            <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
+            <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
+            <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
+          </>
+        )}
         <span className="sync">
           {draftState.sorted.length}/{draftState.totalPicks} picks · checked {new Date(live.checkedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
         </span>
-        {accountControl && <span className="account">{accountControl}</span>}
+        {accountControl && !teamPage && <span className="account">{accountControl}</span>}
       </nav>
 
       {tab === 'lineup' && myRoster ? (
