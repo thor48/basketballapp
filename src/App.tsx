@@ -567,34 +567,36 @@ export default function App({ account, accountControl }: { account: Account | nu
             <p className="legend">{scoringLegend(base.league.scoring_settings).join(' · ')}</p>
           </div>
         </div>
-        <div className={`clock ${onMyClock ? 'mine' : ''}`}>
-          {draft.status === 'pre_draft' && (
-            <>
-              <span className="clock-label">Draft starts</span>
-              <strong>{draft.start_time ? new Date(draft.start_time).toLocaleString([], { weekday: 'short', hour: 'numeric', minute: '2-digit' }) : 'Not scheduled'}</strong>
-              {draft.start_time && <span>in {countdown(draft.start_time - now)}</span>}
-            </>
-          )}
-          {(draft.status === 'drafting' || draft.status === 'paused') && (
-            <>
-              <span className="clock-label">{draft.status === 'paused' ? 'Paused at' : 'On the clock'} · pick {draftState.currentPick}</span>
-              <strong>{onMyClock ? 'You are up' : ownerByRoster.get(draftState.onClock ?? -1) ?? '—'}</strong>
-              {timer !== null && <span>{timer}s left</span>}
-            </>
-          )}
-          {draft.status === 'complete' && (
-            <>
-              <span className="clock-label">Draft</span>
-              <strong>Complete</strong>
-            </>
-          )}
-          {myNext && draft.status !== 'complete' && (
-            <span className="clock-mine">
-              Your picks: {draftState.myUpcoming.join(', ')}
-              {draft.status === 'drafting' && !onMyClock && ` · ${myNext - draftState.currentPick} away`}
-            </span>
-          )}
-        </div>
+        {!teamPage && (
+          <div className={`clock ${onMyClock ? 'mine' : ''}`}>
+            {draft.status === 'pre_draft' && (
+              <>
+                <span className="clock-label">Draft starts</span>
+                <strong>{draft.start_time ? new Date(draft.start_time).toLocaleString([], { weekday: 'short', hour: 'numeric', minute: '2-digit' }) : 'Not scheduled'}</strong>
+                {draft.start_time && <span>in {countdown(draft.start_time - now)}</span>}
+              </>
+            )}
+            {(draft.status === 'drafting' || draft.status === 'paused') && (
+              <>
+                <span className="clock-label">{draft.status === 'paused' ? 'Paused at' : 'On the clock'} · pick {draftState.currentPick}</span>
+                <strong>{onMyClock ? 'You are up' : ownerByRoster.get(draftState.onClock ?? -1) ?? '—'}</strong>
+                {timer !== null && <span>{timer}s left</span>}
+              </>
+            )}
+            {draft.status === 'complete' && (
+              <>
+                <span className="clock-label">Draft</span>
+                <strong>Complete</strong>
+              </>
+            )}
+            {myNext && draft.status !== 'complete' && (
+              <span className="clock-mine">
+                Your picks: {draftState.myUpcoming.join(', ')}
+                {draft.status === 'drafting' && !onMyClock && ` · ${myNext - draftState.currentPick} away`}
+              </span>
+            )}
+          </div>
+        )}
       </header>
 
       <nav className="tabs">
