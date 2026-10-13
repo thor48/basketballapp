@@ -601,77 +601,79 @@ export default function App({ account, accountControl }: { account: Account | nu
                 </label>
               </div>
             </div>
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th className="star-cell" />
-                    {header('rank', 'num')}
-                    <th>Player</th>
-                    {header('consensus', 'num')}
-                    {header('projGp', 'num wide')}
-                    {header('expert', 'num wide')}
-                    {header('tier', 'wide')}
-                    {header('last', 'num wide')}
-                    {header('lastGp', 'num wide')}
-                    {header('adp', 'num')}
-                    {header('gap', 'num wide')}
-                    {myFollowing && <th className="num wide" title={`Whether standard ADP says he is still there at your pick ${myFollowing}`}>At #{myFollowing}</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {visible.map((player, index) => {
-                    const pick = draftState.drafted.get(player.id)
-                    const mine = pick && pick.roster_id === draftState.myRosterId
-                    const tier = tierFor(player, position)
-                    const tierStarts = sort.key === 'tier' && !sort.desc && tier && (index === 0 || tier.tier !== tierFor(visible[index - 1], position)?.tier)
-                    return (
-                      <Fragment key={player.id}>
-                        {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 12 : 11}>Tier {tier.tier}</td></tr>}
-                        <tr className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
-                          <td className="star-cell">
-                            <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
-                          </td>
-                          <td className="num muted">
-                            <div className="rank-cell">
-                              {player.rank}
-                              <Headshot id={player.id} name={player.name} />
-                            </div>
-                          </td>
-                          <td>
-                            <div className="player">
-                              <span className="name">{player.name}</span>
-                              <span className="meta">
-                                {player.positions.join('/')} · {player.team}
-                                {player.rookie && <em className="tag rookie">R</em>}
-                                {player.injury && <em className="tag injury">{player.injury}</em>}
-                                {tier && <em className="tag tier">{tier.position} T{tier.tier}</em>}
-                                {pick && <em className="tag taken">#{pick.pick_no} {mine ? 'You' : ownerByRoster.get(pick.roster_id)}</em>}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="num strong" title={consensusTitle(player)}>{formatPoints(player.consensus)}</td>
-                          <td className={`num wide ${player.projGp !== null && player.projGp < 60 ? 'warn' : ''}`} title={gamesTitle(player)}>{player.projGp ?? '—'}</td>
-                          <td className="num wide" title={expertTitle(player)}>{player.expert === null ? '—' : Math.round(player.expert)}</td>
-                          <td className="wide tier-cell">{tier ? `${tier.position} ${tier.tier}` : '—'}</td>
-                          <td className="num wide">{formatPoints(player.last)}</td>
-                          <td className={`num wide ${player.lastGp !== null && player.lastGp < 50 ? 'warn' : ''}`}>{player.lastGp ?? '—'}</td>
-                          <td className="num">{player.adp === null ? '—' : player.adp.toFixed(1)}</td>
-                          <td className={`num wide ${player.gap === null ? '' : player.gap >= 5 ? 'good' : player.gap <= -5 ? 'bad' : ''}`}>
-                            {player.gap === null ? '—' : player.gap > 0 ? `+${player.gap}` : player.gap}
-                          </td>
-                          {myFollowing && (
-                            <td className="num wide">
-                              {player.adp === null ? <span className="good">likely</span> : player.adp >= myFollowing ? <span className="good">likely</span> : <span className="muted">gone</span>}
+            <div className="board-body">
+              <div className="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th className="star-cell" />
+                      {header('rank', 'num')}
+                      <th>Player</th>
+                      {header('consensus', 'num')}
+                      {header('projGp', 'num wide')}
+                      {header('expert', 'num wide')}
+                      {header('tier', 'wide')}
+                      {header('last', 'num wide')}
+                      {header('lastGp', 'num wide')}
+                      {header('adp', 'num')}
+                      {header('gap', 'num wide')}
+                      {myFollowing && <th className="num wide" title={`Whether standard ADP says he is still there at your pick ${myFollowing}`}>At #{myFollowing}</th>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {visible.map((player, index) => {
+                      const pick = draftState.drafted.get(player.id)
+                      const mine = pick && pick.roster_id === draftState.myRosterId
+                      const tier = tierFor(player, position)
+                      const tierStarts = sort.key === 'tier' && !sort.desc && tier && (index === 0 || tier.tier !== tierFor(visible[index - 1], position)?.tier)
+                      return (
+                        <Fragment key={player.id}>
+                          {tierStarts && <tr className="tier-row"><td colSpan={myFollowing ? 12 : 11}>Tier {tier.tier}</td></tr>}
+                          <tr className={pick ? (mine ? 'drafted mine' : 'drafted') : ''}>
+                            <td className="star-cell">
+                              <button className={starred.has(player.id) ? 'star on' : 'star'} onClick={() => toggleStar(player.id)} aria-label="Star player">★</button>
                             </td>
-                          )}
-                        </tr>
-                      </Fragment>
-                    )
-                  })}
-                </tbody>
-              </table>
-              {!visible.length && <p className="empty">No players match.</p>}
+                            <td className="num muted">
+                              <div className="rank-cell">
+                                {player.rank}
+                                <Headshot id={player.id} name={player.name} />
+                              </div>
+                            </td>
+                            <td>
+                              <div className="player">
+                                <span className="name">{player.name}</span>
+                                <span className="meta">
+                                  {player.positions.join('/')} · {player.team}
+                                  {player.rookie && <em className="tag rookie">R</em>}
+                                  {player.injury && <em className="tag injury">{player.injury}</em>}
+                                  {tier && <em className="tag tier">{tier.position} T{tier.tier}</em>}
+                                  {pick && <em className="tag taken">#{pick.pick_no} {mine ? 'You' : ownerByRoster.get(pick.roster_id)}</em>}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="num strong" title={consensusTitle(player)}>{formatPoints(player.consensus)}</td>
+                            <td className={`num wide ${player.projGp !== null && player.projGp < 60 ? 'warn' : ''}`} title={gamesTitle(player)}>{player.projGp ?? '—'}</td>
+                            <td className="num wide" title={expertTitle(player)}>{player.expert === null ? '—' : Math.round(player.expert)}</td>
+                            <td className="wide tier-cell">{tier ? `${tier.position} ${tier.tier}` : '—'}</td>
+                            <td className="num wide">{formatPoints(player.last)}</td>
+                            <td className={`num wide ${player.lastGp !== null && player.lastGp < 50 ? 'warn' : ''}`}>{player.lastGp ?? '—'}</td>
+                            <td className="num">{player.adp === null ? '—' : player.adp.toFixed(1)}</td>
+                            <td className={`num wide ${player.gap === null ? '' : player.gap >= 5 ? 'good' : player.gap <= -5 ? 'bad' : ''}`}>
+                              {player.gap === null ? '—' : player.gap > 0 ? `+${player.gap}` : player.gap}
+                            </td>
+                            {myFollowing && (
+                              <td className="num wide">
+                                {player.adp === null ? <span className="good">likely</span> : player.adp >= myFollowing ? <span className="good">likely</span> : <span className="muted">gone</span>}
+                              </td>
+                            )}
+                          </tr>
+                        </Fragment>
+                      )
+                    })}
+                  </tbody>
+                </table>
+                {!visible.length && <p className="empty">No players match.</p>}
+              </div>
             </div>
           </section>
 

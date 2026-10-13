@@ -29,6 +29,11 @@
 .sign-in { padding: 6px 14px; border: 1px solid var(--slime); border-radius: 999px; background: var(--panel); color: var(--slime); font-weight: 600; }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+/* The board column stretches to the sidebar's height. The table sits absolutely inside it so its
+   hundreds of rows scroll within that height instead of setting it. */
+.board { display: flex; flex-direction: column; align-self: stretch; min-width: 0; }
+.board-body { position: relative; flex: 1; min-height: calc(100svh - 230px); }
+.board-body > .table-wrap { position: absolute; inset: 0; max-height: none; }
 
 .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px; }
 .search { flex: 1 1 200px; min-width: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
@@ -122,6 +127,8 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .layout { grid-template-columns: 1fr; }
   .side { position: static; order: -1; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
   .table-wrap { max-height: none; }
+  .board-body { min-height: 0; }
+  .board-body > .table-wrap { position: static; }
 }
 
 @media (max-width: 640px) {
@@ -131,7 +138,7 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .logo { width: 64px; height: 64px; }
   .clock { width: 100%; text-align: left; }
   .side { order: 0; }
-  .table-wrap { max-height: 70svh; }
+  .table-wrap, .board-body > .table-wrap { max-height: 70svh; }
   th.wide, td.wide { display: none; }
   .tag.tier { display: inline; }
   .rank-cell { gap: 6px; }
