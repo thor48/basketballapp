@@ -22,7 +22,7 @@
 .clock.mine strong { color: var(--ecto); }
 
 .tabs { display: flex; align-items: center; gap: 6px; margin: 14px 0; }
-.tabs button { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--muted); font-weight: 600; }
+.tabs button { white-space: nowrap; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--muted); font-weight: 600; }
 .tabs button.active { border-color: var(--slime); color: var(--slime); }
 .sync { margin-left: auto; color: var(--floor-muted); font-size: 12px; }
 .account { display: flex; align-items: center; }
@@ -100,6 +100,21 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .team.mine { border-color: var(--slime); }
 .team.clock-on { box-shadow: 0 0 0 2px var(--ball); }
 
+.week-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.week-bar strong { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; text-transform: uppercase; letter-spacing: .04em; }
+.week-bar .meta { color: var(--floor-muted); font-size: 14px; }
+.week-bar .chip:disabled { opacity: .4; cursor: default; }
+.lineup-table td.slot { width: 52px; color: var(--orange); font-size: 12px; font-weight: 700; }
+.lineup-table tr.idle td { opacity: .5; }
+.lineup-table tr.open td { color: var(--muted); font-style: italic; }
+.lineup-player { justify-content: flex-start; }
+.days { display: flex; gap: 3px; }
+.day { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--panel-2); color: var(--muted); font-size: 10px; font-weight: 700; }
+.day.plays { background: var(--ball); color: var(--board); }
+.day.past { opacity: .45; }
+.moves li { display: grid; gap: 2px; padding: 4px 0; font-size: 13px; }
+.guide li { display: grid; gap: 1px; padding: 4px 0; font-size: 13px; }
+
 .footer { margin-top: 24px; color: var(--floor-muted); font-size: 12px; line-height: 1.6; }
 .footer a { color: var(--text); }
 
@@ -121,5 +136,10 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .tag.tier { display: inline; }
   .rank-cell { gap: 6px; }
   .headshot { width: 28px; height: 28px; font-size: 11px; }
+  .days { gap: 2px; }
+  .day { width: 14px; height: 14px; font-size: 8px; }
+  .lineup-table td.slot { width: auto; }
+  .lineup-table td, .lineup-table th { padding-left: 5px; padding-right: 5px; }
+  .lineup-player .headshot { display: none; }
   .toggles { flex-wrap: wrap; }
 }

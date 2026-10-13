@@ -76,6 +76,22 @@ export type LeagueUser = {
 export type Roster = {
   roster_id: number
   owner_id: string | null
+  // Empty until the draft finishes. `starters` lines up with the non-bench `roster_positions`,
+  // with '0' for an empty slot.
+  players?: string[] | null
+  starters?: string[] | null
+  reserve?: string[] | null
+}
+
+// One NBA game. `week` is the Sleeper fantasy week it scores in, so no date maths is needed to
+// group games into matchups; `date` is the US calendar day, YYYY-MM-DD.
+export type ScheduleGame = {
+  game_id: string
+  date: string
+  week: number
+  status: string
+  home: { team: string }
+  away: { team: string }
 }
 
 async function readJson<T>(path: string): Promise<T> {
@@ -95,3 +111,9 @@ export const getPlayers = () => readJson<Record<string, SleeperPlayer>>('/player
 export const getProjections = (season: string) => readJson<Record<string, StatLine>>(`/projections/nba/regular/${season}`)
 // Season stats are totals, including the `bonus_*` game counts the projections lack.
 export const getSeasonStats = (season: string) => readJson<Record<string, StatLine>>(`/stats/nba/regular/${season}`)
+// The full regular-season schedule. It lives outside `/v1` but is just as public and CORS-open.
+export async function getSchedule(season: string) {
+  const response = await fetch(`https://api.sleeper.app/schedule/nba/regular/${season}`, { cache: 'no-store' })
+  if (!response.ok) throw new Error(`Sleeper schedule answered ${response.status}`)
+  return response.json() as Promise<ScheduleGame[]>
+}

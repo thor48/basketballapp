@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react'
 import './App.css'
+import Lineup, { type LineupPlayer } from './Lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
 import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
 import { scoreLine, scoringLegend } from './lib/scoring'
@@ -55,6 +56,8 @@ type BaseData = {
   users: LeagueUser[]
   rosters: Roster[]
   board: BoardPlayer[]
+  // Kept for rostered players Sleeper does not project, so they still show in the lineup.
+  players: Record<string, SleeperPlayer>
 }
 
 type LiveDraft = {
@@ -276,7 +279,7 @@ async function loadAll(): Promise<{ base: BaseData; live: LiveDraft }> {
     getTradedPicks(draftId),
   ])
   return {
-    base: { league, users, rosters, board: buildBoard(players, projections, stats, league.scoring_settings, league.settings.num_teams * league.roster_positions.length) },
+    base: { league, users, rosters, players, board: buildBoard(players, projections, stats, league.scoring_settings, league.settings.num_teams * league.roster_positions.length) },
     live: { draft, picks, traded, checkedAt: Date.now() },
   }
 }
@@ -307,7 +310,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const [starredOnly, setStarredOnly] = useState(false)
   const [needsOnly, setNeedsOnly] = useState(false)
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: 'rank', desc: false })
-  const [tab, setTab] = useState<'board' | 'teams'>('board')
+  const [tab, setTab] = useState<'board' | 'teams' | 'lineup'>('board')
   const [starred, setStarred] = useState(readStarred)
   const [now, setNow] = useState(() => Date.now())
   const [attempt, setAttempt] = useState(0)
@@ -426,6 +429,37 @@ export default function App({ account, accountControl }: { account: Account | nu
     }
   }, [base, live, playerById])
 
+  // The owner's roster for the lineup tab. Sleeper fills `players` once the draft is over; until
+  // then the roster is whatever this team has drafted so far.
+  const myRoster = useMemo(() => {
+    if (!base || !draftState) return null
+    const roster = base.rosters.find((entry) => entry.owner_id === userId) ?? base.rosters.find((entry) => entry.roster_id === draftState.myRosterId)
+    const toLineup = (id: string): LineupPlayer | null => {
+      const board = playerById.get(id)
+      if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus }
+      const player = base.players[id]
+      if (!player) return null
+      return {
+        id,
+        name: player.full_name ?? `${player.first_name ?? ''} ${player.last_name ?? ''}`.trim(),
+        team: player.team ?? 'FA',
+        positions: player.fantasy_positions?.length ? player.fantasy_positions : [player.position ?? ''].filter(Boolean),
+        injury: player.injury_status ?? '',
+        perGame: 0,
+      }
+    }
+    const reserveIds = new Set(roster?.reserve ?? [])
+    const ids = roster?.players?.length
+      ? roster.players
+      : (draftState.myRosterId ? (draftState.byRoster.get(draftState.myRosterId) ?? []) : []).map((player) => player.id)
+    const list = (filter: (id: string) => boolean) => ids.filter(filter).map(toLineup).filter((player): player is LineupPlayer => !!player)
+    return {
+      players: list((id) => !reserveIds.has(id)),
+      reserve: list((id) => reserveIds.has(id)),
+      starters: roster?.starters ?? null,
+    }
+  }, [base, draftState, playerById])
+
   const visible = useMemo(() => {
     if (!base || !draftState) return []
     const query = search.trim().toLowerCase()
@@ -533,13 +567,23 @@ export default function App({ account, accountControl }: { account: Account | nu
       <nav className="tabs">
         <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
         <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
+        <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
         <span className="sync">
           {draftState.sorted.length}/{draftState.totalPicks} picks · checked {new Date(live.checkedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
         </span>
         {accountControl && <span className="account">{accountControl}</span>}
       </nav>
 
-      {tab === 'board' ? (
+      {tab === 'lineup' && myRoster ? (
+        <Lineup
+          season={base.league.season}
+          rosterPositions={base.league.roster_positions}
+          players={myRoster.players}
+          reserve={myRoster.reserve}
+          sleeperStarters={myRoster.starters}
+          headshot={(player) => <Headshot id={player.id} name={player.name} />}
+        />
+      ) : tab === 'board' ? (
         <div className="layout">
           <section className="board">
             <div className="filters">

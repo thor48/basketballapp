@@ -53,7 +53,17 @@ The draft is polled every 3 s while `drafting`, every 30 s before it starts or w
 
 `?draft=<id>&user=<user_id>` replays another draft for testing. Last season's league (BS Basketball, `1260852226524454912`) has a complete 192-pick draft: `?draft=1260852226528657408&user=337522748299411456`. Scoring and lineup still come from Beer League.
 
+## My lineup
+
+Beer League plays Sleeper's **Lock-In** mode (`game_mode` 1): each starter scores one game per week, the one the manager locks after it is played, or his last game of the week if none is locked. Last season's matchups confirm it: starters score 20 to 60 a week, one game's worth, not three or four games added up. So games are not added together. A player with no game that week scores nothing, and every extra game is another chance at a big night to lock.
+
+- The schedule is Sleeper's own, `api.sleeper.app/schedule/nba/regular/<season>` (outside `/v1`, still public and CORS-open). Every game carries its fantasy `week`, so weeks need no date maths. Most run Monday to Sunday; week 1 starts on opening night, and the NBA Cup and All-Star breaks make weeks 7, 8, 18 and 19 short.
+- `lockValues` in `src/lib/lineup.ts` is the expected locked score with n games, locking optimally: one game is worth FP/G, and value(n + 1) = E[max(game, value(n))], with a game's score normal around FP/G at a 30% spread (`gameSpread`). A 40 FP/G player is worth 40, 44.8, 47.6 and 49.5 with one to four games. A simulation agrees.
+- `bestLineup` assigns players to slots to maximise the total value (Hungarian algorithm), rather than the draft board's greedy fill. Players listed Out, IR, Sus or NA are valued at 0.
+- The lock guide is the same numbers read the other way: after a game with k games still to come, lock it if it beat value(k).
+- The roster is the owner's Sleeper roster once the draft is done, and the players drafted so far until then. Sleeper's current `starters` are compared with the best lineup to list Start / Sit moves. Sleeper has no write API, so the moves are made in the Sleeper app.
+
 ## Next
 
-In-season pages: the owner's roster and matchup, games per player per week, free agents ranked in league scoring, and injuries.
+In-season: blend this season's actual FP/G into the projection as games are played, free agents ranked by next week's lock value, and the weekly matchup.
 # basketballapp
