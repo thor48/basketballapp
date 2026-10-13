@@ -88,6 +88,7 @@ const tierPositions: Record<PositionFilter, string[]> = {
   F: ['SF', 'PF'],
 }
 const starredKey = 'hoops.starred'
+const syncedKey = 'hoops.starred.synced'
 const params = new URLSearchParams(window.location.search)
 // `?draft=` and `?user=` replay another draft, e.g. last season's finished one, for testing.
 const draftOverride = params.get('draft')
@@ -138,38 +139,55 @@ function sourceProjections(experts: ExpertRanks, sleeperLine: StatLine, scoring:
   return result
 }
 
-function readStarred() {
+function readSet(key: string) {
   try {
-    return new Set<string>(JSON.parse(localStorage.getItem(starredKey) ?? '[]'))
+    const raw = localStorage.getItem(key)
+    return raw === null ? null : new Set<string>(JSON.parse(raw))
   } catch {
-    return new Set<string>()
+    return null
   }
 }
 
-function writeStarred(stars: Set<string>) {
+function writeSet(key: string, stars: Set<string>) {
   try {
-    localStorage.setItem(starredKey, JSON.stringify([...stars]))
+    localStorage.setItem(key, JSON.stringify([...stars]))
   } catch {
     // Stars still work for the session without storage.
   }
 }
 
+const readStarred = () => readSet(starredKey) ?? new Set<string>()
+const writeStarred = (stars: Set<string>) => writeSet(starredKey, stars)
+
 // Signed in, stars live in `starred_players` so they follow the user between laptop and phone.
-// Stars made signed out on this browser are uploaded on sign-in rather than lost.
+// `hoops.starred.synced` remembers what the account held at this browser's last sync, so the
+// browser's own changes since then can be told apart from changes made on another device: a star
+// added here is uploaded, a star removed here is deleted, and a star removed elsewhere stays
+// removed instead of being uploaded again from this browser's stale copy.
 async function syncStarred(account: Account, local: Set<string>) {
   const client = createSupabaseClient(account.getToken)
   if (!client) return null
   const { data, error } = await client.from('starred_players').select('player_id')
   if (error) throw error
   const remote = new Set(data.map((row: { player_id: string }) => row.player_id))
-  const missing = [...local].filter((id) => !remote.has(id))
-  if (missing.length) {
+  const synced = readSet(syncedKey)
+  // With no record yet (a browser's first sync), this browser's stars may be stale copies of ones
+  // since removed elsewhere, so the account wins unless it has none at all.
+  const added = synced || !remote.size ? [...local].filter((id) => !remote.has(id) && !synced?.has(id)) : []
+  const removed = synced ? [...synced].filter((id) => !local.has(id) && remote.has(id)) : []
+  if (added.length) {
     const { error: insertError } = await client
       .from('starred_players')
-      .upsert(missing.map((player_id) => ({ user_id: account.userId, player_id })))
+      .upsert(added.map((player_id) => ({ user_id: account.userId, player_id })))
     if (insertError) throw insertError
   }
-  return new Set([...remote, ...local])
+  if (removed.length) {
+    const { error: deleteError } = await client.from('starred_players').delete().eq('user_id', account.userId).in('player_id', removed)
+    if (deleteError) throw deleteError
+  }
+  const merged = new Set([...remote, ...added].filter((id) => !removed.includes(id)))
+  writeSet(syncedKey, merged)
+  return merged
 }
 
 function Headshot({ id, name }: { id: string; name: string }) {
@@ -381,7 +399,13 @@ export default function App({ account, accountControl }: { account: Account | nu
       ? client.from('starred_players').upsert({ user_id: account.userId, player_id: id })
       : client.from('starred_players').delete().eq('user_id', account.userId).eq('player_id', id)
     write.then(({ error: writeError }) => {
-      if (writeError) console.error('Could not save star', writeError)
+      if (writeError) return console.error('Could not save star', writeError)
+      // The account now matches this browser for this player, so the next sync must not treat
+      // it as a change made here.
+      const synced = readSet(syncedKey) ?? new Set<string>()
+      if (adding) synced.add(id)
+      else synced.delete(id)
+      writeSet(syncedKey, synced)
     })
   }
 

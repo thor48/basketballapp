@@ -81,7 +81,9 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .star-cell { width: 28px; padding-right: 0; }
 .star { padding: 0; border: 0; background: none; color: #d4bd98; font-size: 16px; line-height: 1; }
 .star.on { color: var(--orange); }
-.star:hover { color: var(--orange); }
+/* Hover only where there is a mouse: on a touch screen it sticks after a tap, so a star just
+   removed would still look starred. */
+@media (hover: hover) { .star:hover { color: var(--orange); } }
 .empty { padding: 24px; color: var(--muted); text-align: center; }
 
 .side { display: grid; gap: 14px; position: sticky; top: 16px; }
