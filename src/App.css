@@ -99,13 +99,20 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .recent li.mine { color: var(--slime); }
 
 .teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
-.team { padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--lift); }
+.team { display: flex; flex-direction: column; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--lift); }
 .team header { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: baseline; margin-bottom: 8px; }
 .team header strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .team .slot-no { color: var(--muted); font-size: 12px; }
 .team li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; font-size: 13px; }
 .team.mine { border-color: var(--slime); }
 .team.clock-on { box-shadow: 0 0 0 2px var(--ball); }
+/* Scoreboard-style strip pinned to the card's foot: hardwood orange, jersey stripes, white ink. */
+.best-band { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: auto -12px -12px; padding: 8px 12px; border-radius: 0 0 9px 9px; border-top: 3px solid var(--board); background: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .08) 0 6px, transparent 6px 14px), linear-gradient(100deg, var(--orange), var(--ball)); color: #fff; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; text-shadow: 0 1px 0 rgba(60, 20, 0, .55); }
+.team > :has(+ .best-band) { margin-bottom: 12px; }
+.best-label { display: grid; font-size: 13px; font-weight: 700; letter-spacing: .12em; line-height: 1.1; }
+.best-label small { font-size: 11px; font-weight: 600; letter-spacing: .08em; opacity: .85; }
+.best-score { font-size: 28px; font-weight: 700; font-style: italic; letter-spacing: .02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.best-score small { margin-left: 4px; font-size: 12px; font-style: normal; letter-spacing: .08em; opacity: .85; }
 
 .week-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .week-bar strong { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; text-transform: uppercase; letter-spacing: .04em; }

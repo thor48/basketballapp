@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react'
 import './App.css'
 import Lineup, { type LineupPlayer } from './Lineup'
+import { bestLineup } from './lib/lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
 import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
 import { projectedPerGame, scoreLine, scoringLegend } from './lib/scoring'
@@ -532,6 +533,15 @@ export default function App({ account, accountControl }: { account: Account | nu
     : null
   const myTeamName = teamName(base.users.find((user) => user.user_id === userId), draftState.myRosterId ?? 0)
   const bestAvailable = base.board.filter((player) => !draftState.drafted.has(player.id)).slice(0, 8)
+  // Each team's strongest possible starting lineup in consensus FP/G, a rough grade of its draft.
+  const starterSlots = base.league.roster_positions.filter((slot) => slot !== 'BN' && slot !== 'IR')
+  const bestLineupScores = new Map(
+    Object.values(draft.slot_to_roster_id ?? {}).map((rosterId) => {
+      const valued = (draftState.byRoster.get(rosterId) ?? []).map((player) => ({ ...player, value: player.consensus }))
+      const starters = bestLineup(starterSlots, valued).starters
+      return [rosterId, starters.reduce((sum, entry) => sum + (entry.player?.value ?? 0), 0)]
+    }),
+  )
 
   const sortBy = (key: SortKey) =>
     setSort((current) => (current.key === key ? { key, desc: !current.desc } : { key, desc: key === 'consensus' || key === 'projGp' || key === 'last' || key === 'lastGp' || key === 'gap' }))
@@ -774,6 +784,8 @@ export default function App({ account, accountControl }: { account: Account | nu
               const lineup = assignLineup(base.league.roster_positions, players)
               const open = lineup.starters.filter((entry) => !entry.player).map((entry) => entry.slot)
               const total = players.reduce((sum, player) => sum + player.consensus, 0)
+              const best = bestLineupScores.get(rosterId) ?? 0
+              const bestRank = [...bestLineupScores.values()].filter((score) => score > best).length + 1
               return (
                 <article key={slot} className={`team ${rosterId === draftState.myRosterId ? 'mine' : ''} ${rosterId === draftState.onClock && draft.status === 'drafting' ? 'clock-on' : ''}`}>
                   <header>
@@ -790,6 +802,12 @@ export default function App({ account, accountControl }: { account: Account | nu
                     ))}
                   </ul>
                   {players.length > 0 && open.length > 0 && <p className="note">Open: {open.join(', ')}</p>}
+                  {players.length > 0 && (
+                    <footer className="best-band" title="Starting lineup with the most consensus FP/G, each player in a slot he can fill">
+                      <span className="best-label">Best lineup<small>#{bestRank} of {bestLineupScores.size}</small></span>
+                      <span className="best-score">{best.toFixed(1)}<small>FP/G</small></span>
+                    </footer>
+                  )}
                 </article>
               )
             })}
