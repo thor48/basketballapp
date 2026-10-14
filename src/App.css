@@ -105,7 +105,10 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .team .slot-no { color: var(--muted); font-size: 12px; }
 .team li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; font-size: 13px; }
 .team.mine { border-color: var(--slime); }
-.team.clock-on { box-shadow: 0 0 0 2px var(--ball); }
+.team.clock-on { position: relative; overflow: hidden; box-shadow: 0 0 0 2px var(--ball); }
+/* The team on the clock is greyed out under a slanted DRAFTING stamp. */
+.team.clock-on::before { content: ''; position: absolute; inset: 0; z-index: 2; background: rgba(200, 200, 200, .55); pointer-events: none; }
+.team.clock-on::after { content: 'Drafting'; position: absolute; top: 50%; left: 50%; z-index: 3; transform: translate(-50%, -50%) rotate(-28deg); color: var(--board); font: italic 700 46px 'Barlow Condensed', sans-serif; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 2px 0 rgba(255, 255, 255, .6); white-space: nowrap; pointer-events: none; }
 /* Scoreboard-style strip pinned to the card's foot: hardwood orange, jersey stripes, white ink. */
 .best-band { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: auto -12px -12px; padding: 8px 12px; border-radius: 0 0 9px 9px; border-top: 3px solid var(--board); background: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .08) 0 6px, transparent 6px 14px), linear-gradient(100deg, var(--orange), var(--ball)); color: #fff; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; text-shadow: 0 1px 0 rgba(60, 20, 0, .55); }
 .team > :has(+ .best-band) { margin-bottom: 12px; }
