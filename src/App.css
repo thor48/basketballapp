@@ -100,7 +100,7 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 
 .teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
 .team { display: flex; flex-direction: column; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--lift); }
-.team header { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+.team header { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; align-items: baseline; margin-bottom: 8px; }
 .team header strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .team .slot-no { color: var(--muted); font-size: 12px; }
 .team li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; font-size: 13px; }

@@ -783,7 +783,6 @@ export default function App({ account, accountControl }: { account: Account | nu
               const players = draftState.byRoster.get(rosterId) ?? []
               const lineup = assignLineup(base.league.roster_positions, players)
               const open = lineup.starters.filter((entry) => !entry.player).map((entry) => entry.slot)
-              const total = players.reduce((sum, player) => sum + player.consensus, 0)
               const best = bestLineupScores.get(rosterId) ?? 0
               const bestRank = [...bestLineupScores.values()].filter((score) => score > best).length + 1
               return (
@@ -791,7 +790,6 @@ export default function App({ account, accountControl }: { account: Account | nu
                   <header>
                     <span className="slot-no">{slot}</span>
                     <strong>{ownerByRoster.get(rosterId)}</strong>
-                    <span className="num">{total.toFixed(0)}</span>
                   </header>
                   <ul>
                     {players.map((player) => (
