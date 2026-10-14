@@ -63,6 +63,22 @@ Beer League plays Sleeper's **Lock-In** mode (`game_mode` 1): each starter score
 - The lock guide is the same numbers read the other way: after a game with k games still to come, lock it if it beat value(k).
 - The roster is the owner's Sleeper roster once the draft is done, and the players drafted so far until then. Sleeper's current `starters` are compared with the best lineup to list Start / Sit moves. Sleeper has no write API, so the moves are made in the Sleeper app.
 
+## Lock alerts
+
+`scripts/lock-alerts.ts` posts to Discord when a ThorbergBC starter finishes a game worth locking. It runs the lock guide on a schedule. After a game with k games left that week, the game is worth locking if it scored at least value(k), rounded up as on the page. It never alerts for the week's last game, since Sleeper keeps that one anyway. It also never alerts once the player's next game has tipped off, since the chance to lock has passed. A player listed Out is valued at 0, so any game he played before being ruled out is worth locking.
+
+- Per-game lines come from `api.sleeper.app/stats/nba/<season>/<week>?season_type=regular`: one row per player per game, with the schedule's `game_id` and `date`. Scores use the same `scoreLine`, and players are valued by the same Cons FP/G (`projectedPerGame`) as the board and lineup page.
+- It runs under plain Node 24 with no install. That's why `src/lib/lineup.ts` imports `./draft.ts` with its extension, and why the script reads `rankings.json` from disk instead of importing `rankings.ts`.
+- `.github/workflows/lock-alerts.yml` runs it every 20 minutes from 17:00 to 07:59 UTC, and it can also be started by hand from the Actions tab. Each run checks the whole week, so a late or dropped GitHub run only delays an alert. The games already alerted live in `.lock-alerts/sent.json`, which the Actions cache carries between runs.
+- The webhook is the `DISCORD_WEBHOOK_URL` repository secret. The repo is public, so the webhook must never be committed. Locally it goes in `.env.local`, which `npm run lock-alerts` loads.
+
+```bash
+npm run lock-alerts -- --dry-run
+npm run lock-alerts -- --dry-run --date 2025-11-05 --league 1260852226524454912 --user 337522748299411456
+```
+
+The second command replays a day of last season's league.
+
 ## Next
 
 In-season: blend this season's actual FP/G into the projection as games are played, free agents ranked by next week's lock value, and the weekly matchup.

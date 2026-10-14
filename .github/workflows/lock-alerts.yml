@@ -1,0 +1,49 @@
+name: Lock alerts
+
+# Posts to Discord when a ThorbergBC starter finishes a game worth locking (scripts/lock-alerts.ts).
+# Every 20 minutes from 17:00 to 07:59 UTC, which covers holiday noon tips through West Coast games
+# running past midnight Eastern. Minutes 7, 27 and 47 stay off the top of the hour, when GitHub's
+# scheduler is busiest and drops or delays the most runs. A late or missed run only delays an alert:
+# a game can be locked until the player's next one tips off, usually a day or more.
+on:
+  schedule:
+    - cron: '7,27,47 17-23,0-7 * * *'
+  workflow_dispatch:
+
+# The cache carries which games already alerted; two runs at once would read the same copy and
+# post the same game twice.
+concurrency:
+  group: lock-alerts
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Restore alerted games
+        uses: actions/cache/restore@v4
+        with:
+          path: .lock-alerts
+          key: lock-alerts-${{ github.run_id }}
+          restore-keys: lock-alerts-
+      - name: Check starters
+        id: check
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          before=$(cat .lock-alerts/sent.json 2>/dev/null | sha1sum)
+          node scripts/lock-alerts.ts
+          after=$(cat .lock-alerts/sent.json 2>/dev/null | sha1sum)
+          [ "$before" = "$after" ] || echo "changed=true" >> "$GITHUB_OUTPUT"
+      # Saved only when something was posted, so quiet runs do not pile up cache entries.
+      - name: Save alerted games
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lock-alerts
+          key: lock-alerts-${{ github.run_id }}

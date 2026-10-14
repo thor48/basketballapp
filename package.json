@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "rankings": "node scripts/rankings.mjs",
+    "lock-alerts": "node --env-file-if-exists=.env.local scripts/lock-alerts.ts",
     "preview": "vite preview"
   },
   "dependencies": {

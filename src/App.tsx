@@ -3,7 +3,7 @@ import './App.css'
 import Lineup, { type LineupPlayer } from './Lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
 import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
-import { scoreLine, scoringLegend } from './lib/scoring'
+import { projectedPerGame, scoreLine, scoringLegend } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
   defaultUserId,
@@ -136,17 +136,6 @@ function consensusTitle(player: BoardPlayer) {
   return [`Sleeper ${formatPoints(player.proj)}`, ...parts].join(' · ')
 }
 
-// ESPN and FantasyPros project no double- or triple-doubles, so each borrows Sleeper's rate for
-// the player. Otherwise those 2 and 5 point bonuses would read as a gap between sources.
-function sourceProjections(experts: ExpertRanks, sleeperLine: StatLine, scoring: Record<string, number>) {
-  const result: Partial<Record<ProjectionSource, number>> = {}
-  for (const source of projectionSources) {
-    const line = experts.projections?.[source]
-    if (line) result[source] = scoreLine({ ...line, dd: sleeperLine.dd ?? 0, td: sleeperLine.td ?? 0 }, scoring)
-  }
-  return result
-}
-
 function readSet(key: string) {
   try {
     const raw = localStorage.getItem(key)
@@ -226,9 +215,7 @@ function buildBoard(
       .filter(Boolean)
       .sort((a, b) => positionOrder.indexOf(a) - positionOrder.indexOf(b))
     const experts = expertRanks(id)
-    const proj = scoreLine(line, scoring) / (line.gp || 1)
-    const sourceProj = sourceProjections(experts, line, scoring)
-    const projs = [proj, ...Object.values(sourceProj)]
+    const { sleeper: proj, sources: sourceProj, consensus } = projectedPerGame(line, experts.projections, scoring)
     const games = projectionSources.map((source) => experts.projections?.[source]?.gp).filter((value): value is number => !!value)
     rows.push({
       id,
@@ -247,7 +234,7 @@ function buildBoard(
       expert: expertAverage(experts),
       tiers: experts.tiers ?? [],
       sourceProj,
-      consensus: projs.reduce((sum, value) => sum + value, 0) / projs.length,
+      consensus,
       projGp: games.length ? Math.round(games.reduce((sum, value) => sum + value, 0) / games.length) : null,
     })
   }

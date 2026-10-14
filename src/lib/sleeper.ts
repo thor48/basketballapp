@@ -94,6 +94,17 @@ export type ScheduleGame = {
   away: { team: string }
 }
 
+// One player's line from one game. `week` is the fantasy week; `date` and `game_id` match the
+// schedule's. A player who sat has a row with empty `stats`.
+export type GameLine = {
+  player_id: string
+  game_id: string
+  date: string
+  team: string
+  opponent: string
+  stats: StatLine
+}
+
 async function readJson<T>(path: string): Promise<T> {
   const response = await fetch(`${base}${path}`, { cache: 'no-store' })
   if (!response.ok) throw new Error(`Sleeper ${path} answered ${response.status}`)
@@ -116,4 +127,10 @@ export async function getSchedule(season: string) {
   const response = await fetch(`https://api.sleeper.app/schedule/nba/regular/${season}`, { cache: 'no-store' })
   if (!response.ok) throw new Error(`Sleeper schedule answered ${response.status}`)
   return response.json() as Promise<ScheduleGame[]>
+}
+// Every game line of a fantasy week so far, one row per player per game. Also outside `/v1`.
+export async function getWeekGameLines(season: string, week: number) {
+  const response = await fetch(`https://api.sleeper.app/stats/nba/${season}/${week}?season_type=regular`, { cache: 'no-store' })
+  if (!response.ok) throw new Error(`Sleeper week ${week} stats answered ${response.status}`)
+  return response.json() as Promise<GameLine[]>
 }

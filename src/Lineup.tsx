@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { bestLineup, currentWeek, lockValues, usToday, weeksFromSchedule, type Week } from './lib/lineup'
+import { bestLineup, currentWeek, lockValues, unavailable, usToday, weeksFromSchedule, type Week } from './lib/lineup'
 import { getSchedule } from './lib/sleeper'
 
 export type LineupPlayer = {
@@ -11,9 +11,6 @@ export type LineupPlayer = {
   // Projected fantasy points per game in league scoring.
   perGame: number
 }
-
-// Statuses that keep a player out for days, not a game-time call. He is shown but valued at 0.
-const unavailable = new Set(['Out', 'IR', 'Sus', 'NA'])
 
 const dayLetter = (date: string) => 'YMTWHFS'[new Date(`${date}T12:00:00`).getDay()]
 const shortDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })

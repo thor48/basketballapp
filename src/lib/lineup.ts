@@ -1,4 +1,5 @@
-import { fitsSlot } from './draft'
+// The `.ts` extension lets the lock alert script (scripts/lock-alerts.ts) load this under plain Node.
+import { fitsSlot } from './draft.ts'
 import type { ScheduleGame } from './sleeper'
 
 // Beer League plays Sleeper's Lock-In mode: each starter scores ONE game per week, the one the
@@ -34,6 +35,9 @@ export const usToday = () => new Date().toLocaleDateString('en-CA', { timeZone: 
 export function currentWeek(weeks: Week[], today = usToday()) {
   return weeks.find((week) => week.end >= today) ?? weeks[weeks.length - 1]
 }
+
+// Statuses that keep a player out for days, not a game-time call. He is valued at 0.
+export const unavailable = new Set(['Out', 'IR', 'Sus', 'NA'])
 
 // How much one game's score swings around the player's average, as a share of it. NBA fantasy
 // lines vary by roughly a quarter to a third game to game; one figure for everyone keeps the
