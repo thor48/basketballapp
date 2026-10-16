@@ -5,12 +5,22 @@
 .status-screen h1 { font-size: 34px; }
 .button { justify-self: start; padding: 8px 16px; border: 0; border-radius: 6px; background: var(--ecto); color: var(--board); font-weight: 700; }
 
-.hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 3px solid rgba(255, 250, 241, .85); }
+.hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 3px solid rgba(255, 250, 241, .85); }
 .hero h1 { font-size: 44px; line-height: 1; margin: 4px 0 8px; }
 .brand { display: flex; align-items: center; gap: 16px; }
 .logo { width: 96px; height: 96px; flex: none; }
 .eyebrow { color: var(--floor-orange); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
-.legend { color: var(--floor-muted); font-size: 13px; }
+
+/* Scoring card: the scoreboard's dark panel, one tile per stat, bonuses in ball orange. */
+.scoring { flex: 0 1 600px; display: grid; gap: 10px; padding: 12px 14px 14px; border-radius: 10px; border-top: 3px solid var(--ball); background: var(--board); color: #f4ece0; box-shadow: var(--lift); }
+.scoring-group { display: grid; gap: 6px; }
+.scoring-title { color: #a8967f; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.scoring-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(68px, 1fr)); gap: 6px; }
+.scoring-tiles li { display: grid; place-content: center; justify-items: center; gap: 2px; min-height: 58px; padding: 6px 4px; border: 1px solid rgba(244, 236, 224, .12); border-radius: 7px; background: rgba(244, 236, 224, .05); text-align: center; }
+.scoring-tiles strong { color: var(--ecto); font: italic 700 26px 'Barlow Condensed', sans-serif; line-height: 1; font-variant-numeric: tabular-nums; }
+.scoring-tiles span { color: #d9ccb9; font-size: 11px; font-weight: 600; line-height: 1.15; }
+.scoring-tiles li.penalty strong { color: #ff7a6b; }
+.scoring-group.bonus strong { color: var(--ball); }
 
 .clock { display: grid; gap: 2px; min-width: 240px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); text-align: right; }
 .clock { border-color: var(--board); border-top: 3px solid var(--ball); background: var(--board); color: #f4ece0; }
@@ -171,6 +181,14 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .brand { gap: 12px; }
   .logo { width: 64px; height: 64px; }
   .clock { width: 100%; text-align: left; }
+  .scoring { flex-basis: 100%; padding: 10px 10px 12px; }
+  .scoring-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .scoring-group.bonus .scoring-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .scoring-tiles li { min-height: 46px; padding: 5px 4px; }
+  .scoring-tiles strong { font-size: 21px; }
+  .scoring-tiles span { font-size: 10px; }
+  /* Seven stats in four columns: the turnover penalty takes the last row's spare cell. */
+  .scoring-tiles li.penalty { grid-column: span 2; }
   .side { order: 0; }
   .table-wrap, .board-body > .table-wrap { max-height: 70svh; }
   th.wide, td.wide { display: none; }

@@ -5,7 +5,7 @@ import Lineup, { type LineupPlayer } from './Lineup'
 import { bestLineup } from './lib/lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
 import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
-import { projectedPerGame, scoreLine, scoringLegend } from './lib/scoring'
+import { projectedPerGame, scoreLine, scoringTable, type ScoringItem } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
   defaultUserId,
@@ -196,6 +196,35 @@ function Headshot({ id, name }: { id: string; name: string }) {
     <span className="headshot">
       {failed ? initials : <img src={headshotUrl(id)} alt="" loading="lazy" onError={() => setFailed(true)} />}
     </span>
+  )
+}
+
+// Stats are worth their plain weight; bonuses read as additions, and a penalty takes a real minus.
+const scoringValue = (value: number, bonus: boolean) => `${value < 0 ? '−' : bonus ? '+' : ''}${Math.abs(value)}`
+
+function ScoringGroup({ title, items, bonus }: { title: string; items: ScoringItem[]; bonus: boolean }) {
+  return (
+    <div className={`scoring-group ${bonus ? 'bonus' : ''}`}>
+      <span className="scoring-title">{title}</span>
+      <ul className="scoring-tiles">
+        {items.map((item) => (
+          <li key={item.key} className={item.value < 0 ? 'penalty' : ''}>
+            <strong>{scoringValue(item.value, bonus)}</strong>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function ScoringBlock({ scoring }: { scoring: Record<string, number> }) {
+  const { stats, bonuses } = scoringTable(scoring)
+  return (
+    <section className="scoring" aria-label="League scoring">
+      <ScoringGroup title="Points per stat" items={stats} bonus={false} />
+      {bonuses.length > 0 && <ScoringGroup title="Game bonuses" items={bonuses} bonus />}
+    </section>
   )
 }
 
@@ -586,7 +615,6 @@ export default function App({ account, accountControl }: { account: Account | nu
           <div>
             <p className="eyebrow">{base.league.name} · {base.league.season} · {draft.settings.teams} teams · {draft.type}</p>
             <h1>ECTOcooler Hoops</h1>
-            <p className="legend">{scoringLegend(base.league.scoring_settings).join(' · ')}</p>
           </div>
         </div>
         {!teamPage && draft.status !== 'complete' && (
@@ -613,6 +641,7 @@ export default function App({ account, accountControl }: { account: Account | nu
             )}
           </div>
         )}
+        <ScoringBlock scoring={base.league.scoring_settings} />
       </header>
 
       <nav className="tabs">

@@ -29,25 +29,33 @@ export function projectedPerGame(sleeperLine: StatLine, projections: ExpertRanks
   return { sleeper, sources, consensus: all.reduce((sum, value) => sum + value, 0) / all.length }
 }
 
-// A short legend for the hero, e.g. "PTS 1 · REB 1.5 · AST 2".
-const scoringLabels: Record<string, string> = {
-  pts: 'PTS',
-  reb: 'REB',
-  ast: 'AST',
-  stl: 'STL',
-  blk: 'BLK',
-  to: 'TO',
-  tpm: '3PM',
-  dd: 'DD',
-  td: 'TD',
-  bonus_pt_40p: '40+ PTS',
-  bonus_pt_50p: '50+ PTS',
-  bonus_ast_15p: '15+ AST',
-  bonus_reb_20p: '20+ REB',
+// The hero's scoring block: what each counting stat is worth, then the per-game bonuses. Read
+// from the league's live settings, so a commissioner change shows up here.
+const statLabels: Record<string, string> = {
+  pts: 'Point',
+  reb: 'Rebound',
+  ast: 'Assist',
+  stl: 'Steal',
+  blk: 'Block',
+  tpm: '3-pointer',
+  to: 'Turnover',
 }
 
-export function scoringLegend(scoring: Record<string, number>) {
-  return Object.entries(scoringLabels)
-    .filter(([key]) => scoring[key])
-    .map(([key, label]) => `${label} ${scoring[key] > 0 && key.startsWith('bonus') ? '+' : ''}${scoring[key]}`)
+const bonusLabels: Record<string, string> = {
+  dd: 'Double-double',
+  td: 'Triple-double',
+  bonus_pt_40p: '40-point game',
+  bonus_pt_50p: '50-point game',
+  bonus_ast_15p: '15-assist game',
+  bonus_reb_20p: '20-rebound game',
+}
+
+export type ScoringItem = { key: string; label: string; value: number }
+
+export function scoringTable(scoring: Record<string, number>) {
+  const pick = (labels: Record<string, string>): ScoringItem[] =>
+    Object.entries(labels)
+      .filter(([key]) => scoring[key])
+      .map(([key, label]) => ({ key, label, value: scoring[key] }))
+  return { stats: pick(statLabels), bonuses: pick(bonusLabels) }
 }
