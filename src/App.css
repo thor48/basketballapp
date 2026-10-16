@@ -132,6 +132,28 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .moves li { display: grid; gap: 2px; padding: 4px 0; font-size: 13px; }
 .guide li { display: grid; gap: 1px; padding: 4px 0; font-size: 13px; }
 
+.league { min-width: 0; }
+.league .table-wrap { max-height: none; }
+.matchups { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.matchup { display: grid; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--lift); overflow: hidden; }
+.matchup.mine { border-color: var(--slime); box-shadow: 0 0 0 1px var(--slime); }
+.matchup-side { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 9px 12px; }
+.matchup-side + .matchup-side { border-top: 1px dashed var(--line); }
+.matchup-team { display: grid; min-width: 0; }
+.matchup-team strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.matchup-team small, .matchup-proj small { color: var(--muted); font-size: 11px; }
+.matchup-proj { display: grid; justify-items: end; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.matchup-score { min-width: 56px; text-align: right; font: italic 700 24px 'Barlow Condensed', sans-serif; font-variant-numeric: tabular-nums; }
+.matchup-side.ahead .matchup-score { color: var(--orange); }
+.matchup-side.won { background: rgba(176, 240, 29, .18); }
+.matchup-side.won .matchup-score, .matchup-side.won strong { color: var(--slime); }
+.note.median { color: var(--floor-muted); }
+.fa-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 22px 0 10px; }
+.fa-head h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; text-transform: uppercase; letter-spacing: .04em; }
+.standings li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto 52px; gap: 8px; align-items: baseline; padding: 4px 0; font-size: 14px; }
+.standings-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.standings li.mine { color: var(--slime); font-weight: 600; }
+
 .footer { margin-top: 24px; color: var(--floor-muted); font-size: 12px; line-height: 1.6; }
 .footer a { color: var(--text); }
 

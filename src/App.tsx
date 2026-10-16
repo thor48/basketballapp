@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react'
 import './App.css'
+import LeaguePage, { type LeagueTeam } from './League'
 import Lineup, { type LineupPlayer } from './Lineup'
 import { bestLineup } from './lib/lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
@@ -324,7 +325,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const [starredOnly, setStarredOnly] = useState(false)
   const [needsOnly, setNeedsOnly] = useState(false)
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: 'rank', desc: false })
-  const [tab, setTab] = useState<'board' | 'teams' | 'lineup'>(teamPage ? 'lineup' : 'board')
+  const [tab, setTab] = useState<'league' | 'board' | 'teams' | 'lineup'>(teamPage ? 'lineup' : 'league')
   const [starred, setStarred] = useState(readStarred)
   const [now, setNow] = useState(() => Date.now())
   const [attempt, setAttempt] = useState(0)
@@ -449,25 +450,26 @@ export default function App({ account, accountControl }: { account: Account | nu
     }
   }, [base, live, playerById])
 
+  const toLineup = useMemo(() => (id: string): LineupPlayer | null => {
+    const board = playerById.get(id)
+    if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus }
+    const player = base?.players[id]
+    if (!player) return null
+    return {
+      id,
+      name: player.full_name ?? `${player.first_name ?? ''} ${player.last_name ?? ''}`.trim(),
+      team: player.team ?? 'FA',
+      positions: player.fantasy_positions?.length ? player.fantasy_positions : [player.position ?? ''].filter(Boolean),
+      injury: player.injury_status ?? '',
+      perGame: 0,
+    }
+  }, [base, playerById])
+
   // The owner's roster for the lineup tab. Sleeper fills `players` once the draft is over; until
   // then the roster is whatever this team has drafted so far.
   const myRoster = useMemo(() => {
     if (!base || !draftState) return null
     const roster = base.rosters.find((entry) => entry.owner_id === userId) ?? base.rosters.find((entry) => entry.roster_id === draftState.myRosterId)
-    const toLineup = (id: string): LineupPlayer | null => {
-      const board = playerById.get(id)
-      if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus }
-      const player = base.players[id]
-      if (!player) return null
-      return {
-        id,
-        name: player.full_name ?? `${player.first_name ?? ''} ${player.last_name ?? ''}`.trim(),
-        team: player.team ?? 'FA',
-        positions: player.fantasy_positions?.length ? player.fantasy_positions : [player.position ?? ''].filter(Boolean),
-        injury: player.injury_status ?? '',
-        perGame: 0,
-      }
-    }
     const reserveIds = new Set(roster?.reserve ?? [])
     const ids = roster?.players?.length
       ? roster.players
@@ -478,7 +480,30 @@ export default function App({ account, accountControl }: { account: Account | nu
       reserve: list((id) => reserveIds.has(id)),
       starters: roster?.starters ?? null,
     }
-  }, [base, draftState, playerById])
+  }, [base, draftState, toLineup])
+
+  // Every roster with its record for the league tab, and the projected players nobody holds.
+  const leagueData = useMemo(() => {
+    if (!base) return null
+    const held = new Set(base.rosters.flatMap((roster) => [...(roster.players ?? []), ...(roster.reserve ?? [])]))
+    const teams: LeagueTeam[] = base.rosters.map((roster) => {
+      const reserveIds = new Set(roster.reserve ?? [])
+      const settings = roster.settings ?? {}
+      return {
+        rosterId: roster.roster_id,
+        name: ownerByRoster.get(roster.roster_id) ?? `Team ${roster.roster_id}`,
+        players: (roster.players ?? []).filter((id) => !reserveIds.has(id)).map(toLineup).filter((player): player is LineupPlayer => !!player),
+        wins: settings.wins ?? 0,
+        losses: settings.losses ?? 0,
+        ties: settings.ties ?? 0,
+        pointsFor: (settings.fpts ?? 0) + (settings.fpts_decimal ?? 0) / 100,
+      }
+    })
+    const freeAgents = base.board
+      .filter((player) => !held.has(player.id))
+      .map((player) => ({ id: player.id, name: player.name, team: player.team, positions: player.positions, injury: player.injury, perGame: player.consensus }))
+    return { teams, freeAgents, myRosterId: base.rosters.find((roster) => roster.owner_id === userId)?.roster_id }
+  }, [base, ownerByRoster, toLineup])
 
   const visible = useMemo(() => {
     if (!base || !draftState) return []
@@ -564,7 +589,7 @@ export default function App({ account, accountControl }: { account: Account | nu
             <p className="legend">{scoringLegend(base.league.scoring_settings).join(' · ')}</p>
           </div>
         </div>
-        {!teamPage && (
+        {!teamPage && draft.status !== 'complete' && (
           <div className={`clock ${onMyClock ? 'mine' : ''}`}>
             {draft.status === 'pre_draft' && (
               <>
@@ -580,13 +605,7 @@ export default function App({ account, accountControl }: { account: Account | nu
                 {timer !== null && <span>{timer}s left</span>}
               </>
             )}
-            {draft.status === 'complete' && (
-              <>
-                <span className="clock-label">Draft</span>
-                <strong>Complete</strong>
-              </>
-            )}
-            {myNext && draft.status !== 'complete' && (
+            {myNext && (
               <span className="clock-mine">
                 Your picks: {draftState.myUpcoming.join(', ')}
                 {draft.status === 'drafting' && !onMyClock && ` · ${myNext - draftState.currentPick} away`}
@@ -598,15 +617,19 @@ export default function App({ account, accountControl }: { account: Account | nu
 
       <nav className="tabs">
         {teamPage ? (
-          <button className="active">{myTeamName} lineup</button>
+          <>
+            <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>{myTeamName} lineup</button>
+            <button className={tab === 'league' ? 'active' : ''} onClick={() => setTab('league')}>League</button>
+          </>
         ) : (
           <>
-            <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
-            <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
+            <button className={tab === 'league' ? 'active' : ''} onClick={() => setTab('league')}>League</button>
             <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
+            <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
+            <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
           </>
         )}
-        {!teamPage && (
+        {!teamPage && draft.status !== 'complete' && (
           <span className="sync">
             {draftState.sorted.length}/{draftState.totalPicks} picks · checked {new Date(live.checkedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
           </span>
@@ -614,7 +637,18 @@ export default function App({ account, accountControl }: { account: Account | nu
         {accountControl && !teamPage && <span className="account">{accountControl}</span>}
       </nav>
 
-      {tab === 'lineup' && myRoster ? (
+      {tab === 'league' && leagueData ? (
+        <LeaguePage
+          leagueId={base.league.league_id}
+          season={base.league.season}
+          rosterPositions={base.league.roster_positions}
+          playoffWeekStart={base.league.settings.playoff_week_start ?? 19}
+          teams={leagueData.teams}
+          freeAgents={leagueData.freeAgents}
+          myRosterId={leagueData.myRosterId}
+          headshot={(player) => <Headshot id={player.id} name={player.name} />}
+        />
+      ) : tab === 'lineup' && myRoster ? (
         <Lineup
           season={base.league.season}
           rosterPositions={base.league.roster_positions}

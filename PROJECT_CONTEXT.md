@@ -63,6 +63,15 @@ Beer League plays Sleeper's **Lock-In** mode (`game_mode` 1): each starter score
 - The lock guide is the same numbers read the other way: after a game with k games still to come, lock it if it beat value(k).
 - The roster is the owner's Sleeper roster once the draft is done, and the players drafted so far until then. Sleeper's current `starters` are compared with the best lineup to list Start / Sit moves. Sleeper has no write API, so the moves are made in the Sleeper app.
 
+## League
+
+The homepage opens on the League tab, now the draft is over; the board, Teams and My lineup tabs stay behind it. The three team pages get a League tab beside their lineup. `src/League.tsx`:
+
+- Matchups come from `/league/<id>/matchups/<week>`: the two rosters sharing a `matchup_id` play each other. Each side shows its record, its projection and, once the week starts, Sleeper's points; the live week is re-read every minute. The projection is the roster's best lineup valued as on the lineup page (`weekScore`), with IR players left out. The league median, which every team also plays, is shown under the cards. Playoff weeks (from `playoff_week_start`) are placeholders in Sleeper, so they show a note instead.
+- Standings are each roster's `settings` wins, losses and `fpts`. Sleeper's record counts the median game too, so a season is 36 decisions.
+- Top free agents are board players on no roster, ranked by the selected week's lock value (games that week at their Cons FP/G), or by FP/G. Rosters are read once per page load.
+- The NBA schedule is read once per season and shared by both tabs (`src/useWeeks.ts`).
+
 ## Lock alerts
 
 `scripts/lock-alerts.ts` posts to Discord when a ThorbergBC starter finishes a game worth locking. It runs the lock guide on a schedule. After a game with k games left that week, the game is worth locking if it scored at least value(k), rounded up as on the page. It never alerts for the week's last game, since Sleeper keeps that one anyway. It also never alerts once the player's next game has tipped off, since the chance to lock has passed. A player listed Out is valued at 0, so any game he played before being ruled out is worth locking.
@@ -81,4 +90,4 @@ The second command replays a day of last season's league.
 
 ## Next
 
-In-season: blend this season's actual FP/G into the projection as games are played, free agents ranked by next week's lock value, and the weekly matchup.
+In-season: blend this season's actual FP/G into the projection as games are played.

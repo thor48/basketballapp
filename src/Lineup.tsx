@@ -1,40 +1,37 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { bestLineup, currentWeek, lockValues, unavailable, usToday, weeksFromSchedule, type Week } from './lib/lineup'
-import { getSchedule } from './lib/sleeper'
+import { useMemo, useState, type ReactNode } from 'react'
+import {
+  bestLineup,
+  currentWeek,
+  datesBetween,
+  dayLetter,
+  shortDate,
+  usToday,
+  valuePlayers,
+  type LineupPlayer,
+  type Valued,
+  type Week,
+} from './lib/lineup'
+import { useWeeks } from './useWeeks'
 
-export type LineupPlayer = {
-  id: string
-  name: string
-  team: string
-  positions: string[]
-  injury: string
-  // Projected fantasy points per game in league scoring.
-  perGame: number
-}
+export type { LineupPlayer }
 
-const dayLetter = (date: string) => 'YMTWHFS'[new Date(`${date}T12:00:00`).getDay()]
-const shortDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })
 const format = (value: number) => value.toFixed(1)
 
-function datesBetween(start: string, end: string) {
-  const dates: string[] = []
-  for (let day = new Date(`${start}T12:00:00`); ; day.setDate(day.getDate() + 1)) {
-    const date = day.toLocaleDateString('en-CA')
-    dates.push(date)
-    if (date >= end) return dates
-  }
-}
-
-type Valued = LineupPlayer & { games: string[]; out: boolean; values: number[]; value: number }
-
-function valuePlayers(players: LineupPlayer[], week: Week): Valued[] {
-  return players.map((player) => {
-    const games = week.dates.get(player.team) ?? []
-    const out = unavailable.has(player.injury)
-    const values = lockValues(out ? 0 : player.perGame, games.length)
-    // A hair of FP/G breaks ties, so a week where nobody plays still starts the better players.
-    return { ...player, games, out, values, value: values[games.length] + player.perGame * 1e-3 }
-  })
+export function WeekBar({ weeks, week, onChange }: { weeks: Week[]; week: Week; onChange: (week: number) => void }) {
+  const today = usToday()
+  const live = week.start <= today && today <= week.end
+  const current = currentWeek(weeks).week
+  return (
+    <div className="week-bar">
+      <button className="chip" disabled={week.week <= weeks[0].week} onClick={() => onChange(week.week - 1)} aria-label="Previous week">‹</button>
+      <div>
+        <strong>Week {week.week}</strong>
+        <span className="meta"> · {shortDate(week.start)} – {shortDate(week.end)}{live ? ' · this week' : ''}</span>
+      </div>
+      <button className="chip" disabled={week.week >= weeks[weeks.length - 1].week} onClick={() => onChange(week.week + 1)} aria-label="Next week">›</button>
+      {current !== week.week && <button className="chip" onClick={() => onChange(current)}>Current</button>}
+    </div>
+  )
 }
 
 export default function Lineup({
@@ -52,28 +49,10 @@ export default function Lineup({
   sleeperStarters: string[] | null
   headshot: (player: LineupPlayer) => ReactNode
 }) {
-  const [weeks, setWeeks] = useState<Week[] | null>(null)
-  const [error, setError] = useState('')
+  const { weeks, error } = useWeeks(season)
   const [weekNo, setWeekNo] = useState<number | null>(null)
 
-  useEffect(() => {
-    let cancelled = false
-    getSchedule(season)
-      .then((games) => {
-        if (cancelled) return
-        const built = weeksFromSchedule(games)
-        setWeeks(built)
-        setWeekNo(currentWeek(built)?.week ?? null)
-      })
-      .catch((caught: unknown) => {
-        if (!cancelled) setError(caught instanceof Error ? caught.message : String(caught))
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [season])
-
-  const week = weeks?.find((entry) => entry.week === weekNo)
+  const week = weeks && (weeks.find((entry) => entry.week === weekNo) ?? currentWeek(weeks))
   const slots = useMemo(() => rosterPositions.filter((slot) => slot !== 'BN' && slot !== 'IR'), [rosterPositions])
 
   const plan = useMemo(() => {
@@ -101,9 +80,6 @@ export default function Lineup({
 
   const today = usToday()
   const days = datesBetween(week.start, week.end)
-  const live = week.start <= today && today <= week.end
-  const first = weeks[0].week
-  const last = weeks[weeks.length - 1].week
 
   const row = (slot: string, player: Valued | undefined, key: string) => {
     if (!player) {
@@ -159,17 +135,7 @@ export default function Lineup({
   return (
     <div className="layout">
       <section>
-        <div className="week-bar">
-          <button className="chip" disabled={week.week <= first} onClick={() => setWeekNo(week.week - 1)} aria-label="Previous week">‹</button>
-          <div>
-            <strong>Week {week.week}</strong>
-            <span className="meta"> · {shortDate(week.start)} – {shortDate(week.end)}{live ? ' · this week' : ''}</span>
-          </div>
-          <button className="chip" disabled={week.week >= last} onClick={() => setWeekNo(week.week + 1)} aria-label="Next week">›</button>
-          {currentWeek(weeks).week !== week.week && (
-            <button className="chip" onClick={() => setWeekNo(currentWeek(weeks).week)}>Current</button>
-          )}
-        </div>
+        <WeekBar weeks={weeks} week={week} onChange={setWeekNo} />
         <div className="table-wrap">
           <table className="lineup-table">
             <thead>

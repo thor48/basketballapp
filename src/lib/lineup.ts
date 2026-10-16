@@ -7,6 +7,17 @@ import type { ScheduleGame } from './sleeper'
 // therefore not added up. Every game is another chance at a big night, and a player with no
 // game that week scores nothing.
 
+// A player as the lineup and league pages value him.
+export type LineupPlayer = {
+  id: string
+  name: string
+  team: string
+  positions: string[]
+  injury: string
+  // Projected fantasy points per game in league scoring.
+  perGame: number
+}
+
 export type Week = {
   week: number
   start: string
@@ -43,6 +54,35 @@ export const unavailable = new Set(['Out', 'IR', 'Sus', 'NA'])
 // lines vary by roughly a quarter to a third game to game; one figure for everyone keeps the
 // model readable and only changes how much an extra game is worth, not who starts.
 export const gameSpread = 0.3
+
+export type Valued = LineupPlayer & { games: string[]; out: boolean; values: number[]; value: number }
+
+export function valuePlayers(players: LineupPlayer[], week: Week): Valued[] {
+  return players.map((player) => {
+    const games = week.dates.get(player.team) ?? []
+    const out = unavailable.has(player.injury)
+    const values = lockValues(out ? 0 : player.perGame, games.length)
+    // A hair of FP/G breaks ties, so a week where nobody plays still starts the better players.
+    return { ...player, games, out, values, value: values[games.length] + player.perGame * 1e-3 }
+  })
+}
+
+// Expected locked score of a roster's best starting lineup for the week.
+export function weekScore(slots: string[], players: LineupPlayer[], week: Week) {
+  return bestLineup(slots, valuePlayers(players, week)).starters.reduce((sum, entry) => sum + (entry.player ? entry.player.values[entry.player.games.length] : 0), 0)
+}
+
+export const dayLetter = (date: string) => 'YMTWHFS'[new Date(`${date}T12:00:00`).getDay()]
+export const shortDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })
+
+export function datesBetween(start: string, end: string) {
+  const dates: string[] = []
+  for (let day = new Date(`${start}T12:00:00`); ; day.setDate(day.getDate() + 1)) {
+    const date = day.toLocaleDateString('en-CA')
+    dates.push(date)
+    if (date >= end) return dates
+  }
+}
 
 // Standard normal density and cumulative distribution (Abramowitz and Stegun 7.1.26).
 const density = (z: number) => Math.exp(-z * z / 2) / Math.sqrt(2 * Math.PI)

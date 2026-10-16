@@ -34,7 +34,7 @@ export type League = {
   draft_id: string
   roster_positions: string[]
   scoring_settings: Record<string, number>
-  settings: { num_teams: number }
+  settings: { num_teams: number; playoff_week_start?: number }
 }
 
 export type Draft = {
@@ -81,6 +81,15 @@ export type Roster = {
   players?: string[] | null
   starters?: string[] | null
   reserve?: string[] | null
+  settings?: { wins?: number; losses?: number; ties?: number; fpts?: number; fpts_decimal?: number } | null
+}
+
+// One roster's side of a week's matchup. The two rosters sharing a `matchup_id` play each other;
+// `points` is their score so far, 0 before the week starts.
+export type Matchup = {
+  roster_id: number
+  matchup_id: number | null
+  points: number
 }
 
 // One NBA game. `week` is the Sleeper fantasy week it scores in, so no date maths is needed to
@@ -114,6 +123,7 @@ async function readJson<T>(path: string): Promise<T> {
 export const getLeague = (id: string) => readJson<League>(`/league/${id}`)
 export const getLeagueUsers = (id: string) => readJson<LeagueUser[]>(`/league/${id}/users`)
 export const getRosters = (id: string) => readJson<Roster[]>(`/league/${id}/rosters`)
+export const getMatchups = (id: string, week: number) => readJson<Matchup[]>(`/league/${id}/matchups/${week}`)
 export const getDraft = (id: string) => readJson<Draft>(`/draft/${id}`)
 export const getPicks = (id: string) => readJson<Pick[]>(`/draft/${id}/picks`)
 export const getTradedPicks = (id: string) => readJson<TradedPick[]>(`/draft/${id}/traded_picks`)
