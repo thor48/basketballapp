@@ -70,6 +70,7 @@ The homepage opens on the League tab, now the draft is over; the board, Teams an
 - Matchups come from `/league/<id>/matchups/<week>`: the two rosters sharing a `matchup_id` play each other. Each side shows its record, its projection and, once the week starts, Sleeper's points; the live week is re-read every minute. The projection is the roster's best lineup valued as on the lineup page (`weekScore`), with IR players left out. The league median, which every team also plays, is shown under the cards. Playoff weeks (from `playoff_week_start`) are placeholders in Sleeper, so they show a note instead.
 - Standings are each roster's `settings` wins, losses and `fpts`. Sleeper's record counts the median game too, so a season is 36 decisions.
 - Top free agents are board players on no roster, ranked by the selected week's lock value (games that week at their Cons FP/G), or by FP/G. Rosters are read once per page load.
+- Under the standings, every NBA team's games that week as day dots, most games first, for picking up streamers.
 - The NBA schedule is read once per season and shared by both tabs (`src/useWeeks.ts`).
 
 ## Lock alerts

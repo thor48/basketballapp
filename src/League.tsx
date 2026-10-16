@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { WeekBar } from './Lineup'
+import { GameDays, WeekBar } from './Lineup'
 import { fitsSlot } from './lib/draft'
-import { currentWeek, datesBetween, dayLetter, shortDate, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
+import { currentWeek, datesBetween, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
 import { getMatchups, type Matchup } from './lib/sleeper'
 import { useWeeks } from './useWeeks'
 
@@ -85,6 +85,8 @@ export default function League({
     () => new Map(week ? teams.map((team) => [team.rosterId, weekScore(slots, team.players, week)]) : []),
     [week, teams, slots],
   )
+  // Every NBA team on the schedule, so a team idle this week still gets a row.
+  const nbaTeams = useMemo(() => [...new Set((weeks ?? []).flatMap((entry) => [...entry.dates.keys()]))].sort(), [weeks])
   const valuedFreeAgents = useMemo(() => (week ? valuePlayers(freeAgents, week) : []), [week, freeAgents])
 
   if (error) return <p className="empty">Couldn't load the NBA schedule: {error}</p>
@@ -106,6 +108,9 @@ export default function League({
     .sort((a, b) => (byPerGame ? b.perGame - a.perGame : b.value - a.value))
     .slice(0, shownFreeAgents)
 
+  const nbaWeek = nbaTeams
+    .map((team) => ({ team, games: week.dates.get(team) ?? [] }))
+    .sort((a, b) => b.games.length - a.games.length || a.team.localeCompare(b.team))
   const standings = [...teams].sort((a, b) => b.wins - a.wins || a.losses - b.losses || b.pointsFor - a.pointsFor)
 
   return (
@@ -196,16 +201,7 @@ export default function League({
                     </div>
                   </td>
                   <td>
-                    <div className="days">
-                      {days.map((date) => {
-                        const plays = player.games.includes(date)
-                        return (
-                          <span key={date} className={`day ${plays ? 'plays' : ''} ${date < today ? 'past' : ''}`} title={`${shortDate(date)}${plays ? ' · game' : ''}`}>
-                            {dayLetter(date)}
-                          </span>
-                        )
-                      })}
-                    </div>
+                    <GameDays days={days} games={player.games} today={today} />
                   </td>
                   <td className="num strong">{player.games.length}</td>
                   <td className="num">{format(player.perGame)}</td>
@@ -218,7 +214,7 @@ export default function League({
         </div>
       </section>
 
-      <aside className="side">
+      <aside className="side league-side">
         <section className="panel">
           <h2>Standings</h2>
           <ol className="standings">
@@ -232,6 +228,20 @@ export default function League({
             ))}
           </ol>
           <p className="note">Wins include the weekly game against the league median. The last column is points for. The top six make the playoffs from week {playoffWeekStart}.</p>
+        </section>
+
+        <section className="panel">
+          <h2>NBA week {week.week}</h2>
+          <ul className="nba-week">
+            {nbaWeek.map(({ team, games }) => (
+              <li key={team} className={games.length ? '' : 'idle'}>
+                <span className="nba-team">{team}</span>
+                <GameDays days={days} games={games} today={today} />
+                <span className="num strong">{games.length}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="note">Teams with the most games first. Every game is another chance at a big night to lock.</p>
         </section>
       </aside>
     </div>

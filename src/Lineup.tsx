@@ -17,6 +17,22 @@ export type { LineupPlayer }
 
 const format = (value: number) => value.toFixed(1)
 
+// One dot per day of the week, orange on game days and faded once the day has passed.
+export function GameDays({ days, games, today }: { days: string[]; games: string[]; today: string }) {
+  return (
+    <div className="days">
+      {days.map((date) => {
+        const plays = games.includes(date)
+        return (
+          <span key={date} className={`day ${plays ? 'plays' : ''} ${date < today ? 'past' : ''}`} title={`${shortDate(date)}${plays ? ' · game' : ''}`}>
+            {dayLetter(date)}
+          </span>
+        )
+      })}
+    </div>
+  )
+}
+
 export function WeekBar({ weeks, week, onChange }: { weeks: Week[]; week: Week; onChange: (week: number) => void }) {
   const today = usToday()
   const live = week.start <= today && today <= week.end
@@ -107,16 +123,7 @@ export default function Lineup({
           </div>
         </td>
         <td>
-          <div className="days">
-            {days.map((date) => {
-              const plays = player.games.includes(date)
-              return (
-                <span key={date} className={`day ${plays ? 'plays' : ''} ${date < today ? 'past' : ''}`} title={`${shortDate(date)}${plays ? ' · game' : ''}`}>
-                  {dayLetter(date)}
-                </span>
-              )
-            })}
-          </div>
+          <GameDays days={days} games={player.games} today={today} />
         </td>
         <td className="num strong">{player.games.length}</td>
         <td className="num wide">{format(player.perGame)}</td>

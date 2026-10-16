@@ -163,6 +163,12 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .standings li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto 52px; gap: 8px; align-items: baseline; padding: 4px 0; font-size: 14px; }
 .standings-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .standings li.mine { color: var(--slime); font-weight: 600; }
+/* Thirty teams make this sidebar taller than the screen, so it scrolls with the page, and on
+   narrow screens it follows the matchups instead of leading. */
+.side.league-side { position: static; order: 0; }
+.nba-week li { display: grid; grid-template-columns: 40px minmax(0, 1fr) 16px; gap: 8px; align-items: center; padding: 3px 0; font-size: 13px; }
+.nba-week li.idle { opacity: .5; }
+.nba-team { font-weight: 700; }
 
 .footer { margin-top: 24px; color: var(--floor-muted); font-size: 12px; line-height: 1.6; }
 .footer a { color: var(--text); }
@@ -181,6 +187,8 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .brand { gap: 12px; }
   .logo { width: 64px; height: 64px; }
   .clock { width: 100%; text-align: left; }
+  .tabs { flex-wrap: wrap; }
+  .tabs button { padding: 6px 10px; }
   .scoring { flex-basis: 100%; padding: 10px 10px 12px; }
   .scoring-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .scoring-group.bonus .scoring-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
