@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { GameDays, WeekBar } from './Lineup'
 import { fitsSlot } from './lib/draft'
 import { currentWeek, datesBetween, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
@@ -17,7 +17,8 @@ export type LeagueTeam = {
 }
 
 const positions = ['ALL', 'PG', 'SG', 'SF', 'PF', 'C', 'G', 'F']
-const shownFreeAgents = 10
+// The free agent list shows at least this many, and beside the sidebar grows to match its height.
+const minFreeAgents = 10
 const format = (value: number) => value.toFixed(1)
 const record = (team: LeagueTeam) => `${team.wins}-${team.losses}${team.ties ? `-${team.ties}` : ''}`
 
@@ -51,6 +52,9 @@ export default function League({
   const [position, setPosition] = useState('ALL')
   const [byPerGame, setByPerGame] = useState(false)
   const [matchups, setMatchups] = useState<Record<number, Matchup[]>>({})
+  const [shownFreeAgents, setShownFreeAgents] = useState(minFreeAgents)
+  const sideRef = useRef<HTMLElement>(null)
+  const tableRef = useRef<HTMLDivElement>(null)
 
   const week = weeks && (weeks.find((entry) => entry.week === weekNo) ?? currentWeek(weeks))
   const today = usToday()
@@ -79,6 +83,36 @@ export default function League({
       window.clearInterval(timer)
     }
   }, [leagueId, weekNumber, playoffWeekStart, live])
+
+  // With the sidebar beside it, the list gains or drops whole rows until its foot lines up with
+  // the sidebar's, so neither column trails off. Stacked on a phone, it stays at the minimum.
+  const loaded = !!weeks
+  useEffect(() => {
+    const side = sideRef.current
+    const table = tableRef.current
+    if (!loaded || !side || !table) return
+    let timer = 0
+    const measure = () => {
+      window.clearTimeout(timer)
+      // Deferred, so resizing the list does not land inside the observer's own callback.
+      timer = window.setTimeout(() => {
+        const sideBox = side.getBoundingClientRect()
+        const tableBox = table.getBoundingClientRect()
+        const row = table.querySelector('tbody tr')?.getBoundingClientRect().height
+        if (sideBox.left < tableBox.right || !row) return setShownFreeAgents(minFreeAgents)
+        const extra = Math.floor((sideBox.bottom - tableBox.bottom) / row)
+        if (extra) setShownFreeAgents((count) => Math.max(minFreeAgents, count + extra))
+      })
+    }
+    const observer = new ResizeObserver(measure)
+    observer.observe(side)
+    observer.observe(table)
+    observer.observe(table.parentElement ?? table)
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(timer)
+    }
+  }, [loaded])
 
   const slots = useMemo(() => rosterPositions.filter((slot) => slot !== 'BN' && slot !== 'IR'), [rosterPositions])
   const projected = useMemo(
@@ -166,7 +200,7 @@ export default function League({
             ))}
           </div>
         </div>
-        <div className="table-wrap">
+        <div className="table-wrap" ref={tableRef}>
           <table className="lineup-table">
             <thead>
               <tr>
@@ -214,7 +248,7 @@ export default function League({
         </div>
       </section>
 
-      <aside className="side league-side">
+      <aside className="side league-side" ref={sideRef}>
         <section className="panel">
           <h2>Standings</h2>
           <ol className="standings">
