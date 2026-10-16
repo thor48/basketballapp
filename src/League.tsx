@@ -17,7 +17,7 @@ export type LeagueTeam = {
 }
 
 const positions = ['ALL', 'PG', 'SG', 'SF', 'PF', 'C', 'G', 'F']
-const shownFreeAgents = 25
+const shownFreeAgents = 10
 const format = (value: number) => value.toFixed(1)
 const record = (team: LeagueTeam) => `${team.wins}-${team.losses}${team.ties ? `-${team.ties}` : ''}`
 
