@@ -23,10 +23,6 @@ export type { LineupPlayer }
 
 const format = (value: number) => value.toFixed(1)
 const real = (id: string | undefined): id is string => !!id && id !== '0'
-// The Best lineup toggle and the Week plan's Start/Sit moves are hidden until this season's stats
-// can value players with no preseason projection. Until then they count as 0.0 FP/G, and the best
-// lineup benches them.
-const bestLineupView = false
 // How far a score is above or below its lock bar: +15, −7.5. A whole number drops its decimal.
 const margin = (value: number) => `${value < 0 ? '−' : '+'}${Number(Math.abs(value).toFixed(1))}`
 
@@ -349,12 +345,10 @@ export default function Lineup({
 
         {plan.hasSleeper && (
           <div className="view-bar">
-            {bestLineupView && (
-              <div className="chips">
-                <button className={shownView === 'sleeper' ? 'chip active' : 'chip'} onClick={() => setView('sleeper')}>Sleeper lineup</button>
-                <button className={shownView === 'best' ? 'chip active' : 'chip'} onClick={() => setView('best')}>Best lineup</button>
-              </div>
-            )}
+            <div className="chips">
+              <button className={shownView === 'sleeper' ? 'chip active' : 'chip'} onClick={() => setView('sleeper')}>Sleeper lineup</button>
+              <button className={shownView === 'best' ? 'chip active' : 'chip'} onClick={() => setView('best')}>Best lineup</button>
+            </div>
             <span className="meta">
               {shownView === 'sleeper' ? 'As set in Sleeper, re-read every minute while games are on.' : started ? 'Locked starters and anyone playing now stay put.' : 'The lineup worth the most this week.'}
             </span>
@@ -387,33 +381,31 @@ export default function Lineup({
       </section>
 
       <aside className="side">
-        {bestLineupView && (
-          <section className="panel">
-            <h2>Week {week.week} plan</h2>
-            <ul className="best">
-              <li><span>Best lineup</span><span /><span className="num strong">{format(plan.optimalTotal)}</span></li>
-              <li>
-                <span>Set in Sleeper</span>
-                <span />
-                <span className="num">{plan.currentTotal === null ? '—' : format(plan.currentTotal)}</span>
-              </li>
+        <section className="panel">
+          <h2>Week {week.week} plan</h2>
+          <ul className="best">
+            <li><span>Best lineup</span><span /><span className="num strong">{format(plan.optimalTotal)}</span></li>
+            <li>
+              <span>Set in Sleeper</span>
+              <span />
+              <span className="num">{plan.currentTotal === null ? '—' : format(plan.currentTotal)}</span>
+            </li>
+          </ul>
+          {plan.currentTotal === null ? (
+            <p className="note">No starters are set in Sleeper yet. Start the players above.</p>
+          ) : plan.start.length === 0 ? (
+            <p className="note good">Your Sleeper lineup already matches.</p>
+          ) : (
+            <ul className="moves">
+              {plan.start.map((player, index) => (
+                <li key={player.id}>
+                  <span className="good">Start {player.name} ({gamesNote(player)})</span>
+                  {plan.sit[index] && <span className="bad">Sit {plan.sit[index].name} ({gamesNote(plan.sit[index])})</span>}
+                </li>
+              ))}
             </ul>
-            {plan.currentTotal === null ? (
-              <p className="note">No starters are set in Sleeper yet. Start the players above.</p>
-            ) : plan.start.length === 0 ? (
-              <p className="note good">Your Sleeper lineup already matches.</p>
-            ) : (
-              <ul className="moves">
-                {plan.start.map((player, index) => (
-                  <li key={player.id}>
-                    <span className="good">Start {player.name} ({gamesNote(player)})</span>
-                    {plan.sit[index] && <span className="bad">Sit {plan.sit[index].name} ({gamesNote(plan.sit[index])})</span>}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        )}
+          )}
+        </section>
 
         <section className="panel">
           <h2>Lock guide</h2>
