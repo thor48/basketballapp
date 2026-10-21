@@ -104,8 +104,9 @@ export type ScheduleGame = {
   date: string
   week: number
   status: string
-  home: { team: string }
-  away: { team: string }
+  // `record` is the team's win-loss going into the game.
+  home: { team: string; record?: string }
+  away: { team: string; record?: string }
 }
 
 // One player's line from one game. `week` is the fantasy week; `date` and `game_id` match the
@@ -137,15 +138,31 @@ export const getPlayers = () => readJson<Record<string, SleeperPlayer>>('/player
 export const getProjections = (season: string) => readJson<Record<string, StatLine>>(`/projections/nba/regular/${season}`)
 // Season stats are totals, including the `bonus_*` game counts the projections lack.
 export const getSeasonStats = (season: string) => readJson<Record<string, StatLine>>(`/stats/nba/regular/${season}`)
-// The full regular-season schedule. It lives outside `/v1` but is just as public and CORS-open.
-export async function getSchedule(season: string) {
-  const response = await fetch(`https://api.sleeper.app/schedule/nba/regular/${season}`, { cache: 'no-store' })
-  if (!response.ok) throw new Error(`Sleeper schedule answered ${response.status}`)
-  return response.json() as Promise<ScheduleGame[]>
+// Reads outside `/v1`: unlisted, but just as public and CORS-open.
+async function readApp<T>(path: string, label: string): Promise<T> {
+  const response = await fetch(`https://api.sleeper.app${path}`, { cache: 'no-store' })
+  if (!response.ok) throw new Error(`Sleeper ${label} answered ${response.status}`)
+  return response.json() as Promise<T>
 }
-// Every game line of a fantasy week so far, one row per player per game. Also outside `/v1`.
-export async function getWeekGameLines(season: string, week: number) {
-  const response = await fetch(`https://api.sleeper.app/stats/nba/${season}/${week}?season_type=regular`, { cache: 'no-store' })
-  if (!response.ok) throw new Error(`Sleeper week ${week} stats answered ${response.status}`)
-  return response.json() as Promise<GameLine[]>
+
+// The full regular-season schedule.
+export const getSchedule = (season: string) => readApp<ScheduleGame[]>(`/schedule/nba/regular/${season}`, 'schedule')
+// Every game line of a fantasy week so far, one row per player per game.
+export const getWeekGameLines = (season: string, week: number) =>
+  readApp<GameLine[]>(`/stats/nba/${season}/${week}?season_type=regular`, `week ${week} stats`)
+// One player's game lines for a season, keyed by fantasy week; a week he has not played is empty.
+export const getPlayerGameLog = (season: string, playerId: string) =>
+  readApp<Record<string, GameLine[] | null>>(`/stats/nba/player/${playerId}?season_type=regular&season=${season}&grouping=week`, 'game log')
+
+// One news item. Sleeper carries RotoWire's player notes: a headline, what happened, and what
+// it means for him. `published` is epoch milliseconds.
+export type PlayerNews = {
+  player_id: string
+  source: string
+  source_key: string
+  published: number
+  metadata: { title?: string; description?: string; analysis?: string }
 }
+
+// A player's latest news, newest first. Sleeper returns about five items.
+export const getPlayerNews = (playerId: string) => readApp<PlayerNews[]>(`/players/nba/${playerId}/news`, 'news')

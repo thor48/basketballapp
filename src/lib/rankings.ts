@@ -29,6 +29,9 @@ export const rankingsFetchedAt = snapshot.fetchedAt
 
 const players = snapshot.players as Record<string, ExpertRanks>
 
+// Players with an ESPN or FantasyPros projection, so the board can value those Sleeper skips.
+export const projectedIds = new Set(Object.keys(players).filter((id) => projectionSources.some((source) => players[id].projections?.[source])))
+
 export function expertRanks(playerId: string): ExpertRanks {
   return players[playerId] ?? {}
 }

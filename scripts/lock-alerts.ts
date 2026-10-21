@@ -1,6 +1,7 @@
 // Lock alerts: posts to Discord when one of the owner's Sleeper starters finishes a game worth
 // locking. It is the lineup page's lock guide run on a schedule: after a game with k games still
-// to come that week, lock it if it scored at least value(k), what waiting on those k is worth.
+// to come that week, lock it if it scored at least lockBar: what waiting on those k is worth,
+// capped at 10% over his FP/G.
 // The week's last game never alerts, since Sleeper keeps it anyway, and nor does a game once the
 // player's next one has tipped off, since the chance to lock it has passed.
 //
@@ -16,7 +17,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { parseArgs } from 'node:util'
-import { currentWeek, lockValues, unavailable, usToday, weeksFromSchedule } from '../src/lib/lineup.ts'
+import { currentWeek, lockBar, unavailable, usToday, weeksFromSchedule } from '../src/lib/lineup.ts'
 import type { ExpertRanks } from '../src/lib/rankings.ts'
 import { projectedPerGame, scoreLine } from '../src/lib/scoring.ts'
 import { defaultUserId, getLeague, getPlayers, getProjections, getRosters, getSchedule, getWeekGameLines, leagueId } from '../src/lib/sleeper.ts'
@@ -84,10 +85,10 @@ for (const id of starters) {
 
   const score = scoreLine(line.stats, league.scoring_settings)
   const projection = projections[id]
-  // Same number the lineup page values him by: Cons FP/G, or 0 for a player it does not rank.
-  const perGame = (projection?.pts ?? 0) > 0 ? projectedPerGame(projection, experts[id]?.projections, league.scoring_settings).consensus : 0
+  // Same number the lineup page values him by: Cons FP/G, or 0 for a player nobody projects.
+  const perGame = projectedPerGame(projection, experts[id]?.projections, league.scoring_settings).consensus
   const out = unavailable.has(player.injury_status ?? '')
-  const bar = Math.ceil(lockValues(out ? 0 : perGame, left.length)[left.length])
+  const bar = lockBar(out ? 0 : perGame, left.length)
   const verdict = score > 0 && score >= bar ? 'LOCK' : 'wait'
   console.log(`  ${verdict.padEnd(4)} ${name}: ${format(score)} on ${last.date}, bar ${bar} with ${left.length} left`)
   if (verdict !== 'LOCK') continue

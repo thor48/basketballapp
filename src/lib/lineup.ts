@@ -16,6 +16,9 @@ export type LineupPlayer = {
   injury: string
   // Projected fantasy points per game in league scoring.
   perGame: number
+  // Last season's FP/G and games, for the player panel. Absent for players off the board.
+  lastPerGame?: number | null
+  lastGp?: number | null
 }
 
 export type Week = {
@@ -109,6 +112,17 @@ export function lockValues(mean: number, games: number) {
     values.push(wait * cumulative(z) + mean * (1 - cumulative(z)) + sd * density(z))
   }
   return values
+}
+
+// How far over his FP/G a game must be to lock it, at most. Waiting on three or four games is
+// worth roughly 19 to 24% over FP/G in theory, but a big night in hand beats one hoped for.
+export const lockEase = 0.1
+
+// The lock guide's bar: after a game with `left` games still to come, lock it if it scored at
+// least this. It is what waiting on those games is worth, capped at `lockEase` over FP/G, so the
+// cap only ever lowers it; with one game left it is his FP/G.
+export function lockBar(perGame: number, left: number) {
+  return Math.ceil(Math.min(lockValues(perGame, left)[left], perGame * (1 + lockEase)))
 }
 
 // The best starting lineup for a set of players, each worth `value`. Unlike the draft board's

@@ -158,6 +158,35 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .lock-count { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font: 600 11px 'DM Sans', sans-serif; font-style: normal; letter-spacing: 0; white-space: nowrap; }
 .lock-count.all { color: var(--slime); }
 
+/* A lineup row opens a panel under it: summary tiles, news, next games and the game log. */
+.lineup-table tr.expandable { cursor: pointer; }
+.lineup-table tr.expandable:focus-visible { outline: 2px solid var(--slime); outline-offset: -2px; }
+.lineup-table tr.expanded td { background: var(--panel-2); }
+.lineup-table tr.expanded.idle td { opacity: 1; }
+.lineup-table tr.detail-row td { padding: 0; background: var(--panel-2); border-top: 0; cursor: default; }
+tbody tr.detail-row:hover td { background: var(--panel-2); }
+.player-detail { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px 22px; padding: 4px 14px 16px 60px; }
+.player-detail h3 { margin-bottom: 6px; color: var(--slime); font: 600 13px 'Barlow Condensed', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.detail-summary { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.detail-summary span { display: grid; min-width: 110px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.detail-summary strong { font: italic 700 22px 'Barlow Condensed', sans-serif; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.detail-summary small { color: var(--muted); font-size: 11px; }
+.detail-news li { display: grid; gap: 3px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.45; }
+.detail-news li:first-child { border-top: 0; padding-top: 0; }
+.news-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.news-head small { flex: none; color: var(--muted); font-size: 11px; }
+.detail-source { margin-top: 6px; color: var(--muted); font-size: 11px; }
+.detail-next li { display: grid; grid-template-columns: 82px 58px auto; gap: 6px; align-items: baseline; padding: 3px 0; font-size: 13px; white-space: nowrap; }
+.detail-next li.detail-week { display: block; padding: 6px 0 2px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.detail-next li.detail-week:first-child { padding-top: 0; }
+/* The latest item reads in full; older analysis keeps to two lines, with the rest on hover. */
+.detail-news li + li .news-analysis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.detail-log { grid-column: 1 / -1; }
+.detail-log-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.detail-log th { position: static; padding: 6px 8px; font-size: 11px; }
+.detail-log td { padding: 5px 8px; font-size: 13px; }
+.detail-log tbody tr:hover td { background: transparent; }
+
 /* Matchup scoreboard on the lineup page: the scoring card's dark board, one half per team. */
 .scoreboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 12px; border-radius: 10px; border-top: 3px solid var(--ball); background: var(--board); color: #f4ece0; box-shadow: var(--lift); overflow: hidden; }
 .scoreboard-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'team score' 'meta score'; gap: 2px 12px; align-items: center; padding: 12px 16px; }
@@ -244,6 +273,8 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .lineup-table td, .lineup-table th { padding-left: 5px; padding-right: 5px; }
   .lineup-player .headshot { display: none; }
   .scoreboard { grid-template-columns: 1fr; }
+  .player-detail { grid-template-columns: 1fr; padding: 4px 10px 14px; }
+  .detail-summary span { flex: 1 1 90px; min-width: 0; }
   .scoreboard-side { padding: 10px 14px; }
   .scoreboard-side + .scoreboard-side { border-left: 0; border-top: 1px solid rgba(244, 236, 224, .12); }
   .scoreboard-score { font-size: 32px; }

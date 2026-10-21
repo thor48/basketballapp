@@ -4,7 +4,7 @@ import LeaguePage, { type LeagueTeam } from './League'
 import Lineup, { type LineupPlayer } from './Lineup'
 import { bestLineup } from './lib/lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
-import { expertAverage, expertRanks, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
+import { expertAverage, expertRanks, projectedIds, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
 import { projectedPerGame, scoreLine, scoringTable, type ScoringItem } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
@@ -36,7 +36,8 @@ type BoardPlayer = {
   team: string
   positions: string[]
   injury: string
-  proj: number
+  // Sleeper's projected FP/G, null when Sleeper projects nothing for him.
+  proj: number | null
   last: number | null
   lastGp: number | null
   adp: number | null
@@ -241,9 +242,11 @@ function buildBoard(
   draftable: number,
 ) {
   const rows: BoardPlayer[] = []
-  for (const [id, line] of Object.entries(projections)) {
+  // Everyone Sleeper projects, plus anyone it skips that ESPN or FantasyPros projects.
+  for (const id of new Set([...Object.keys(projections), ...projectedIds])) {
     const player = players[id]
-    if (!player || !(line.pts > 0)) continue
+    const line = projections[id] ?? {}
+    if (!player || !(line.pts > 0 || projectedIds.has(id))) continue
     const lastLine = stats[id]
     const lastGp = lastLine?.gp ? lastLine.gp : null
     const adp = line.adp_std && line.adp_std < 999 ? line.adp_std : null
@@ -294,7 +297,7 @@ function unprojectedPlayer(pick: Pick): BoardPlayer {
     team: meta.team || 'FA',
     positions: meta.position ? [meta.position] : [],
     injury: '',
-    proj: 0,
+    proj: null,
     last: null,
     lastGp: null,
     adp: null,
@@ -509,7 +512,7 @@ export default function App({ account, accountControl }: { account: Account | nu
 
   const toLineup = useMemo(() => (id: string): LineupPlayer | null => {
     const board = playerById.get(id)
-    if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus }
+    if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus, lastPerGame: board.last, lastGp: board.lastGp }
     const player = base?.players[id]
     if (!player) return null
     return {

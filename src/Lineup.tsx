@@ -1,10 +1,12 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { Fragment, useMemo, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { LeagueTeam } from './League'
+import PlayerDetail from './PlayerDetail'
 import {
   bestLineup,
   currentWeek,
   datesBetween,
   dayLetter,
+  lockBar,
   shortDate,
   usToday,
   valuePlayers,
@@ -127,9 +129,11 @@ export default function Lineup({
   lookup: (id: string) => LineupPlayer | null
   headshot: (player: LineupPlayer) => ReactNode
 }) {
-  const { weeks, error } = useWeeks(season)
+  const { weeks, games: schedule, error } = useWeeks(season)
   const [weekNo, setWeekNo] = useState<number | null>(null)
   const [view, setView] = useState<'sleeper' | 'best'>('sleeper')
+  // The player whose row is open, showing his news, next games and game log.
+  const [opened, setOpened] = useState<string | null>(null)
 
   const week = weeks && (weeks.find((entry) => entry.week === weekNo) ?? currentWeek(weeks))
   const slots = useMemo(() => rosterPositions.filter((slot) => slot !== 'BN' && slot !== 'IR'), [rosterPositions])
@@ -219,40 +223,63 @@ export default function Lineup({
       )
     }
     const state = player.state
+    const open = opened === player.id
+    const toggle = () => setOpened(open ? null : player.id)
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return
+      event.preventDefault()
+      toggle()
+    }
     return (
-      <tr key={key} className={player.games.length === 0 || player.out ? 'idle' : ''}>
-        <td className="slot">{slot}</td>
-        <td>
-          <div className="rank-cell lineup-player">
-            {headshot(player)}
-            <div className="player">
-              <span className="name">{player.name}</span>
-              <span className="meta">
-                {player.positions.join('/')} · {player.team}
-                {player.injury && <em className="tag injury">{player.injury}</em>}
-                {state?.playing && <em className="tag playing">Playing</em>}
-              </span>
-            </div>
-          </div>
-        </td>
-        <td>
-          <GameDays days={days} games={player.games} today={today} played={state?.played} locked={state?.lock?.why === 'locked' ? state.lock.date : null} />
-        </td>
-        <td className="num strong">{player.games.length}</td>
-        <td className="num wide">{format(player.perGame)}</td>
-        <td
-          className="num strong"
-          title={state ? 'Expected final points from here, counting his lock and the games he has left' : 'Expected locked score: one game counts, and more games mean more chances at a big one'}
+      <Fragment key={key}>
+        <tr
+          className={`expandable ${open ? 'expanded' : ''} ${player.games.length === 0 || player.out ? 'idle' : ''}`}
+          onClick={toggle}
+          onKeyDown={onKey}
+          tabIndex={0}
+          aria-expanded={open}
+          title={open ? undefined : 'Show news, next games and stats'}
         >
-          {format(player.expected)}
-        </td>
-        {started && (
-          <td className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock ? 'locked' : ''}`} title={state?.lock ? lockTitle(state.lock) : player.starting ? 'Sleeper points so far' : 'Bench points do not count'}>
-            {state?.played.length || state?.points ? format(state.points) : '—'}
-            {state?.lock && <LockIcon />}
+          <td className="slot">{slot}</td>
+          <td>
+            <div className="rank-cell lineup-player">
+              {headshot(player)}
+              <div className="player">
+                <span className="name">{player.name}</span>
+                <span className="meta">
+                  {player.positions.join('/')} · {player.team}
+                  {player.injury && <em className="tag injury">{player.injury}</em>}
+                  {state?.playing && <em className="tag playing">Playing</em>}
+                </span>
+              </div>
+            </div>
           </td>
+          <td>
+            <GameDays days={days} games={player.games} today={today} played={state?.played} locked={state?.lock?.why === 'locked' ? state.lock.date : null} />
+          </td>
+          <td className="num strong">{player.games.length}</td>
+          <td className="num wide">{format(player.perGame)}</td>
+          <td
+            className="num strong"
+            title={state ? 'Expected final points from here, counting his lock and the games he has left' : 'Expected locked score: one game counts, and more games mean more chances at a big one'}
+          >
+            {format(player.expected)}
+          </td>
+          {started && (
+            <td className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock ? 'locked' : ''}`} title={state?.lock ? lockTitle(state.lock) : player.starting ? 'Sleeper points so far' : 'Bench points do not count'}>
+              {state?.played.length || state?.points ? format(state.points) : '—'}
+              {state?.lock && <LockIcon />}
+            </td>
+          )}
+        </tr>
+        {open && (
+          <tr className="detail-row">
+            <td colSpan={columns}>
+              <PlayerDetail player={player} season={season} scoring={scoring} schedule={schedule} today={today} />
+            </td>
+          </tr>
         )}
-      </tr>
+      </Fragment>
     )
   }
 
@@ -396,7 +423,7 @@ export default function Lineup({
                 const state = player.state
                 const latest = state?.played.at(-1)
                 // His latest game, once over, is worth locking if it beat what the games left are worth.
-                const bar = state && state.left ? Math.ceil(player.values[state.left]) : null
+                const bar = state && state.left ? lockBar(player.perGame, state.left) : null
                 const verdict = !state || state.lock || state.playing || !latest?.done || bar === null ? null : latest.score >= bar ? 'lock' : 'wait'
                 return (
                   <li key={player.id}>
@@ -418,7 +445,7 @@ export default function Lineup({
                       {player.games.map((date, index) => {
                         const left = player.games.length - index - 1
                         const game = state?.played.find((entry) => entry.date === date)
-                        const target = left ? Math.ceil(player.values[left]) : null
+                        const target = left ? lockBar(player.perGame, left) : null
                         return (
                           <span key={date} className={date < today && !game ? 'muted' : ''}>
                             {index ? ' · ' : ''}
