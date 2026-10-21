@@ -94,14 +94,19 @@ const syncedKey = 'hoops.starred.synced'
 const params = new URLSearchParams(window.location.search)
 // `?draft=` and `?user=` replay another draft, e.g. last season's finished one, for testing.
 const draftOverride = params.get('draft')
-// Unlisted lineup-only pages, one per team, keyed by the lowercased path. Owners are pinned by
-// Sleeper user id so a renamed team keeps its URL.
+// Lineup pages, one per team, keyed by path and linked from the footer. The path matches in any
+// case. Owners are pinned by Sleeper user id so a renamed team keeps its URL.
 const teamPages: Record<string, string> = {
-  thorbergbc: defaultUserId,
+  ThorbergBC: defaultUserId,
   ccanderson99: '1257439963113345024',
-  rimjob: '995037716922372096',
+  RimJob: '995037716922372096',
 }
-const teamPage = teamPages[window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase()]
+const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase()
+const teamPage = Object.entries(teamPages).find(([name]) => name.toLowerCase() === path)?.[1]
+// The draft's pages, kept now the draft is over and linked from the footer. The Teams page is
+// built from the draft's picks, so it shows each team as drafted, not as it stands.
+const archivePages = { board: 'Draft board', teams: 'Draft teams' } as const
+const archivePage = path in archivePages ? (path as keyof typeof archivePages) : undefined
 const userId = teamPage ?? params.get('user') ?? defaultUserId
 
 const sortLabels: Record<SortKey, string> = {
@@ -354,7 +359,7 @@ export default function App({ account, accountControl }: { account: Account | nu
   const [starredOnly, setStarredOnly] = useState(false)
   const [needsOnly, setNeedsOnly] = useState(false)
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: 'rank', desc: false })
-  const [tab, setTab] = useState<'league' | 'board' | 'teams' | 'lineup'>(teamPage ? 'lineup' : 'league')
+  const [tab, setTab] = useState<'league' | 'board' | 'teams' | 'lineup'>(teamPage ? 'lineup' : (archivePage ?? 'league'))
   const [starred, setStarred] = useState(readStarred)
   const [now, setNow] = useState(() => Date.now())
   const [attempt, setAttempt] = useState(0)
@@ -391,6 +396,29 @@ export default function App({ account, accountControl }: { account: Account | nu
     }, delay)
     return () => window.clearInterval(timer)
   }, [draftId, draftStatus])
+
+  // Once the draft is done, rosters are re-read every minute while the page is in view, and at once
+  // when it comes back into view, so lineup moves, adds and drops made in Sleeper show up here.
+  const rosterLeagueId = live?.draft.league_id
+  useEffect(() => {
+    if (!rosterLeagueId || draftStatus !== 'complete') return
+    const refresh = async () => {
+      if (document.hidden) return
+      try {
+        const rosters = await getRosters(rosterLeagueId)
+        // Unchanged rosters keep their object, so nothing downstream recomputes.
+        setBase((current) => (current && JSON.stringify(current.rosters) !== JSON.stringify(rosters) ? { ...current, rosters } : current))
+      } catch {
+        // A missed read is retried on the next tick.
+      }
+    }
+    const timer = window.setInterval(refresh, 60000)
+    document.addEventListener('visibilitychange', refresh)
+    return () => {
+      window.clearInterval(timer)
+      document.removeEventListener('visibilitychange', refresh)
+    }
+  }, [rosterLeagueId, draftStatus])
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -508,6 +536,7 @@ export default function App({ account, accountControl }: { account: Account | nu
       players: list((id) => !reserveIds.has(id)),
       reserve: list((id) => reserveIds.has(id)),
       starters: roster?.starters ?? null,
+      rosterId: roster?.roster_id ?? draftState.myRosterId,
     }
   }, [base, draftState, toLineup])
 
@@ -650,13 +679,13 @@ export default function App({ account, accountControl }: { account: Account | nu
             <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>{myTeamName} lineup</button>
             <button className={tab === 'league' ? 'active' : ''} onClick={() => setTab('league')}>League</button>
           </>
-        ) : (
+        ) : archivePage ? (
           <>
-            <button className={tab === 'league' ? 'active' : ''} onClick={() => setTab('league')}>League</button>
-            <button className={tab === 'lineup' ? 'active' : ''} onClick={() => setTab('lineup')}>My lineup</button>
-            <button className={tab === 'teams' ? 'active' : ''} onClick={() => setTab('teams')}>Teams</button>
-            <button className={tab === 'board' ? 'active' : ''} onClick={() => setTab('board')}>Board</button>
+            <a href="/">League</a>
+            <button className="active">{archivePages[archivePage]}</button>
           </>
+        ) : (
+          <button className="active">League</button>
         )}
         {!teamPage && draft.status !== 'complete' && (
           <span className="sync">
@@ -671,19 +700,28 @@ export default function App({ account, accountControl }: { account: Account | nu
           leagueId={base.league.league_id}
           season={base.league.season}
           rosterPositions={base.league.roster_positions}
+          scoring={base.league.scoring_settings}
           playoffWeekStart={base.league.settings.playoff_week_start ?? 19}
           teams={leagueData.teams}
           freeAgents={leagueData.freeAgents}
           myRosterId={leagueData.myRosterId}
+          lookup={toLineup}
           headshot={(player) => <Headshot id={player.id} name={player.name} />}
         />
       ) : tab === 'lineup' && myRoster ? (
         <Lineup
+          leagueId={base.league.league_id}
           season={base.league.season}
           rosterPositions={base.league.roster_positions}
+          scoring={base.league.scoring_settings}
+          playoffWeekStart={base.league.settings.playoff_week_start ?? 19}
+          rosterId={myRoster.rosterId}
+          teamName={myTeamName}
+          teams={leagueData?.teams ?? []}
           players={myRoster.players}
           reserve={myRoster.reserve}
           sleeperStarters={myRoster.starters}
+          lookup={toLineup}
           headshot={(player) => <Headshot id={player.id} name={player.name} />}
         />
       ) : tab === 'board' ? (
@@ -876,22 +914,38 @@ export default function App({ account, accountControl }: { account: Account | nu
       )}
 
       <footer className="footer">
-        Rank orders Cons FP/G: projected points per game in this league's scoring, averaged across Sleeper's projection and{' '}
-        {projectionSources.map((source, index) => (
-          <Fragment key={source}>
-            {index ? ' and ' : ''}
-            <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}'s</a>
-          </Fragment>
-        ))}. The other two project no double- or triple-doubles, so they borrow Sleeper's rates, and no projection includes the 40/50 point, 15 assist and 20 rebound bonuses. Proj GP averages ESPN's and FantasyPros' projected games, in orange under 60.
-        {' '}ADP and last season ({Number(base.league.season) - 1}, with its bonuses) are from Sleeper. ADP gap is standard ADP minus rank, shown for the top players a full draft would take: positive means the room usually takes him later than his points say.
-        {' '}Experts is the average of the{' '}
-        {(['espn', 'rotowire', 'rotoballer'] as const).map((source, index) => (
-          <Fragment key={source}>
-            {index ? (index === 2 ? ' and ' : ', ') : ''}
-            <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}</a>
-          </Fragment>
-        ))}{' '}
-        points-league rankings, which publish an order but no stats to rescore. Tiers are <a href={rankingSources.tiers.url} target="_blank" rel="noreferrer">ESPN's points draft tiers</a> by position. Outside data as of {new Date(rankingsFetchedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}.
+        <nav className="footer-links" aria-label="Team pages">
+          <span>Team pages:</span>
+          {Object.keys(teamPages).map((name) => (
+            <a key={name} href={`/${name}`}>{name}</a>
+          ))}
+        </nav>
+        <nav className="footer-links" aria-label="Archive">
+          <span>From the draft:</span>
+          {Object.entries(archivePages).map(([key, label]) => (
+            <a key={key} href={`/${key}`}>{label}</a>
+          ))}
+        </nav>
+        {tab === 'board' && (
+          <p>
+            Rank orders Cons FP/G: projected points per game in this league's scoring, averaged across Sleeper's projection and{' '}
+            {projectionSources.map((source, index) => (
+              <Fragment key={source}>
+                {index ? ' and ' : ''}
+                <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}'s</a>
+              </Fragment>
+            ))}. The other two project no double- or triple-doubles, so they borrow Sleeper's rates, and no projection includes the 40/50 point, 15 assist and 20 rebound bonuses. Proj GP averages ESPN's and FantasyPros' projected games, in orange under 60.
+            {' '}ADP and last season ({Number(base.league.season) - 1}, with its bonuses) are from Sleeper. ADP gap is standard ADP minus rank, shown for the top players a full draft would take: positive means the room usually takes him later than his points say.
+            {' '}Experts is the average of the{' '}
+            {(['espn', 'rotowire', 'rotoballer'] as const).map((source, index) => (
+              <Fragment key={source}>
+                {index ? (index === 2 ? ' and ' : ', ') : ''}
+                <a href={rankingSources[source].url} target="_blank" rel="noreferrer">{rankingSources[source].name}</a>
+              </Fragment>
+            ))}{' '}
+            points-league rankings, which publish an order but no stats to rescore. Tiers are <a href={rankingSources.tiers.url} target="_blank" rel="noreferrer">ESPN's points draft tiers</a> by position. Outside data as of {new Date(rankingsFetchedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}.
+          </p>
+        )}
       </footer>
     </div>
   )

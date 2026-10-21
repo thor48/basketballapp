@@ -32,7 +32,7 @@
 .clock.mine strong { color: var(--ecto); }
 
 .tabs { display: flex; align-items: center; gap: 6px; margin: 14px 0; }
-.tabs button { white-space: nowrap; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--muted); font-weight: 600; }
+.tabs button, .tabs a { white-space: nowrap; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--muted); font-weight: 600; text-decoration: none; }
 .tabs button.active { border-color: var(--slime); color: var(--slime); }
 .sync { margin-left: auto; color: var(--floor-muted); font-size: 12px; }
 .account { display: flex; align-items: center; }
@@ -139,6 +139,37 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .day { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--panel-2); color: var(--muted); font-size: 10px; font-weight: 700; }
 .day.plays { background: var(--ball); color: var(--board); }
 .day.past { opacity: .45; }
+.day.locked { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--slime); opacity: 1; }
+.lock-icon { flex: none; vertical-align: -1px; }
+.lineup-table td.pts { white-space: nowrap; }
+.lineup-table td.pts .lock-icon { margin-left: 4px; color: var(--slime); }
+.lineup-table td.pts.locked { color: var(--slime); }
+.tag.playing { background: rgba(240, 124, 42, .16); color: var(--orange); }
+.tag.locked, .tag.lock-now { background: rgba(176, 240, 29, .3); color: var(--slime); }
+.tag.wait { background: var(--line); color: var(--muted); }
+.tag .lock-icon { width: 8px; height: 10px; vertical-align: 0; }
+.view-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 10px; }
+.view-bar .meta { color: var(--floor-muted); font-size: 13px; }
+.live-dot { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--ball); box-shadow: 0 0 0 3px rgba(240, 124, 42, .3); animation: live-pulse 2s ease-in-out infinite; }
+@keyframes live-pulse { 50% { box-shadow: 0 0 0 1px rgba(240, 124, 42, .1); } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+.lock-count { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font: 600 11px 'DM Sans', sans-serif; font-style: normal; letter-spacing: 0; white-space: nowrap; }
+.lock-count.all { color: var(--slime); }
+
+/* Matchup scoreboard on the lineup page: the scoring card's dark board, one half per team. */
+.scoreboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 12px; border-radius: 10px; border-top: 3px solid var(--ball); background: var(--board); color: #f4ece0; box-shadow: var(--lift); overflow: hidden; }
+.scoreboard-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'team score' 'meta score'; gap: 2px 12px; align-items: center; padding: 12px 16px; }
+.scoreboard-side + .scoreboard-side { border-left: 1px solid rgba(244, 236, 224, .12); }
+.scoreboard-team { grid-area: team; display: grid; min-width: 0; }
+.scoreboard-team strong { overflow: hidden; font: 700 20px 'Barlow Condensed', sans-serif; letter-spacing: .04em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.scoreboard-team small { color: #a8967f; font-size: 12px; }
+.scoreboard-score { grid-area: score; color: #f4ece0; font: italic 700 40px 'Barlow Condensed', sans-serif; line-height: 1; font-variant-numeric: tabular-nums; }
+.scoreboard-side.ahead .scoreboard-score { color: var(--ball); }
+.scoreboard-side.won .scoreboard-score { color: var(--ecto); }
+.scoreboard-meta { grid-area: meta; display: flex; flex-wrap: wrap; gap: 4px 12px; color: #a8967f; font-size: 12px; font-variant-numeric: tabular-nums; }
+.scoreboard-meta .lock-count { color: #a8967f; }
+.scoreboard-meta .lock-count.all { color: var(--ecto); }
+.scoreboard-sync { grid-column: 1 / -1; display: flex; align-items: center; padding: 6px 16px; border-top: 1px solid rgba(244, 236, 224, .12); color: #a8967f; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
 .moves li { display: grid; gap: 2px; padding: 4px 0; font-size: 13px; }
 .guide li { display: grid; gap: 1px; padding: 4px 0; font-size: 13px; }
 
@@ -153,7 +184,7 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 .matchup-team strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .matchup-team small, .matchup-proj small { color: var(--muted); font-size: 11px; }
 .matchup-proj { display: grid; justify-items: end; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; line-height: 1.1; }
-.matchup-score { min-width: 56px; text-align: right; font: italic 700 24px 'Barlow Condensed', sans-serif; font-variant-numeric: tabular-nums; }
+.matchup-score { display: grid; justify-items: end; min-width: 56px; text-align: right; font: italic 700 24px 'Barlow Condensed', sans-serif; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .matchup-side.ahead .matchup-score { color: var(--orange); }
 .matchup-side.won { background: rgba(176, 240, 29, .18); }
 .matchup-side.won .matchup-score, .matchup-side.won strong { color: var(--slime); }
@@ -172,6 +203,8 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 
 .footer { margin-top: 24px; color: var(--floor-muted); font-size: 12px; line-height: 1.6; }
 .footer a { color: var(--text); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 6px; }
+.footer-links a { font-weight: 600; }
 
 @media (max-width: 960px) {
   .layout { grid-template-columns: 1fr; }
@@ -208,5 +241,9 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
   .lineup-table td.slot { width: auto; }
   .lineup-table td, .lineup-table th { padding-left: 5px; padding-right: 5px; }
   .lineup-player .headshot { display: none; }
+  .scoreboard { grid-template-columns: 1fr; }
+  .scoreboard-side { padding: 10px 14px; }
+  .scoreboard-side + .scoreboard-side { border-left: 0; border-top: 1px solid rgba(244, 236, 224, .12); }
+  .scoreboard-score { font-size: 32px; }
   .toggles { flex-wrap: wrap; }
 }

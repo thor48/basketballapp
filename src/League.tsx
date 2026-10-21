@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { GameDays, WeekBar } from './Lineup'
+import { GameDays, LockCount, WeekBar } from './Lineup'
 import { fitsSlot } from './lib/draft'
 import { currentWeek, datesBetween, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
-import { getMatchups, type Matchup } from './lib/sleeper'
+import { sideSummary } from './lib/live'
+import type { Matchup } from './lib/sleeper'
+import { useLiveWeek } from './useLiveWeek'
 import { useWeeks } from './useWeeks'
 
 export type LeagueTeam = {
@@ -32,57 +34,41 @@ export default function League({
   leagueId,
   season,
   rosterPositions,
+  scoring,
   playoffWeekStart,
   teams,
   freeAgents,
   myRosterId,
+  lookup,
   headshot,
 }: {
   leagueId: string
   season: string
   rosterPositions: string[]
+  scoring: Record<string, number>
   playoffWeekStart: number
   teams: LeagueTeam[]
   freeAgents: LineupPlayer[]
   myRosterId: number | undefined
+  // Any player by Sleeper id, for a starter no longer on his roster.
+  lookup: (id: string) => LineupPlayer | null
   headshot: (player: LineupPlayer) => ReactNode
 }) {
   const { weeks, error } = useWeeks(season)
   const [weekNo, setWeekNo] = useState<number | null>(null)
   const [position, setPosition] = useState('ALL')
   const [byPerGame, setByPerGame] = useState(false)
-  const [matchups, setMatchups] = useState<Record<number, Matchup[]>>({})
   const [shownFreeAgents, setShownFreeAgents] = useState(minFreeAgents)
   const sideRef = useRef<HTMLElement>(null)
   const tableRef = useRef<HTMLDivElement>(null)
 
   const week = weeks && (weeks.find((entry) => entry.week === weekNo) ?? currentWeek(weeks))
   const today = usToday()
-  const started = !!week && week.start <= today
-  const live = started && !!week && today <= week.end
   const playoffs = !!week && week.week >= playoffWeekStart
-  const weekNumber = week?.week
-
   // Sleeper's playoff matchups are placeholders until the bracket is seeded, so only regular
-  // season weeks are read. Scores move while a week is being played, so that week is re-read.
-  useEffect(() => {
-    if (weekNumber === undefined || weekNumber >= playoffWeekStart) return
-    let cancelled = false
-    const load = () =>
-      getMatchups(leagueId, weekNumber)
-        .then((list) => {
-          if (!cancelled) setMatchups((current) => ({ ...current, [weekNumber]: list }))
-        })
-        .catch(() => {
-          // A missed read is retried on the next tick or week change.
-        })
-    load()
-    const timer = live ? window.setInterval(load, 60000) : undefined
-    return () => {
-      cancelled = true
-      window.clearInterval(timer)
-    }
-  }, [leagueId, weekNumber, playoffWeekStart, live])
+  // season weeks are read.
+  const { snapshot, started, live } = useLiveWeek(leagueId, season, week, !!week && !playoffs)
+  const matchups = useMemo(() => snapshot?.matchups ?? [], [snapshot])
 
   // With the sidebar beside it, the list gains or drops whole rows until its foot lines up with
   // the sidebar's, so neither column trails off. Stacked on a phone, it stays at the minimum.
@@ -115,9 +101,18 @@ export default function League({
   }, [loaded])
 
   const slots = useMemo(() => rosterPositions.filter((slot) => slot !== 'BN' && slot !== 'IR'), [rosterPositions])
+  // Once games are played, each side's starters as they stand in Sleeper, with their locks.
+  const summaries = useMemo(() => {
+    const weekLive = started ? snapshot?.live : null
+    return new Map(weekLive ? matchups.map((side) => [side.roster_id, sideSummary(side, lookup, weekLive, scoring)]) : [])
+  }, [started, snapshot, matchups, lookup, scoring])
+  // Before the week, each roster's best lineup; after, the expected final score of its starters.
   const projected = useMemo(
-    () => new Map(week ? teams.map((team) => [team.rosterId, weekScore(slots, team.players, week)]) : []),
-    [week, teams, slots],
+    () => new Map(week ? teams.map((team) => {
+      const summary = summaries.get(team.rosterId)
+      return [team.rosterId, summary?.starters ? summary.projected : weekScore(slots, team.players, week)]
+    }) : []),
+    [week, teams, slots, summaries],
   )
   // Every NBA team on the schedule, so a team idle this week still gets a row.
   const nbaTeams = useMemo(() => [...new Set((weeks ?? []).flatMap((entry) => [...entry.dates.keys()]))].sort(), [weeks])
@@ -128,13 +123,13 @@ export default function League({
 
   const teamById = new Map(teams.map((team) => [team.rosterId, team]))
   const pairs = new Map<number, Matchup[]>()
-  for (const side of matchups[week.week] ?? []) {
+  for (const side of matchups) {
     if (side.matchup_id === null) continue
     pairs.set(side.matchup_id, [...(pairs.get(side.matchup_id) ?? []), side])
   }
   const games = [...pairs.entries()].sort(([a], [b]) => a - b).map(([, sides]) => sides)
   const medianProjected = projected.size ? median([...projected.values()]) : 0
-  const medianPoints = started ? median((matchups[week.week] ?? []).map((side) => side.points)) : 0
+  const medianPoints = started && matchups.length ? median(matchups.map((side) => side.points)) : 0
 
   const days = datesBetween(week.start, week.end)
   const shown = valuedFreeAgents
@@ -168,17 +163,23 @@ export default function League({
                   <article key={sides[0].matchup_id} className={`matchup ${sides.some((side) => side.roster_id === myRosterId) ? 'mine' : ''}`}>
                     {sides.map((side) => {
                       const team = teamById.get(side.roster_id)
+                      const summary = summaries.get(side.roster_id)
                       return (
                         <div key={side.roster_id} className={`matchup-side ${leader === side.roster_id ? (done ? 'won' : 'ahead') : ''}`}>
                           <span className="matchup-team">
                             <strong>{team?.name ?? `Team ${side.roster_id}`}</strong>
                             <small>{team ? record(team) : ''}</small>
                           </span>
-                          <span className="matchup-proj" title="Expected locked score of this roster's best lineup for the week">
+                          <span className="matchup-proj" title={summary?.starters ? 'Expected final score of these starters, counting their locks' : "Expected locked score of this roster's best lineup for the week"}>
                             {format(projected.get(side.roster_id) ?? 0)}
                             <small>proj</small>
                           </span>
-                          {started && <span className="matchup-score">{format(side.points)}</span>}
+                          {started && (
+                            <span className="matchup-score">
+                              {format(side.points)}
+                              {live && summary?.starters ? <LockCount settled={summary.settled} starters={summary.starters} /> : null}
+                            </span>
+                          )}
                         </div>
                       )
                     })}

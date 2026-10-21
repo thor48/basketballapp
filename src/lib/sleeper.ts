@@ -85,11 +85,16 @@ export type Roster = {
 }
 
 // One roster's side of a week's matchup. The two rosters sharing a `matchup_id` play each other;
-// `points` is their score so far, 0 before the week starts.
+// `points` is their score so far, 0 before the week starts. `starters` is the week's lineup, lined
+// up with the non-bench `roster_positions` like a roster's; `players_points` has each player's
+// points, bench included. Under Lock-In a player's points are one game's score, never a sum.
 export type Matchup = {
   roster_id: number
   matchup_id: number | null
   points: number
+  starters?: string[] | null
+  players?: string[] | null
+  players_points?: Record<string, number> | null
 }
 
 // One NBA game. `week` is the Sleeper fantasy week it scores in, so no date maths is needed to
