@@ -21,6 +21,8 @@ export type { LineupPlayer }
 
 const format = (value: number) => value.toFixed(1)
 const real = (id: string | undefined): id is string => !!id && id !== '0'
+// How far a score is above or below its lock bar: +15, −7.5. A whole number drops its decimal.
+const margin = (value: number) => `${value < 0 ? '−' : '+'}${Number(Math.abs(value).toFixed(1))}`
 
 // One dot per day of the week, orange on game days and faded once the day has passed. A game he
 // played carries its score in the tooltip, and a locked game is ringed.
@@ -393,8 +395,16 @@ export default function Lineup({
                     <span className="name">
                       {player.name}
                       {state?.lock?.why === 'locked' && <em className="tag locked"><LockIcon /> Locked {format(state.points)}</em>}
-                      {verdict === 'lock' && <em className="tag lock-now">Lock {format(latest!.score)}</em>}
-                      {verdict === 'wait' && <em className="tag wait">Wait</em>}
+                      {verdict === 'lock' && (
+                        <em className="tag lock-now" title={`Advice: his ${format(latest!.score)} beats the ${bar} his games left are worth, so lock it in Sleeper`}>
+                          Lock it? {margin(latest!.score - bar!)}
+                        </em>
+                      )}
+                      {verdict === 'wait' && (
+                        <em className="tag wait" title={`Advice: his ${format(latest!.score)} is under the ${bar} his games left are worth, so wait`}>
+                          Wait {margin(latest!.score - bar!)}
+                        </em>
+                      )}
                     </span>
                     <span className="meta">
                       {player.games.map((date, index) => {
