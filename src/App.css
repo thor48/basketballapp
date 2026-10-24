@@ -149,6 +149,14 @@ tbody tr.tier-row:hover td { background: var(--panel-2); }
 /* Advice, not a fact: an outline, so it never reads as the solid Locked tag. */
 .tag.lock-now { box-shadow: inset 0 0 0 1px var(--slime); color: var(--slime); }
 .tag.wait { background: var(--line); color: var(--muted); }
+.tag.disputed { background: rgba(240, 124, 42, .16); color: var(--orange); }
+.lineup-table td.pts.warn { color: var(--orange); }
+/* Marking a lock: a small dashed button beside the advice, and each finished game's score. */
+.mark-lock { display: inline-flex; align-items: center; gap: 3px; margin-left: 6px; padding: 0 6px; border: 1px dashed var(--muted); border-radius: 4px; background: transparent; color: var(--muted); font-size: 11px; font-weight: 700; line-height: 16px; }
+.mark-lock .lock-icon { width: 8px; height: 10px; }
+.game-score { padding: 0; border: 0; border-bottom: 1px dashed currentColor; background: none; color: var(--text); font-weight: 700; }
+.game-score.good { color: var(--slime); }
+@media (hover: hover) { .mark-lock:hover, .game-score:hover { color: var(--slime); border-color: var(--slime); } }
 .tag .lock-icon { width: 8px; height: 10px; vertical-align: 0; }
 .view-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 10px; }
 .view-bar .meta { color: var(--floor-muted); font-size: 13px; }

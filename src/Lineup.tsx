@@ -15,7 +15,7 @@ import {
   type Valued,
   type Week,
 } from './lib/lineup'
-import { liveState, sideSummary, type LiveGame, type LiveState } from './lib/live'
+import { liveState, sideSummary, withMark, type LiveGame, type LiveState } from './lib/live'
 import { useLiveWeek } from './useLiveWeek'
 import { useWeeks } from './useWeeks'
 
@@ -72,7 +72,26 @@ export function LockCount({ settled, starters }: { settled: number; starters: nu
 }
 
 const lockTitle = (lock: NonNullable<LiveState['lock']>) =>
-  lock.why === 'locked' ? `Locked: his ${lock.date ? dayLetter(lock.date) : ''} game counts` : lock.date ? 'Locked in: no games left, so his last one counts' : 'Locked in: no games this week'
+  lock.disputed
+    ? "Marked locked here, but Sleeper's score isn't counting that game. Check the lock in the Sleeper app."
+    : lock.marked
+      ? "Marked locked here. His points confirm it once his next game starts."
+      : lock.why === 'locked'
+        ? `Locked: his ${lock.date ? dayLetter(lock.date) : ''} game counts`
+        : lock.date
+          ? 'Locked in: no games left, so his last one counts'
+          : 'Locked in: no games this week'
+
+// Locks marked on the page, keyed by season, week and player, each the date of the game locked.
+// Kept in this browser only.
+const marksKey = 'hoops.lockMarks'
+function readMarks(): Record<string, string> {
+  try {
+    return JSON.parse(localStorage.getItem(marksKey) ?? '{}') as Record<string, string>
+  } catch {
+    return {}
+  }
+}
 
 export function WeekBar({ weeks, week, onChange }: { weeks: Week[]; week: Week; onChange: (week: number) => void }) {
   const today = usToday()
@@ -130,6 +149,19 @@ export default function Lineup({
   const [view, setView] = useState<'sleeper' | 'best'>('sleeper')
   // The player whose row is open, showing his news, next games and game log.
   const [opened, setOpened] = useState<string | null>(null)
+  const [marks, setMarks] = useState(readMarks)
+  const markKey = (id: string) => `${season}:${week?.week}:${id}`
+  const setMark = (id: string, date: string | null) => {
+    const next = { ...marks }
+    if (date) next[markKey(id)] = date
+    else delete next[markKey(id)]
+    setMarks(next)
+    try {
+      localStorage.setItem(marksKey, JSON.stringify(next))
+    } catch {
+      // Without storage the mark lasts until the page reloads.
+    }
+  }
 
   const week = weeks && (weeks.find((entry) => entry.week === weekNo) ?? currentWeek(weeks))
   const slots = useMemo(() => rosterPositions.filter((slot) => slot !== 'BN' && slot !== 'IR'), [rosterPositions])
@@ -159,7 +191,8 @@ export default function Lineup({
     const toRows = (list: LineupPlayer[]): Row[] =>
       valuePlayers(list, week).map((player) => {
         const isStarter = starting.has(player.id)
-        const state = weekLive ? liveState(player, points[player.id] ?? 0, weekLive, scoring, isStarter) : null
+        const live = weekLive ? liveState(player, points[player.id] ?? 0, weekLive, scoring, isStarter) : null
+        const state = live && isStarter ? withMark(live, marks[`${season}:${week.week}:${player.id}`]) : live
         const expected = state ? state.value : player.values[player.games.length]
         // A hair of FP/G breaks ties, so a week where nobody plays still starts the better players.
         return { ...player, starting: isStarter, state, expected, value: expected + player.perGame * 1e-3 }
@@ -196,7 +229,7 @@ export default function Lineup({
       start: optimal.filter((player) => !starting.has(player.id)),
       sit: current.filter((player) => !optimalIds.has(player.id)),
     }
-  }, [week, started, snapshot, mine, sleeperStarters, players, reserve, lookup, slots, scoring])
+  }, [week, started, snapshot, mine, sleeperStarters, players, reserve, lookup, slots, scoring, marks, season])
 
   if (error) return <p className="empty">Couldn't load the NBA schedule: {error}</p>
   if (!weeks || !week || !plan) return <p className="empty">Loading the NBA schedule…</p>
@@ -262,9 +295,9 @@ export default function Lineup({
             {format(player.expected)}
           </td>
           {started && (
-            <td className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock ? 'locked' : ''}`} title={state?.lock ? lockTitle(state.lock) : player.starting ? 'Sleeper points so far' : 'Bench points do not count'}>
+            <td className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock?.disputed ? 'warn' : state?.lock ? 'locked' : ''}`} title={state?.lock ? lockTitle(state.lock) : player.starting ? 'Sleeper points so far' : 'Bench points do not count'}>
               {state?.played.length || state?.points ? format(state.points) : '—'}
-              {state?.lock && <LockIcon />}
+              {state?.lock && !state.lock.disputed && <LockIcon />}
             </td>
           )}
         </tr>
@@ -421,7 +454,11 @@ export default function Lineup({
                   <li key={player.id}>
                     <span className="name">
                       {player.name}
-                      {state?.lock?.why === 'locked' && <em className="tag locked"><LockIcon /> Locked {format(state.points)}</em>}
+                      {state?.lock?.why === 'locked' && (
+                        <em className="tag locked" title={lockTitle(state.lock)}><LockIcon /> Locked {format(state.value)}</em>
+                      )}
+                      {state?.lock?.disputed && <em className="tag disputed" title={lockTitle(state.lock)}>Sleeper: {format(state.points)}</em>}
+                      {state?.lock?.marked && <button className="mark-lock" onClick={() => setMark(player.id, null)}>Undo</button>}
                       {verdict === 'lock' && (
                         <em className="tag lock-now" title={`Advice: his ${format(latest!.score)} beats the ${bar} his games left are worth, so lock it in Sleeper`}>
                           Lock it? {margin(latest!.score - bar!)}
@@ -431,6 +468,11 @@ export default function Lineup({
                         <em className="tag wait" title={`Advice: his ${format(latest!.score)} is under the ${bar} his games left are worth, so wait`}>
                           Wait {margin(latest!.score - bar!)}
                         </em>
+                      )}
+                      {verdict && (
+                        <button className="mark-lock" onClick={() => setMark(player.id, latest!.date)} title={`Mark his ${dayLetter(latest!.date)} game locked after locking it in Sleeper`}>
+                          <LockIcon /> Mark locked
+                        </button>
                       )}
                     </span>
                     <span className="meta">
@@ -443,7 +485,18 @@ export default function Lineup({
                             {index ? ' · ' : ''}
                             {dayLetter(date)}{' '}
                             {game ? (
-                              <strong className={game.done && target !== null && game.score >= target ? 'good' : ''}>{format(game.score)}</strong>
+                              // A finished game can be marked locked by tapping it, unless his points already show a lock.
+                              game.done && state && !(state.lock?.why === 'locked' && !state.lock.marked) ? (
+                                <button
+                                  className={`game-score ${target !== null && game.score >= target ? 'good' : ''}`}
+                                  onClick={() => setMark(player.id, state.lock?.marked && state.lock.date === date ? null : date)}
+                                  title={state.lock?.marked && state.lock.date === date ? 'Tap to unmark this lock' : 'Tap to mark this game locked'}
+                                >
+                                  {format(game.score)}
+                                </button>
+                              ) : (
+                                <strong className={game.done && target !== null && game.score >= target ? 'good' : ''}>{format(game.score)}</strong>
+                              )
                             ) : target !== null ? `${target}+` : 'last'}
                             {state?.lock?.why === 'locked' && state.lock.date === date && <LockIcon />}
                           </span>
@@ -459,6 +512,7 @@ export default function Lineup({
           )}
           <p className="note">
             After each game, lock it if he scored at least the number shown for that day; otherwise wait. Unlocked, Sleeper keeps his last game of the week.
+            Sleeper doesn't publish locks until the next game starts, so after locking one there, tap Mark locked or the game's score here.
           </p>
         </section>
       </aside>
