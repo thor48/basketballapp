@@ -3,11 +3,11 @@ import { lockValues, unavailable, type LineupPlayer } from './lineup.ts'
 import { scoreLine } from './scoring.ts'
 import type { GameLine, Matchup, ScheduleGame, StatLine } from './sleeper'
 
-// Sleeper's public API does not say which game a manager locked. Under Lock-In a starter's points
-// are always one game's score, though: the locked game, or else the latest game he played in (a
-// game he sat out does not replace it, last season's matchups show). So a lock shows once he
-// plays a later game and his points stay on the earlier one. Between games, locking the game just
-// played and not locking yet look the same, so neither is claimed.
+// Sleeper's public API does not say which game a manager locked. Once a week is over a starter's
+// points are one game's score, the locked one or else his last, but on game nights the public
+// matchup is not reliable enough to read locks from: on Oct 23, 2026 two reads two seconds apart
+// disagreed on three starters, and locked players read as their latest game for an hour. So a lock
+// is the manager's own mark on the page, and Sleeper's points only flag a mark it isn't counting.
 
 // The week as it is being played: each NBA team's games with their status, and every player's
 // line from each game he has appeared in so far.
@@ -44,12 +44,12 @@ export type LiveState = {
   left: number
   // One of his team's games is under way.
   playing: boolean
-  // Why a starter's points can no longer change: the manager locked a game, or his week is over.
-  // `marked` is a lock the manager marked on the page; `disputed` when Sleeper's points are not
-  // that game's score, so Sleeper is not counting the lock.
-  lock: { date: string | null; why: 'locked' | 'final'; marked?: boolean; disputed?: boolean } | null
-  // Expected final points. A starter's are his lock, or the better of locking now and waiting; a
-  // bench player moved in now only has the games yet to tip off.
+  // Why a starter's points can no longer change: the manager marked a game locked, or his week is
+  // over. `disputed` when Sleeper's points are not the marked game's score.
+  lock: { date: string | null; why: 'locked' | 'final'; disputed?: boolean } | null
+  // Expected final points, from the game scores rather than Sleeper's points. A starter's are his
+  // lock, his last game once his week is over, or else the better of locking his latest game now
+  // and waiting; a bench player moved in now only has the games yet to tip off.
   value: number
 }
 
@@ -72,32 +72,25 @@ export function liveState(player: LineupPlayer, points: number, live: LiveWeek, 
     if (line) played.push({ date: game.date, score: scoreLine(line, scoring), done })
   }
   const latest = played.at(-1)
-  const locked = latest && !sameScore(points, latest.score) ? played.slice(0, -1).findLast((game) => sameScore(points, game.score)) : undefined
-  const lock: LiveState['lock'] = !starting
-    ? null
-    : locked
-      ? { date: locked.date, why: 'locked' }
-      : !left && !playing
-        ? { date: latest?.date ?? null, why: 'final' }
-        : null
+  const lock: LiveState['lock'] = starting && !left && !playing ? { date: latest?.date ?? null, why: 'final' } : null
   // A game under way is a fresh chance, and the one before it can no longer be locked.
   const chances = lockValues(unavailable.has(player.injury) ? 0 : player.perGame, left + (playing ? 1 : 0))
-  const value = !starting ? chances[left] : lock ? points : playing ? chances[left + 1] : Math.max(points, chances[left])
+  const last = latest?.score ?? 0
+  const value = !starting ? chances[left] : lock ? last : playing ? chances[left + 1] : Math.max(last, chances[left])
   return { points, played, left, playing, lock, value }
 }
 
-// Between games, locking the game just played looks the same as not locking yet, so the manager
-// can mark a finished game locked on the page right after locking it in Sleeper. A lock his
-// points already show wins over a mark. A mark whose game is not his points is kept but flagged:
-// either the lock did not go through, or Sleeper's public score is behind.
+// A finished game the manager marked locked on the page, right after locking it in Sleeper. A
+// mark whose game is not Sleeper's points is kept but flagged: the lock may not have gone through,
+// or Sleeper's public score may be off for now.
 export function withMark(state: LiveState, markedDate: string | undefined): LiveState {
   const game = markedDate ? state.played.find((entry) => entry.date === markedDate && entry.done) : undefined
-  if (!game || state.lock?.why === 'locked') return state
-  return { ...state, lock: { date: game.date, why: 'locked', marked: true, disputed: !sameScore(state.points, game.score) }, value: game.score }
+  if (!game) return state
+  return { ...state, lock: { date: game.date, why: 'locked', disputed: !sameScore(state.points, game.score) }, value: game.score }
 }
 
-// One side of a week's matchup as it stands: each starter's state, how many have points that can
-// no longer change, and the expected final score.
+// One side of a week's matchup as it stands: each starter's state, how many are done for the week
+// (another team's locks are not public), and the expected final score.
 export function sideSummary(side: Matchup, find: (id: string) => LineupPlayer | null, live: LiveWeek, scoring: Record<string, number>) {
   const states = new Map<string, LiveState>()
   for (const id of side.starters ?? []) {

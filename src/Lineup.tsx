@@ -59,28 +59,32 @@ export function LockIcon({ title }: { title?: string }) {
   )
 }
 
-// How many of a side's starters have points that can no longer change.
-export function LockCount({ settled, starters }: { settled: number; starters: number }) {
+// How many of a side's starters have points that can no longer change. A team's own page counts
+// the locks marked there; any other team's locks are not public, so it counts starters done for
+// the week.
+export function LockCount({ settled, starters, own = false }: { settled: number; starters: number; own?: boolean }) {
   return (
     <small
       className={`lock-count ${settled === starters ? 'all' : ''}`}
-      title="Starters whose points are locked in: a game the manager locked, or no games left this week. Sleeper doesn't publish locks, so one made between games shows once the player's next game starts."
+      title={own ? 'Starters marked locked on this page, plus any with no games left this week' : "Starters with no games left this week. Sleeper doesn't publish other teams' locks."}
     >
-      <LockIcon /> {settled}/{starters} locked
+      <LockIcon /> {settled}/{starters} {own ? 'locked' : 'done'}
     </small>
   )
 }
 
 const lockTitle = (lock: NonNullable<LiveState['lock']>) =>
   lock.disputed
-    ? "Marked locked here, but Sleeper's score isn't counting that game. Check the lock in the Sleeper app."
-    : lock.marked
-      ? "Marked locked here. His points confirm it once his next game starts."
-      : lock.why === 'locked'
-        ? `Locked: his ${lock.date ? dayLetter(lock.date) : ''} game counts`
-        : lock.date
-          ? 'Locked in: no games left, so his last one counts'
-          : 'Locked in: no games this week'
+    ? "Marked locked here, but Sleeper's score isn't counting that game right now. If it stays that way, check the lock in the Sleeper app."
+    : lock.why === 'locked'
+      ? `Marked locked: his ${lock.date ? dayLetter(lock.date) : ''} game counts`
+      : lock.date
+        ? 'Done: no games left, so his last one counts unless a lock was marked'
+        : 'Done: no games this week'
+
+// The points that count for him as it stands: his locked game, or else his latest. Read from the
+// game scores, since Sleeper's public points jump around on game nights.
+const counted = (state: LiveState) => (state.lock?.why === 'locked' ? state.value : (state.played.at(-1)?.score ?? null))
 
 // Locks marked on the page, keyed by season, week and player, each the date of the game locked.
 // Kept in this browser only.
@@ -295,9 +299,15 @@ export default function Lineup({
             {format(player.expected)}
           </td>
           {started && (
-            <td className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock?.disputed ? 'warn' : state?.lock ? 'locked' : ''}`} title={state?.lock ? lockTitle(state.lock) : player.starting ? 'Sleeper points so far' : 'Bench points do not count'}>
-              {state?.played.length || state?.points ? format(state.points) : '—'}
-              {state?.lock && !state.lock.disputed && <LockIcon />}
+            <td
+              className={`num pts ${player.starting ? 'strong' : 'muted'} ${state?.lock ? 'locked' : ''}`}
+              title={[
+                state?.lock ? lockTitle(state.lock) : player.starting ? 'His latest game, which counts unless he locks one' : 'Bench points do not count',
+                state && counted(state) !== null && Math.abs(counted(state)! - state.points) > 0.05 ? `Sleeper shows ${format(state.points)} right now.` : '',
+              ].filter(Boolean).join(' ')}
+            >
+              {state && counted(state) !== null ? format(counted(state)!) : '—'}
+              {state?.lock && <LockIcon />}
             </td>
           )}
         </tr>
@@ -329,6 +339,7 @@ export default function Lineup({
       points: mine?.points ?? 0,
       projected: started && plan.currentTotal !== null ? plan.currentTotal : plan.optimalTotal,
       settled: plan.settled,
+      own: true,
       starters: plan.starters,
     },
     ...(opponentSide
@@ -339,6 +350,7 @@ export default function Lineup({
           points: opponentSide.points,
           projected: opponentSummary?.starters ? opponentSummary.projected : weekScore(slots, opponent?.players ?? [], week),
           settled: opponentSummary?.settled ?? 0,
+          own: false,
           starters: opponentSummary?.starters ?? 0,
         }]
       : []),
@@ -363,7 +375,7 @@ export default function Lineup({
                 <span className="scoreboard-score">{started ? format(side.points) : '—'}</span>
                 <span className="scoreboard-meta">
                   <span title={started ? 'Expected final score of these starters, counting their locks' : "Expected locked score of the roster's best lineup"}>proj {format(side.projected)}</span>
-                  {live && side.starters > 0 && <LockCount settled={side.settled} starters={side.starters} />}
+                  {live && side.starters > 0 && <LockCount settled={side.settled} starters={side.starters} own={side.own} />}
                 </span>
               </div>
             ))}
@@ -398,7 +410,7 @@ export default function Lineup({
                 <th className="num">G</th>
                 <th className="num wide">FP/G</th>
                 <th className="num" title={started ? 'Expected final points from here' : 'Expected locked score: one game counts, and more games mean more chances at a big one'}>{started ? 'Proj' : 'Value'}</th>
-                {started && <th className="num" title="Sleeper points this week: the locked game, or else his latest">Pts</th>}
+                {started && <th className="num" title="Points that count this week: his locked game, or else his latest">Pts</th>}
               </tr>
             </thead>
             <tbody>
@@ -457,8 +469,7 @@ export default function Lineup({
                       {state?.lock?.why === 'locked' && (
                         <em className="tag locked" title={lockTitle(state.lock)}><LockIcon /> Locked {format(state.value)}</em>
                       )}
-                      {state?.lock?.disputed && <em className="tag disputed" title={lockTitle(state.lock)}>Sleeper: {format(state.points)}</em>}
-                      {state?.lock?.marked && <button className="mark-lock" onClick={() => setMark(player.id, null)}>Undo</button>}
+                      {state?.lock?.why === 'locked' && <button className="mark-lock" onClick={() => setMark(player.id, null)}>Undo</button>}
                       {verdict === 'lock' && (
                         <em className="tag lock-now" title={`Advice: his ${format(latest!.score)} beats the ${bar} his games left are worth, so lock it in Sleeper`}>
                           Lock it? {margin(latest!.score - bar!)}
@@ -485,12 +496,12 @@ export default function Lineup({
                             {index ? ' · ' : ''}
                             {dayLetter(date)}{' '}
                             {game ? (
-                              // A finished game can be marked locked by tapping it, unless his points already show a lock.
-                              game.done && state && !(state.lock?.why === 'locked' && !state.lock.marked) ? (
+                              // A finished game can be marked locked by tapping it.
+                              game.done && state ? (
                                 <button
                                   className={`game-score ${target !== null && game.score >= target ? 'good' : ''}`}
-                                  onClick={() => setMark(player.id, state.lock?.marked && state.lock.date === date ? null : date)}
-                                  title={state.lock?.marked && state.lock.date === date ? 'Tap to unmark this lock' : 'Tap to mark this game locked'}
+                                  onClick={() => setMark(player.id, state.lock?.why === 'locked' && state.lock.date === date ? null : date)}
+                                  title={state.lock?.why === 'locked' && state.lock.date === date ? 'Tap to unmark this lock' : 'Tap to mark this game locked'}
                                 >
                                   {format(game.score)}
                                 </button>
@@ -512,7 +523,7 @@ export default function Lineup({
           )}
           <p className="note">
             After each game, lock it if he scored at least the number shown for that day; otherwise wait. Unlocked, Sleeper keeps his last game of the week.
-            Sleeper doesn't publish locks until the next game starts, so after locking one there, tap Mark locked or the game's score here.
+            Sleeper doesn't publish locks, so after locking one there, tap Mark locked or the game's score here.
           </p>
         </section>
       </aside>
