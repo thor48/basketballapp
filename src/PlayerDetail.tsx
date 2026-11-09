@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { shortDate, type LineupPlayer } from './lib/lineup'
+import { perGameTitle, shortDate, type LineupPlayer } from './lib/lineup'
 import { scoreLine } from './lib/scoring'
 import { getPlayerGameLog, getPlayerNews, type GameLine, type PlayerNews, type ScheduleGame } from './lib/sleeper'
 
@@ -86,10 +86,16 @@ export default function PlayerDetail({
   return (
     <div className="player-detail">
       <div className="detail-summary">
-        <span title="Cons FP/G: projected points per game in league scoring">
+        <span title={perGameTitle(player)}>
           <strong>{format(player.perGame)}</strong>
-          <small>Projected FP/G</small>
+          <small>FP/G</small>
         </span>
+        {player.projected !== undefined && (
+          <span title="Cons FP/G: the preseason projection, Sleeper's, ESPN's and FantasyPros' averaged">
+            <strong>{player.projected ? format(player.projected) : '—'}</strong>
+            <small>Preseason proj</small>
+          </span>
+        )}
         <span>
           <strong>{seasonPerGame === null ? '—' : format(seasonPerGame)}</strong>
           <small>{season} FP/G{played.length ? ` · ${played.length} GP` : ''}</small>

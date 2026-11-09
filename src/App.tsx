@@ -5,7 +5,7 @@ import Lineup, { type LineupPlayer } from './Lineup'
 import { bestLineup } from './lib/lineup'
 import { assignLineup, fitsSlot, rosterForPick } from './lib/draft'
 import { expertAverage, expertRanks, projectedIds, projectionSources, rankingSources, rankingsFetchedAt, type ExpertRanks, type ProjectionSource, type Tier } from './lib/rankings'
-import { projectedPerGame, scoreLine, scoringTable, type ScoringItem } from './lib/scoring'
+import { blendedPerGame, projectedPerGame, scoreLine, scoringTable, type ScoringItem } from './lib/scoring'
 import { createSupabaseClient } from './lib/supabase'
 import {
   defaultUserId,
@@ -49,6 +49,11 @@ type BoardPlayer = {
   // Each projection source's FP/G in this league's scoring, and their mean with Sleeper's.
   sourceProj: Partial<Record<ProjectionSource, number>>
   consensus: number
+  // In season: Cons FP/G blended with this season's actual FP/G by games played, which the
+  // lineup and league pages value him by. The draft board itself keeps ranking on Cons FP/G.
+  perGame: number
+  season: number | null
+  seasonGp: number
   // Mean of ESPN's and FantasyPros' projected games; Sleeper projects none.
   projGp: number | null
   tiers: Tier[]
@@ -238,15 +243,18 @@ function buildBoard(
   players: Record<string, SleeperPlayer>,
   projections: Record<string, StatLine>,
   stats: Record<string, StatLine>,
+  seasonStats: Record<string, StatLine>,
   scoring: Record<string, number>,
   draftable: number,
 ) {
   const rows: BoardPlayer[] = []
-  // Everyone Sleeper projects, plus anyone it skips that ESPN or FantasyPros projects.
-  for (const id of new Set([...Object.keys(projections), ...projectedIds])) {
+  const playedIds = Object.keys(seasonStats).filter((id) => seasonStats[id].gp > 0)
+  // Everyone Sleeper projects, anyone it skips that ESPN or FantasyPros projects, and anyone who
+  // has played this season, so a breakout nobody projected still shows up as a free agent.
+  for (const id of new Set([...Object.keys(projections), ...projectedIds, ...playedIds])) {
     const player = players[id]
     const line = projections[id] ?? {}
-    if (!player || !(line.pts > 0 || projectedIds.has(id))) continue
+    if (!player || !(line.pts > 0 || projectedIds.has(id) || seasonStats[id]?.gp > 0)) continue
     const lastLine = stats[id]
     const lastGp = lastLine?.gp ? lastLine.gp : null
     const adp = line.adp_std && line.adp_std < 999 ? line.adp_std : null
@@ -255,6 +263,7 @@ function buildBoard(
       .sort((a, b) => positionOrder.indexOf(a) - positionOrder.indexOf(b))
     const experts = expertRanks(id)
     const { sleeper: proj, sources: sourceProj, consensus } = projectedPerGame(line, experts.projections, scoring)
+    const blend = blendedPerGame(consensus, seasonStats[id], scoring)
     const games = projectionSources.map((source) => experts.projections?.[source]?.gp).filter((value): value is number => !!value)
     rows.push({
       id,
@@ -274,6 +283,9 @@ function buildBoard(
       tiers: experts.tiers ?? [],
       sourceProj,
       consensus,
+      perGame: blend.perGame,
+      season: blend.season,
+      seasonGp: blend.gp,
       projGp: games.length ? Math.round(games.reduce((sum, value) => sum + value, 0) / games.length) : null,
     })
   }
@@ -308,6 +320,9 @@ function unprojectedPlayer(pick: Pick): BoardPlayer {
     expert: null,
     sourceProj: {},
     consensus: 0,
+    perGame: 0,
+    season: null,
+    seasonGp: 0,
     projGp: null,
     tiers: [],
   }
@@ -317,11 +332,12 @@ async function loadAll(): Promise<{ base: BaseData; live: LiveDraft }> {
   const league = await getLeague(leagueId)
   const draftId = draftOverride ?? league.draft_id
   const lastSeason = String(Number(league.season) - 1)
-  const [draft, players, projections, stats] = await Promise.all([
+  const [draft, players, projections, stats, seasonStats] = await Promise.all([
     getDraft(draftId),
     getPlayers(),
     getProjections(league.season),
     getSeasonStats(lastSeason),
+    getSeasonStats(league.season),
   ])
   // Owners come from the draft's own league, which differs from Beer League only in a replay.
   const [users, rosters, picks, traded] = await Promise.all([
@@ -331,7 +347,7 @@ async function loadAll(): Promise<{ base: BaseData; live: LiveDraft }> {
     getTradedPicks(draftId),
   ])
   return {
-    base: { league, users, rosters, players, board: buildBoard(players, projections, stats, league.scoring_settings, league.settings.num_teams * league.roster_positions.length) },
+    base: { league, users, rosters, players, board: buildBoard(players, projections, stats, seasonStats, league.scoring_settings, league.settings.num_teams * league.roster_positions.length) },
     live: { draft, picks, traded, checkedAt: Date.now() },
   }
 }
@@ -512,7 +528,7 @@ export default function App({ account, accountControl }: { account: Account | nu
 
   const toLineup = useMemo(() => (id: string): LineupPlayer | null => {
     const board = playerById.get(id)
-    if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.consensus, lastPerGame: board.last, lastGp: board.lastGp }
+    if (board) return { id, name: board.name, team: board.team, positions: board.positions, injury: board.injury, perGame: board.perGame, projected: board.consensus, seasonPerGame: board.season, seasonGp: board.seasonGp, lastPerGame: board.last, lastGp: board.lastGp }
     const player = base?.players[id]
     if (!player) return null
     return {
@@ -562,7 +578,7 @@ export default function App({ account, accountControl }: { account: Account | nu
     })
     const freeAgents = base.board
       .filter((player) => !held.has(player.id))
-      .map((player) => ({ id: player.id, name: player.name, team: player.team, positions: player.positions, injury: player.injury, perGame: player.consensus }))
+      .map((player) => ({ id: player.id, name: player.name, team: player.team, positions: player.positions, injury: player.injury, perGame: player.perGame, projected: player.consensus, seasonPerGame: player.season, seasonGp: player.seasonGp }))
     return { teams, freeAgents, myRosterId: base.rosters.find((roster) => roster.owner_id === userId)?.roster_id }
   }, [base, ownerByRoster, toLineup])
 

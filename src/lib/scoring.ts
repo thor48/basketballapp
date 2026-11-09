@@ -31,6 +31,27 @@ export function projectedPerGame(sleeperLine: StatLine | undefined, projections:
   return { sleeper, sources, consensus: all.length ? all.reduce((sum, value) => sum + value, 0) / all.length : 0 }
 }
 
+// How many games the preseason projection counts for once the season is under way. FP/G is
+// `(projection × priorGames + season FP/G × gp) / (priorGames + gp)`, so this season's own
+// numbers are half of it after 8 games, two thirds after 16 and over 80% after 40. Fantasy
+// points per game settle fast in the NBA (minutes and role show up within a couple of weeks),
+// so the projection only steadies the first few games.
+export const priorGames = 8
+
+// FP/G as the lineup, league and lock alerts value a player: the preseason Cons FP/G blended with
+// this season's actual FP/G by games played. A player nobody projected is valued on his season
+// alone. Mid-season, Sleeper's totals set every `bonus_*` key to 1 for most players (304 had a
+// "40-point game" in week 4 of 2026), so those keys are dropped. That matches the game log, which
+// has no `bonus_*` keys either; `dd` and `td` are real counts and stay.
+export function blendedPerGame(projected: number, seasonLine: StatLine | undefined, scoring: Record<string, number>) {
+  const gp = seasonLine?.gp ?? 0
+  const line = Object.fromEntries(Object.entries(seasonLine ?? {}).filter(([key]) => !key.startsWith('bonus_')))
+  const season = gp > 0 ? scoreLine(line, scoring) / gp : null
+  if (season === null) return { perGame: projected, season, gp, weight: 0 }
+  const weight = projected > 0 ? gp / (gp + priorGames) : 1
+  return { perGame: projected + (season - projected) * weight, season, gp, weight }
+}
+
 // The hero's scoring block: what each counting stat is worth, then the per-game bonuses. Read
 // from the league's live settings, so a commissioner change shows up here.
 const statLabels: Record<string, string> = {

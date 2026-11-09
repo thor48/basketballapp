@@ -30,6 +30,7 @@ All from `src/lib/sleeper.ts`:
 - `/players/nba`: identity, `fantasy_positions`, `injury_status`. About 2.5 MB, fetched once per load.
 - `/projections/nba/regular/<season>`: a per-game line (`gp` is 1) with `adp_std` and `adp_dynasty`. `adp_std` of 999 means no ADP.
 - `/stats/nba/regular/<season - 1>`: last season's totals, including the `bonus_*` game counts.
+- `/stats/nba/regular/<season>`: this season's totals so far, with `gp`. Mid-season its `bonus_*` keys are junk (1 for most players), so they are ignored; `dd` and `td` are real.
 - `/league/<id>`, `/league/<id>/users`, `/league/<id>/rosters`, `/draft/<id>`, `/draft/<id>/picks`, `/draft/<id>/traded_picks`.
 
 Outside sources come from a snapshot, `src/data/rankings.json`, that `npm run rankings` (`scripts/rankings.mjs`) rebuilds: ESPN's fantasy API (points draft rank and per-game projections), FantasyPros' consensus per-game projections, RotoWire's and RotoBaller's points top 150s, and ESPN's positional tier article. Names are matched to Sleeper ids, projections are stored under Sleeper's stat keys so the board scores them with the league's live `scoring_settings`, and the script refuses to write if a source parses short. Rerun it and commit to refresh.
@@ -38,7 +39,11 @@ Outside sources come from a snapshot, `src/data/rankings.json`, that `npm run ra
 
 ## Board
 
-- Rank orders Cons FP/G: projected fantasy points per game in league scoring, averaged across Sleeper, ESPN and FantasyPros. It is fixed at load and does not move as players are drafted. Each source's number is in the Cons FP/G tooltip.
+- Rank orders Cons FP/G: projected fantasy points per game in league scoring, averaged across Sleeper, ESPN and FantasyPros. It is fixed at load and does not move as players are drafted. Each source's number is in the Cons FP/G tooltip. The board stays on this preseason number; the in-season pages use the blend below.
+
+## In-season FP/G
+
+Everywhere outside the draft board (lineup, league, free agents, lock guide and lock alerts), FP/G is the preseason Cons FP/G blended with this season's actual FP/G by games played, `blendedPerGame` in `src/lib/scoring.ts`: `(projection × 8 + season FP/G × gp) / (8 + gp)`. The projection counts as 8 games (`priorGames`), so this season is half the number after 8 games, two thirds after 16 and over 80% after 40. A player nobody projected is valued on his season alone, and anyone who has played is on the board, so an unprojected breakout still shows as a free agent. The FP/G tooltip gives the split, and the player panel shows the blend beside the preseason projection.
 - ESPN and FantasyPros project no `dd`/`td`, so their lines borrow Sleeper's per-game rates before scoring; otherwise the 2 and 5 point bonuses read as a gap between sources.
 - Sleeper projects nothing for some players (rookies such as Lendeborg and Acuff Jr., Lillard back from his Achilles). They are on the board anyway when ESPN or FantasyPros projects them (`projectedIds`), valued on those alone with no double-double rate. Before, they read 0.0 FP/G everywhere.
 - Proj GP is the mean of ESPN's and FantasyPros' projected games (Sleeper projects none), orange under 60.
@@ -64,7 +69,7 @@ Beer League plays Sleeper's **Lock-In** mode (`game_mode` 1): each starter score
 - The lock guide is the same numbers read the other way: after a game with k games still to come, lock it if it beat value(k), capped at 10% over FP/G (`lockBar`, `lockEase`). In theory waiting on three or four games is worth 19 to 24% over FP/G; the cap takes the bird in hand sooner. It only ever lowers the bar, so with one game left the bar is still FP/G. The tags show the margin: "Lock it? +15", "Wait −7".
 - The roster is the owner's Sleeper roster once the draft is done, and the players drafted so far until then. Sleeper's current `starters` are compared with the best lineup to list Start / Sit moves. Sleeper has no write API, so the moves are made in the Sleeper app.
 - Live sync: rosters are re-read every minute while the page is in view, and at once when it comes back into view (`App.tsx`). The week being played is also re-read every minute (`src/useLiveWeek.ts`): its matchups, the schedule's game statuses and the week's game lines. The table shows the lineup as set in Sleeper, starters in their slots then bench and IR, with a Best lineup toggle. Once a week starts, its own matchup's `starters` and `players` are the lineup, so past weeks show what actually played.
-- Clicking a row opens a panel under it (`src/PlayerDetail.tsx`): projected, this season's and last season's FP/G; his latest news; his next five games by fantasy week with each opponent's record; and this season's game log scored in league points. News is RotoWire's notes via `api.sleeper.app/players/nba/<id>/news` and the log is `api.sleeper.app/stats/nba/player/<id>?season=<season>&grouping=week`, both unlisted, public and CORS-open. They are read when the panel opens and kept for the page's life.
+- Clicking a row opens a panel under it (`src/PlayerDetail.tsx`): FP/G (the blend), the preseason projection, this season's and last season's FP/G; his latest news; his next five games by fantasy week with each opponent's record; and this season's game log scored in league points. News is RotoWire's notes via `api.sleeper.app/players/nba/<id>/news` and the log is `api.sleeper.app/stats/nba/player/<id>?season=<season>&grouping=week`, both unlisted, public and CORS-open. They are read when the panel opens and kept for the page's life.
 - A scoreboard above the table shows both sides of the owner's matchup: Sleeper points, the projection, and a lock count. The owner's side counts starters marked locked plus those with no games left ("7/10 locked"); the opponent's locks aren't public, so it counts starters with no games left ("3/10 done").
 - Locks (`src/lib/live.ts`): Sleeper's public API does not publish which game a manager locked, and the GraphQL API that does needs a login. Once a week is over a starter's points are one game's score (the locked one, or else his last), and replaying last season's finished weeks bears that out. On game nights, though, the public matchup can't be trusted to show locks. On Oct 23, 2026 two reads two seconds apart disagreed on three starters, locked players read as their latest game for an hour, and an unlocked one read as an earlier game. Reading locks from the points showed Duren locked when he wasn't and missed Lillard, so the page no longer infers them.
 - Marking locks: a lock is the manager's own mark. Right after locking a player in Sleeper, the manager taps Mark locked (or any finished game's score) in the lock guide (`withMark`). Marks live in this browser's `localStorage` (`hoops.lockMarks`, by season, week and player). The Pts column shows the points that count by the page's own reckoning, from the game scores: the marked game, or else his latest. Sleeper's own number is in the tooltip when it differs.
@@ -76,7 +81,7 @@ The homepage is the League page alone, now the draft is over. Each lineup has it
 
 - Matchups come from `/league/<id>/matchups/<week>`: the two rosters sharing a `matchup_id` play each other. Each side shows its record, its projection and, once the week starts, Sleeper's points and how many starters are done for the week; the live week is re-read every minute. Before the week, the projection is the roster's best lineup valued as on the lineup page (`weekScore`), with IR players left out; once it starts, the expected final score of its actual starters. The league median, which every team also plays, is shown under the cards. Playoff weeks (from `playoff_week_start`) are placeholders in Sleeper, so they show a note instead.
 - Standings are each roster's `settings` wins, losses and `fpts`. Sleeper's record counts the median game too, so a season is 36 decisions.
-- Top free agents are board players on no roster, ranked by the selected week's lock value (games that week at their Cons FP/G), or by FP/G. Rosters are read once per page load.
+- Top free agents are board players on no roster, ranked by the selected week's lock value (games that week at their blended FP/G), or by FP/G. Rosters are read once per page load.
 - Under the standings, every NBA team's games that week as day dots, most games first, for picking up streamers.
 - The NBA schedule is read once per season and shared by both tabs (`src/useWeeks.ts`).
 
@@ -84,7 +89,7 @@ The homepage is the League page alone, now the draft is over. Each lineup has it
 
 `scripts/lock-alerts.ts` posts to Discord when a ThorbergBC starter finishes a game worth locking. It runs the lock guide on a schedule. After a game with k games left that week, the game is worth locking if it scored at least the same `lockBar` as on the page. It never alerts for the week's last game, since Sleeper keeps that one anyway. It also never alerts once the player's next game has tipped off, since the chance to lock has passed. A player listed Out is valued at 0, so any game he played before being ruled out is worth locking.
 
-- Per-game lines come from `api.sleeper.app/stats/nba/<season>/<week>?season_type=regular`: one row per player per game, with the schedule's `game_id` and `date`. Scores use the same `scoreLine`, and players are valued by the same Cons FP/G (`projectedPerGame`) as the board and lineup page.
+- Per-game lines come from `api.sleeper.app/stats/nba/<season>/<week>?season_type=regular`: one row per player per game, with the schedule's `game_id` and `date`. Scores use the same `scoreLine`, and players are valued by the same blended FP/G (`blendedPerGame`) as the lineup page.
 - It runs under plain Node 24 with no install. That's why `src/lib/lineup.ts` imports `./draft.ts` with its extension, and why the script reads `rankings.json` from disk instead of importing `rankings.ts`.
 - `.github/workflows/lock-alerts.yml` runs it every 20 minutes from 17:00 to 07:59 UTC, and it can also be started by hand from the Actions tab. Each run checks the whole week, so a late or dropped GitHub run only delays an alert. The games already alerted live in `.lock-alerts/sent.json`, which the Actions cache carries between runs.
 - The webhook is the `DISCORD_WEBHOOK_URL` repository secret. The repo is public, so the webhook must never be committed. Locally it goes in `.env.local`, which `npm run lock-alerts` loads.
@@ -95,7 +100,3 @@ npm run lock-alerts -- --dry-run --date 2025-11-05 --league 1260852226524454912 
 ```
 
 The second command replays a day of last season's league.
-
-## Next
-
-In-season: blend this season's actual FP/G into the projection as games are played.

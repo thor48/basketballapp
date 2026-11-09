@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { GameDays, LockCount, WeekBar } from './Lineup'
 import { fitsSlot } from './lib/draft'
-import { currentWeek, datesBetween, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
+import { currentWeek, datesBetween, perGameTitle, usToday, valuePlayers, weekScore, type LineupPlayer } from './lib/lineup'
 import { sideSummary } from './lib/live'
 import type { Matchup } from './lib/sleeper'
 import { useLiveWeek } from './useLiveWeek'
@@ -239,7 +239,7 @@ export default function League({
                     <GameDays days={days} games={player.games} today={today} />
                   </td>
                   <td className="num strong">{player.games.length}</td>
-                  <td className="num">{format(player.perGame)}</td>
+                  <td className="num" title={perGameTitle(player)}>{format(player.perGame)}</td>
                   <td className="num strong">{format(player.values[player.games.length])}</td>
                 </tr>
               ))}

@@ -7,6 +7,7 @@ import {
   datesBetween,
   dayLetter,
   lockBar,
+  perGameTitle,
   shortDate,
   usToday,
   valuePlayers,
@@ -291,7 +292,7 @@ export default function Lineup({
             <GameDays days={days} games={player.games} today={today} played={state?.played} locked={state?.lock?.why === 'locked' ? state.lock.date : null} />
           </td>
           <td className="num strong">{player.games.length}</td>
-          <td className="num wide">{format(player.perGame)}</td>
+          <td className="num wide" title={perGameTitle(player)}>{format(player.perGame)}</td>
           <td
             className="num strong"
             title={state ? 'Expected final points from here, counting his lock and the games he has left' : 'Expected locked score: one game counts, and more games mean more chances at a big one'}

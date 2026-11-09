@@ -19,8 +19,8 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { parseArgs } from 'node:util'
 import { currentWeek, lockBar, unavailable, usToday, weeksFromSchedule } from '../src/lib/lineup.ts'
 import type { ExpertRanks } from '../src/lib/rankings.ts'
-import { projectedPerGame, scoreLine } from '../src/lib/scoring.ts'
-import { defaultUserId, getLeague, getPlayers, getProjections, getRosters, getSchedule, getWeekGameLines, leagueId } from '../src/lib/sleeper.ts'
+import { blendedPerGame, projectedPerGame, scoreLine } from '../src/lib/scoring.ts'
+import { defaultUserId, getLeague, getPlayers, getProjections, getRosters, getSchedule, getSeasonStats, getWeekGameLines, leagueId } from '../src/lib/sleeper.ts'
 
 const { values: args } = parseArgs({
   options: {
@@ -65,7 +65,12 @@ if (!starters.length || !weekGames.some(played)) {
   process.exit(0)
 }
 
-const [players, projections, lines] = await Promise.all([getPlayers(), getProjections(season), getWeekGameLines(season, week.week)])
+const [players, projections, seasonStats, lines] = await Promise.all([
+  getPlayers(),
+  getProjections(season),
+  getSeasonStats(season),
+  getWeekGameLines(season, week.week),
+])
 const experts = (JSON.parse(readFileSync(new URL('../src/data/rankings.json', import.meta.url), 'utf8')) as { players: Record<string, ExpertRanks> }).players
 const sent = new Set(readSent())
 const alerts: { key: string; text: string }[] = []
@@ -85,8 +90,10 @@ for (const id of starters) {
 
   const score = scoreLine(line.stats, league.scoring_settings)
   const projection = projections[id]
-  // Same number the lineup page values him by: Cons FP/G, or 0 for a player nobody projects.
-  const perGame = projectedPerGame(projection, experts[id]?.projections, league.scoring_settings).consensus
+  // Same number the lineup page values him by: Cons FP/G blended with this season's FP/G by games
+  // played. The season totals run through today, so his latest game is already in them.
+  const projected = projectedPerGame(projection, experts[id]?.projections, league.scoring_settings).consensus
+  const perGame = blendedPerGame(projected, seasonStats[id], league.scoring_settings).perGame
   const out = unavailable.has(player.injury_status ?? '')
   const bar = lockBar(out ? 0 : perGame, left.length)
   const verdict = score > 0 && score >= bar ? 'LOCK' : 'wait'

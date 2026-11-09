@@ -1,5 +1,6 @@
 // The `.ts` extension lets the lock alert script (scripts/lock-alerts.ts) load this under plain Node.
 import { fitsSlot } from './draft.ts'
+import { priorGames } from './scoring.ts'
 import type { ScheduleGame } from './sleeper'
 
 // Beer League plays Sleeper's Lock-In mode: each starter scores ONE game per week, the one the
@@ -14,11 +15,26 @@ export type LineupPlayer = {
   team: string
   positions: string[]
   injury: string
-  // Projected fantasy points per game in league scoring.
+  // Fantasy points per game in league scoring: the preseason projection blended with this
+  // season's actual FP/G by games played (`blendedPerGame`).
   perGame: number
+  // The preseason Cons FP/G and this season's actual FP/G and games behind it, for tooltips and
+  // the player panel. Absent for players off the board.
+  projected?: number
+  seasonPerGame?: number | null
+  seasonGp?: number
   // Last season's FP/G and games, for the player panel. Absent for players off the board.
   lastPerGame?: number | null
   lastGp?: number | null
+}
+
+// What a player's FP/G is made of, for its tooltip.
+export function perGameTitle(player: LineupPlayer) {
+  const gp = player.seasonGp ?? 0
+  if (!gp || player.seasonPerGame == null) return 'Preseason projection; no games this season yet'
+  if (!player.projected) return `This season's ${player.seasonPerGame.toFixed(1)} over ${gp} GP; nobody projected him`
+  const share = Math.round((gp / (gp + priorGames)) * 100)
+  return `${share}% this season's ${player.seasonPerGame.toFixed(1)} over ${gp} GP, ${100 - share}% the preseason ${player.projected.toFixed(1)}`
 }
 
 export type Week = {
